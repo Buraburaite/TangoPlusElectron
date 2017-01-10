@@ -1,0 +1,22 @@
+{
+  "name": "tango-plus",
+  "version": "1.0.0",
+  "description": "Video Player for intermediate Japanese language learners",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/Buraburaite/TangoPlusElectron"
+  },
+  "author": "Javier Cueto",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "1.4.13"
+    "electron-connect": "^0.6.1",
+    "gulp": "^3.9.1",
+    "videojs": "^1.0.0"
+  }
+}
