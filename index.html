@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>TangoPlusElectron</title>
   <meta charset="UTF-8">
-  <title>Hello World!</title>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <div id="video-container">
     <video
-    id="player"
+    id="video"
     class="video-js"
+    autoplay
     preload="auto"
     poster="Assets/Icons/Stop.png"
-    controls
-    width="70%"
+    width="100%"
+    onclick="this.paused ? this.play() : this.pause();"
     data-setup='{
     }'
-    <source src="Assets/NICO Touches the Walls - Diver.mp4">
+    <source src="Assets/IgnoreThis/NICO Touches the Walls - Diver.mp4">
     </video>
-    <span id="video-overlay">Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii</span>
-  </div>
+    <div id="video-overlay">
+      <div id="doubtitles">
+        <button class="word" type="button" onclick="this.innerHTML+='Hi';">東京中央銀行 大阪西支店 融資課長の半沢直樹は</button>
+        <span class="tooltip">Definition</span>
+      </div>
+    </div>
+  </div> <!-- What do I want here? I want EACH word to show ITS tooltip on hover. I want to write the CSS once, and
+              insert the html dynamically. The current solution of .word:hover ~ .tooltip doesn't work for multiple
+              tooltips, and probably what I want is to refer to the next sibling or to child the tooltip in the css.
+              Probably the latter, although I'm unsure how to do this and which tags to use.-->
 </body>
 </html>

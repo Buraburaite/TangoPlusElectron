@@ -1,16 +1,49 @@
 #video-container {
   position: relative;
   top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
   z-index: 0;
 }
 #video-overlay {
-  position: relative;
-  top: 0;
+  height: calc(20% - 4px);
+  width: calc(100% - 4px);
+  position: absolute;
+  top: calc(80% - 4px);
   bottom: 0;
-  left: 150;
+  left: 0;
   right: 0;
   z-index: 1;
+  border: 2px;
+  border-color: black;
+  border-style: solid;
+}
+#doubtitles {
+  height: 50%;
+  width: 80%;
+  position: relative;
+  left: 10%;
+  border: 2px;
+  border-color: red;
+  border-style: solid;
+}
+.word {
+  height: 100%;
+  font-size: 28px;
+  background-color: transparent;
+  background-repeat:no-repeat;
+  border: none;
+  outline: none;
+}
+.word:hover {
+  border: 1px;
+  border-style: solid;
+  border-color: orange;
+}
+.word:hover ~ .tooltip {
+  visibility: visible;
+}
+.tooltip {
+  position: absolute;
+  z-index: 2;
+  visibility: hidden;
+  border-radius: 6px;
 }
