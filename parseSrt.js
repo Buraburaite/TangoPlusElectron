@@ -75,4 +75,4 @@ function parseFile(err, data){
 // }
 
 
-srt = fs.readFile("Assets/IgnoreThis/Hanzawa Naoki - Ep 2.srt", 'utf8', parseFile);
+srt = fs.readFile("Assets/Hanzawa Naoki - Ep 2.srt", 'utf8', parseFile);
