@@ -14,7 +14,7 @@
     preload="auto"
     poster="Assets/Icons/Stop.png"
     width="100%"
-    onloadstart="this.volume=0.5;"
+    onloadstart="this.volume=0.1"
     onclick="this.paused ? this.play() : this.pause();"
     data-setup='{
     }'
@@ -22,6 +22,7 @@
     </video>
     <div id="video-overlay">
       <div id="doubtitles">
+        <button class="doubtitles-navigation-btn" id="doubtitles-previous-btn" type="button"></button>
         <span class="word-container">
           <span class="word">東京</span>
           <span class="tooltip" contenteditable="true">Definition</span>
@@ -30,10 +31,12 @@
           <span class="word">東京</span>
           <span class="tooltip" contenteditable="true">Much, much, much longer definition! I think it's fair to say that this definition is a great deal longer than the first one.</span>
         </span>
+        <button class="doubtitles-navigation-btn" id="doubtitles-next-btn" type="button"></button>
       </div>
     </div>
-  </body>
-  </html>
-  <!--
-  TODO
+  </div>
+</body>
+</html>
+<!--
+TODO
 -->
