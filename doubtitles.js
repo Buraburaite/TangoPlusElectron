@@ -1,3 +1,11 @@
-var video = videojs('video');
+var {slides, slideMarks} = require("./parseSrt.js");
 
-console.log(video);
+var isPlaying = false;
+var nextSlideNum = -1;
+
+module.exports = {
+  "slides" : slides,
+  "slideMarks" : slideMarks,
+  "isPlaying" : isPlaying,
+  "nextSlideNum" : nextSlideNum
+};

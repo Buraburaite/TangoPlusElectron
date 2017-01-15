@@ -1,8 +1,8 @@
 fs = require('fs');
 
-function parseFile(err, data){
-  if (err) throw err;
+var slides = parseSrt(fs.readFileSync("Assets/Hanzawa Naoki - Ep 2.srt", "utf8"));
 
+function parseSrt(data){
   // data.replace(/(\r\n|\n|\r)/gm,"*");
 
   data = data.replace("<b>", "").replace("<i>", "").replace("</b>", "").replace("</i>", "");
@@ -32,10 +32,14 @@ function parseFile(err, data){
     return ms;
     }
 
-  console.log(slides);
-
+  return slides;
 
 }
+
+module.exports = {
+  "slides" : slides,
+  "slideMarks" : Array.from(slides.keys())
+};
 
 // void Doubtitles::loadSource(QString filename, int* mode)
 // {
@@ -73,6 +77,3 @@ function parseFile(err, data){
 //
 //    return p - 500; //to better average starting point (positionChanged called apprx. once per second when playing)
 // }
-
-
-srt = fs.readFile("Assets/Hanzawa Naoki - Ep 2.srt", 'utf8', parseFile);

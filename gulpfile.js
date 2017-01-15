@@ -12,7 +12,8 @@ gulp.task('serve', function () {
   gulp.watch('main.js', electron.restart);
 
   // Reload renderer process
-  gulp.watch(['main.js', 'index.html', 'index.css'], electron.reload);
+  gulp.watch(['main.js', 'index.html', 'index.css', 'initIndex.js',
+              'parseSrt.js', 'doubtitles.js'], electron.reload);
 });
 
 gulp.task('reload:browser', function () {
