@@ -13,7 +13,7 @@ gulp.task('serve', function () {
 
   // Reload renderer process
   gulp.watch(['main.js', 'index.html', 'index.css', 'initIndex.js',
-              'parseSrt.js', 'doubtitles.js'], electron.reload);
+              'doubtitles.js'], electron.reload);
 });
 
 gulp.task('reload:browser', function () {

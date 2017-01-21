@@ -11,15 +11,14 @@
     <video
     id="video"
     class="video-js"
-    autoplay
     preload="auto"
+    autoplay muted
     poster="Assets/Icons/Stop.png"
     width="100%"
-    onloadstart="this.volume=0.1"
-    onclick="this.paused ? this.play() : this.pause();"
+    onloadstart="this.volume=0.7"
     data-setup='{
     }'
-    <source src="Assets/Border-Collies.mp4">
+    <source src="Assets/IgnoreThis/2-1.mp4">
     </video>
     <div id="video-overlay">
       <div id="doubtitles">
@@ -33,6 +32,13 @@
           <span class="tooltip" contenteditable="true">Much, much, much longer definition! I think it's fair to say that this definition is a great deal longer than the first one.</span>
         </span>
         <button class="doubtitles-navigation-btn" id="doubtitles-next-btn" type="button"></button>
+      </div>
+      <div id="player-controls">
+        <button id="play-pause-btn" type="button"></button>
+        <span id="progress-box">
+          <img id="progress-toki" src="Assets/Icons/tokiIcon.png"></img>
+          <progress id="progress-bar" value="0"></progress>
+        </span>
       </div>
     </div>
   </div>
