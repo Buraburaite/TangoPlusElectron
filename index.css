@@ -4,10 +4,13 @@
   z-index: 0;
 }
 #video-overlay {
-  height: calc(20% - 4px);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: calc(30% - 4px);
   width: calc(100% - 4px);
   position: absolute;
-  top: calc(80% - 4px);
+  top: calc(70% - 4px);
   bottom: 0;
   left: 0;
   right: 0;
@@ -17,11 +20,11 @@
   border-style: solid;
 }
 #doubtitles {
-  display: flex;
+  display: flex;;
   justify-content: center;
-  height: 50%;
+  height: 60%;
   width: 80%;
-  position: absolute;
+  position: relative;
   left: 10%;
   border: 2px;
   border-color: pink;
@@ -30,9 +33,11 @@
 .word-container {
   position: relative;
   display: inline-flex;
+  align-items: center;
   justify-content: center;
 }
 .word {
+  height: 50%;
   font-size: 3.4vw;
   background: rgba(200,200,200,0.8);
   outline: none;
@@ -69,54 +74,31 @@
   transition: opacity 1s;
   outline: none;
 }
-.doubtitles-navigation-btn {
-  height: 100%;
-  width: 10%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  border: none;
-}
-#doubtitles-previous-btn {
-  background-image: url('Assets/Icons/Previous.png');
-}
-
-#doubtitles-next-btn {
-  background-image: url('Assets/Icons/Next.png');
-}
-#player-controls {
-  display: inline-flex;
-  justify-content: center;
-  height: calc(50% - 8px);
-  width: calc(100% - 4px);
-  position: absolute;
-  top: calc(50% + 4px);
-  border: 2px;
-  border-color: cyan;
-  border-style: solid;
-}
-#play-pause-btn {
-  height: 100%;
-  width: calc(10% - 4px);
-}
 #progress-box {
   display: inline-flex;
   align-items: center;
-  width: calc(90%);
-  height: 100%;
+  width: calc(100% - 4px);
+  height: 15%;
+  border: 2px;
+  border-style: solid;
+  border-color: green;
+}
+#progress-box:hover progress{
+  -webkit-appearance: none;
+  appearance: none;
+  height: 50%;
+  transition: height 0.1s;
 }
 #progress-bar {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 10%;
+  height: 25%;
   transition: height 0.1s;
+  position: relative;
+  top: 25%;
 }
 #progress-bar:hover {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 20%;
-  transition: height 0.1s;
 }
 #progress-bar::-webkit-progress-bar {
   background-color: rgba(255, 255, 255, .25);
@@ -137,9 +119,18 @@
     }
     #progress-toki {
       position: absolute;
+      top: 63.75%;
       left: 0px;
       z-index: 5;
       width: 2%;
       height: auto;
       pointer-events: none;
     }
+
+#player-controls {
+  height: 25%;
+  width: calc(100% - 4px);
+  border: 2px;
+  border-color: cyan;
+  border-style: solid;
+}

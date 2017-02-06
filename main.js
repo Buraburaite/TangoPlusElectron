@@ -1,3 +1,8 @@
+/*====
+This code is provided by the Electron team. It's almost entirely untouched.
+====*/
+
+
 /*jshint esversion: 6 */
 
 const {app, BrowserWindow} = require('electron');
