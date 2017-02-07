@@ -28,8 +28,8 @@ class Player {
     player.progressEl.addEventListener ('mousemove',  listeners.progressOnMouseMove);
     player.progressEl.addEventListener ('mousedown',  listeners.progressOnMouseDown);
     player.progressEl.addEventListener ('mouseup',    listeners.progressOnMouseUp);
-    player.document.addEventListener ('mouseup',    listeners.docOnMouseUp);
-    player.document.addEventListener ('mousemove',  listeners.docOnMouseMove);
+    player.document.addEventListener   ('mouseup',    listeners.docOnMouseUp);
+    player.document.addEventListener   ('mousemove',  listeners.docOnMouseMove);
   }
 
   //Closure with relevant variables for the events
@@ -92,14 +92,23 @@ class Player {
     //=====================================================-Video-Element-Events
     function videoOnClick(e) { playPause(); }
 
+    let tracking = nextSlideNum;
+
     function videoOnTimeUpdate(e) {
       //Syncs slides
-      if (video.currentTime * 1000 >= slides[nextSlideNum].mark){
-        let text = slides[nextSlideNum].text;
-        // console.log(text);
+      while (video.currentTime * 1000 >= slides[nextSlideNum].mark){
+        // let text = slides[nextSlideNum].text;
         // console.log(addWord(text, "What"));
         // doubsEl.innerHTML = addWord(text, "What");
         nextSlideNum++;
+      }
+
+      if (tracking != nextSlideNum) {
+        let text = slides[nextSlideNum - 1].text;
+        console.clear();
+        console.log(text);
+
+        tracking = nextSlideNum;
       }
       //Syncs progress bar
       progress.value  = video.currentTime / video.duration;
