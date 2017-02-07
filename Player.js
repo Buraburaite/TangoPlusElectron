@@ -14,7 +14,6 @@ class Player {
     let Doubtitles  = require('./Doubtitles.js');
     let doubs       = new Doubtitles(srtName);
     this.slides     = doubs.slides;
-    this.slideMarks = doubs.slideMarks;
 
     this.attachListeners(this);
   }
@@ -46,14 +45,13 @@ class Player {
     //Subtitles related
     let doubsEl       = player.doubsEl;
     let slides        = player.slides;
-    let slideMarks    = player.slideMarks;
     let nextSlideNum  = 0;
 
 
     //==========================================================-Document-Events
     function docOnMouseMove(e) {
       if (isUserDraggingProgressBar){
-        console.log('Hello World!');
+        // console.log('Hello World!');
         let desiredProgress = e.offsetX / document.body.clientWidth;
         video.currentTime = desiredProgress * video.duration;
         nextSlideNum = findSlideNum(video.currentTime) + 1;
@@ -78,10 +76,9 @@ class Player {
     }
 
     function progressOnMouseMove(e) {
-      let desiredProgress     = e.offsetX / progress.offsetWidth;
-      let selectedTime        = Math.floor(desiredProgress * video.duration);
-      let preceedingValidTime = slideMarks[findSlideNum(selectedTime)];
-      let correctSlide        = slides.get(preceedingValidTime);
+      let desiredProgress = e.offsetX / progress.offsetWidth;
+      let selectedTime    = Math.floor(desiredProgress * video.duration);
+      let correctSlide    = slides[findSlideNum(selectedTime)];
 
       // console.log(correctSlide);
     }
@@ -97,8 +94,8 @@ class Player {
 
     function videoOnTimeUpdate(e) {
       //Syncs slides
-      if (video.currentTime * 1000 >= slideMarks[nextSlideNum]){
-        let text = slides.get(slideMarks[nextSlideNum]);
+      if (video.currentTime * 1000 >= slides[nextSlideNum].mark){
+        let text = slides[nextSlideNum].text;
         console.log(text);
         // console.log(addWord(text, "What"));
         // doubsEl.innerHTML = addWord(text, "What");
@@ -127,21 +124,21 @@ class Player {
     }
 
     /*===
-    This performs a binary search for the greatest index of slideMarks,
-    where slideMarks[index] <= time . This corresponds to the index of
+    This performs a binary search for the greatest index of slides,
+    where slides[index].mark <= time . This corresponds to the index of
     the slide that includes time. Use this to re-sync the subtitles whenever
     video progress changes arbitrarily (e.g. the user moves the progress bar).
     ====*/
-    function findSlideNum(time) { //Precondition: time is in milliseconds
-      let low = 0, high = slideMarks.length - 2, average = Math.floor( (low + high) / 2 );
+    function findSlideNum(time) { //Pre: time is in milliseconds
+      let low = 0, high = slides.length - 2, average = Math.floor( (low + high) / 2 );
 
       while (low + 1 != high){
 
-        if (slideMarks[average] < time){
+        if (slides[average].mark < time){
           low = average;
           average = Math.floor((average + high) / 2);
         }
-        else if (slideMarks[average] > time){
+        else if (slides[average].mark > time){
           high = average;
           average = Math.floor((low + average) / 2);
         }
@@ -150,7 +147,7 @@ class Player {
         }
       }
 
-      if (slideMarks[average] <= time) { return low; }
+      if (slides[average].mark <= time) { return low; }
 
       return high;
     }
