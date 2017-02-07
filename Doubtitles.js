@@ -1,3 +1,13 @@
+
+class Slide {
+  constructor(text, startTime, endTime) { //Pre: times are in milliseconds
+    this.text = text;
+    this.startTime = this.mark = startTime;
+    this.endTime = endTime;
+  }
+}
+
+
 class Doubtitles {
 
   constructor (srt) {
@@ -44,6 +54,8 @@ class Doubtitles {
 
   }
 }
+// let d = new Doubtitles("Assets/Hanzawa Naoki - Ep 2.srt");
+// console.log(new d.Slide('Hello World!'));
 
 
 module.exports = Doubtitles;

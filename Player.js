@@ -1,12 +1,14 @@
 class Player {
 
-  constructor (srtName, videoEl, doubsEl, progressEl, handleEl) {
+  constructor (srtName, doc) {
+
+    this.document = doc;
 
     //Elements inside the player
-    this.videoEl = videoEl;
-    this.doubsEl = doubsEl;
-    this.progressEl = progressEl;
-    this.handleEl = handleEl;
+    this.videoEl    = doc.getElementById('video'); //Video element;
+    this.doubsEl    = doc.getElementById('doubtitles'); //Smart subtitles div;
+    this.progressEl = doc.getElementById('progress-bar'); //Video progress element;
+    this.handleEl   = doc.getElementById('progress-toki'); //Progess bar handle;
 
     //Subtitles related
     let Doubtitles  = require('./Doubtitles.js');
@@ -97,6 +99,7 @@ class Player {
       //Syncs slides
       if (video.currentTime * 1000 >= slideMarks[nextSlideNum]){
         let text = slides.get(slideMarks[nextSlideNum]);
+        console.log(text);
         // console.log(addWord(text, "What"));
         // doubsEl.innerHTML = addWord(text, "What");
         nextSlideNum++;
@@ -188,7 +191,7 @@ module.exports = Player;
 
 /*====TODO
 
--Make dragging the progress bar smooth.
+-Make dragging the progress bar smootho.
 ---Right now, progressDown and progressMove seem to be working differently on slides and time updates. Probably don't even need progressMove, since we have docMove
 -mousemove only gets called on stops, need another solution or an adjustment to this one
 -Need to hide focus events
