@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>TangoPlusElectron</title>
-  <script type="text/javascript" src="initIndex.js" defer></script>
+  <script type="text/javascript" src="../JS/initIndex.js" defer></script>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="../Styles/index.min.css">
 </head>
 <body>
   <div id="video-container">
@@ -13,18 +13,18 @@
     class="video-js"
     preload="auto"
     autoplay
-    poster="Assets/Icons/Stop.png"
+    poster="../Assets/Icons/Stop.png"
     width="100%"
     onloadstart="this.volume=0.7"
     data-setup='{
     }'
-    <source src="Assets/IgnoreThis/2-1.mp4">
+    <source src="../Assets/IgnoreThis/2-1.mp4">
     </video>
     <div id="video-overlay">
       <div id="doubtitles">
       </div>
       <div id="progress-box">
-        <img id="progress-toki" src="Assets/Icons/tokiIcon.png"></img>
+        <img id="progress-toki" src="../Assets/Icons/tokiIcon.png"></img>
         <progress id="progress-bar" value="0"></progress>
       </div>
       <div id="player-controls">

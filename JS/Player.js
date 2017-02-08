@@ -103,6 +103,7 @@ class Player {
         nextSlideNum++;
       }
 
+      //for testing subtitles sync
       if (tracking != nextSlideNum) {
         let text = slides[nextSlideNum - 1].text;
         console.clear();
