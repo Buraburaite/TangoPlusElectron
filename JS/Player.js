@@ -15,13 +15,13 @@ class Player {
     let doubs       = new Doubtitles(srtName);
     this.slides     = doubs.slides;
 
-    this.attachListeners(this);
+    this._attachListeners(this);
   }
 
   //=======================================================================-Init
-  attachListeners(player){
+  _attachListeners(player){
 
-    let listeners = this.playerEventListeners(player);
+    let listeners = this._playerEventListeners(player);
 
     player.videoEl.addEventListener    ('timeupdate', listeners.videoOnTimeUpdate);
     player.videoEl.addEventListener    ('click',      listeners.videoOnClick);
@@ -33,7 +33,7 @@ class Player {
   }
 
   //Closure with relevant variables for the events
-  playerEventListeners(player) {
+  _playerEventListeners(player) {
 
     //Progress related
     let video         = player.videoEl;
@@ -92,25 +92,16 @@ class Player {
     //=====================================================-Video-Element-Events
     function videoOnClick(e) { playPause(); }
 
-    let tracking = nextSlideNum;
-
     function videoOnTimeUpdate(e) {
       //Syncs slides
       while (video.currentTime * 1000 >= slides[nextSlideNum].mark){
-        // let text = slides[nextSlideNum].text;
+        let text = slides[nextSlideNum].text;
+        console.log(text);
         // console.log(addWord(text, "What"));
         // doubsEl.innerHTML = addWord(text, "What");
         nextSlideNum++;
       }
 
-      //for testing subtitles sync
-      if (tracking != nextSlideNum) {
-        let text = slides[nextSlideNum - 1].text;
-        console.clear();
-        console.log(text);
-
-        tracking = nextSlideNum;
-      }
       //Syncs progress bar
       progress.value  = video.currentTime / video.duration;
       let handleLeft  = Math.round((progress.value * progress.offsetWidth) +
@@ -195,14 +186,3 @@ class Player {
 
 
 module.exports = Player;
-
-/*====TODO
-
--Make dragging the progress bar smootho.
----Right now, progressDown and progressMove seem to be working differently on slides and time updates. Probably don't even need progressMove, since we have docMove
--mousemove only gets called on stops, need another solution or an adjustment to this one
--Need to hide focus events
--Figure out why replaying the video breaks the event listening.
--Remove script tag, and instead use on 'DOMContentLoaded' somehow? Doesn't seem like a good idea.
-
-====*/

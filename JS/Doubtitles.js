@@ -1,85 +1,122 @@
+//========================================================================-Slide
+/*==NOTE==
+Slides represent individual lines of subtitles. This includes time stamps, where
+the 'words' are, definitions, and pronunciation. Much of the functionality of
+this program is dependent upon slide objects, all of which are kept within their
+corresponding Doubtitles object.
+
+Conceptually, slides can be thought as a sequence of startTimes. That is, given
+time t, the current slide is that which has the greatest startTime that is less
+than or equal to t. 'Silence' is then represented by slides with empty strings.
+
+startTime is key to understanding how subtitles are synchronized in this program.
+For this reason, there is an redundant property that references startTime,
+called mark, which more clearly emphasizes how slides do not end, only the next
+one starts. However, startTime is maintained in order to have a clearer
+conceptual opposite to endTime, which is useful when implementing features like
+slides whose durations overlap.
+====NOTE*/
 
 class Slide {
-  constructor(text, startTime, endTime = startTime + 1) { //Pre: times are in milliseconds
+  constructor(text, startTime, endTime = startTime + 1) { //Pre: times are in ms
     this.text      = text;
+    this.words     = [];
     this.startTime = startTime;
     this.endTime   = endTime;
   }
-
 }
 
-/*===
-'Slide.mark' is another name for 'Slide.startTime'. Conceptually, slides can be
-thought as a sequence of startTimes. For instance, if two slides overlap, that
-is presented as three slides: Slide A -> Slide A & B -> Slide B. That is, the
-overlap is considered its own slide, which simplifies overlapping slides into
-a video display issue. Therefore, one should use Slide.mark over Slide.startTime,
-unless you are specifically trying to differentiate the starting time from the
-ending time, in which case you should use Slide.startTime in conjunction with
-Slide.endTime, although functionally there is no difference.
-===*/
 Object.defineProperty(Slide.prototype, 'mark', {
   get: function()        { return this.startTime; },
   set: function(newTime) { this.startTime = newTime; }
 });
 
 
+//===================================================================-Doubtitles
+
 class Doubtitles {
 
-  constructor (srt) {
+  constructor (filename) {
 
-    this.slides = this.parseSrt(srt);
+    this.fileString = this._readFile(filename);
+    this.fileExt    = filename.slice('.')[-1];
+    this.metadata   = this.fileExt === 'doub' ? this._readMetadata() : this._defaultMetadata();
+    this.slides     = this._readSlides();
   }
 
-  //'00:00:02,400' becomes 2400
-  srtToMilliseconds(timeString){
-    timeString = timeString.replace(',','');
-    let splitTime = timeString.split(":");
+  _defaultMetadata () {
 
-    let ms = parseInt(splitTime[0]) * 3600000;
-    ms += parseInt(splitTime[1]) * 60000;
-    ms += parseInt(splitTime[2]);
-
-    return ms;
+    return {
+      lexicographer  : "Javier Cueto",
+      lastUpdated    : new Date(2016,1,8),
+      defBrackets    : '[]',
+      defDelimiter   : '|',
+      doubSourceUrl  : 'https://www.google.com',
+      srtFilename    : 'Hanzawa Naoki - Ep 2.srt',
+      srtSourceUrl   : 'https://www.google.com',
+      mediaFilename  : '2-2.mp4',
+      mediaSourceUrl : 'https://www.google.com'
+    };
   }
 
-  parseSrt(filename) {
+  _readFile (filename) {
 
-    //Read .srt file
-    let fs = require('fs');
-    let data = fs.readFileSync(filename, "utf8");
+    let fs = require('fs'); //should this be global?
+    return fs.readFileSync(filename, "utf8");
+  }
 
-    // data.replace(/(\r\n|\n|\r)/gm,"*");
+  _readMetadata () {
+
+    //Extract the metadata into strings
+    let data = this.fileString.replace('\r\n', '');
+    data = data.slice(data.indexOf('/*'), data.indexOf('*/'));
+    let lines = data.split(',');
+
+    //Place key-value pairs into an object to return
+    metaObj = {};
+    lines.forEach( function (line) {
+      let keyValuePair = line.split(': ');
+      metaObj[keyValuePair[0]] = keyValuePair[1];
+    });
+
+    return metaObj;
+  }
+
+  _readSlides () {
+
+    let data = this.fileString;
+
+    // data.replace(/(\r\n|\n|\r)/gm,"*"); Doesn't work for some reason...?
 
     data = data.replace("<b>", "").replace("<i>", "").replace("</b>", "").replace("</i>", "");
 
     let subs = data.split("\r\n");
     subs = subs.filter(function isNotAnEmptyString(value) { return value !== ""; });
+    //pretty sure I don't want this filter line
 
     let slides = [];
-
     slides.push(new Slide('', 0));
     let text, startTime, endTime;
     for (let i = 0; i < subs.length; i++){
       if (subs[i].includes("-->")){
         text      = subs[i + 1];
-        startTime = this.srtToMilliseconds(subs[i].slice(0,12));
-        endTime   = this.srtToMilliseconds(subs[i].slice(17,29));
+        startTime = this._srtToMilliseconds(subs[i].slice(0,12));
+        endTime   = this._srtToMilliseconds(subs[i].slice(17,29));
         slides.push(new Slide(text, startTime, endTime));
-        slides.push(new Slide(text, endTime)); //TODO: soon to-be deprecated
+        slides.push(new Slide('', endTime + 1)); //TODO: soon to-be deprecated
       }
     }
-    slides.push(new Slide('', Number.MAX_SAFE_INTEGER - 1)); //I forget why I needed this line
+    slides.push(new Slide('', Number.MAX_SAFE_INTEGER - 1)); //Deprecate?
 
-    //Sort all of the slides
-    slides.sort(function sortByStartTime(a,b) {
-      return a.startTime - b.startTime;
-    });
+    //Sort all of the slide
+    let byStartTime = (a,b) => a.startTime - b.startTime;
+    slides.sort(byStartTime);
 
-    /*=================================================-OVERLAPPING-SLIDES-LOGIC
 
-    //Note: Only works for up to two overlapping slides. Otherwise, there may be
-    //      unexpected behaviors.
+    /*OVERLAPPING-SLIDES-LOGIC
+
+    //NOTE: Only works for up to two overlapping slides. Otherwise, there may be
+    //      unexpected behavior.
     //
     // Strategy: Add a new slide whose text is a concatenation of A and B with a
     //           delimiter. Its startTime = B.startTime + 1, so that it will
@@ -114,6 +151,7 @@ class Doubtitles {
     //                      |      A      |  B (hidden) |     A&B    |
     //
     ====*/
+
     let originalLength = slides.length;
     for (let i = 0; i < originalLength; i++) {
 
@@ -121,42 +159,95 @@ class Doubtitles {
       let sB = slides[i + 1];
       if (sA.endTime >= sB.startTime && ![sA.text, sB.text].includes('')) {
 
-          let overlappingText = sA.text + '-%-' + sB.text;
-          slides.push(new Slide(
-            overlappingText,
-            sB.startTime + 1,
-            Math.min(sA.startTime, sB.startTime)
-          ));
+        let overlappingText = sA.text + '-%-' + sB.text;
+        slides.push(new Slide(
+          overlappingText,
+          sB.startTime + 1,
+          Math.min(sA.startTime, sB.startTime)
+        ));
 
-          if (sA.endingTime < sB.endingTime) {
-            slides.push(new Slide(
-              sB.text,
-              sA.startTime + 1,
-              sB.endTime + 1
-            ));
-          }
-          else if (sA.endingTime > sB.endingTime) {
-            slides.push(new Slide(
-              sA.text,
-              sB.startTime + 1,
-              sA.endTime + 1
-            ));
+        if (sA.endingTime < sB.endingTime) {
+          slides.push(new Slide(
+            sB.text,
+            sA.startTime + 1,
+            sB.endTime + 1
+          ));
+        }
+        else if (sA.endingTime > sB.endingTime) {
+          slides.push(new Slide(
+            sA.text,
+            sB.startTime + 1,
+            sA.endTime + 1
+          ));
+        }
+        //Equals case not required.
+      }
+    }
+
+
+    //Sort all of the slides (again)
+    slides.sort(byStartTime);
+
+    //If file is a .doub file, interpret definitions and pronunciations
+    if (this.fileExt === '.doub') { //No no no no no, bad Javi! This is not what words mean!
+      let text, segments, parts, word, pronun, def;
+
+      for (let i = 0; i < slides.length; i++) {
+        text     = slides[i].text;
+        segments = text.split('[');
+
+        for (let j = 0; j < segments.length; j++) {
+          parts = segments.split('|'); //Makes this do words, dammit
+          slides[i].text   = parts[0]; //need to remove trailing bracket
+          slides[i].pronun = parts[1] || parts[2] || null;
+          slides[i].def    = parts[2] || null;
+        }
+        //get text without extra data in it
+      }
+    }
+
+    // function saveParts(seg) {
+    //
+    //   parts = seg.split('|');
+    //   slides[i].text   = parts[0];
+    //   slides[i].pronun = parts[1] || null;
+    //   slides[i].def    = parts[2] || null;
+    // }
+
+    function toPlainText(str) {
+
+      let plainText = '';
+      for (let i = 0; i < str.length; i++) {
+
+        if (str[i] === '[') {
+          while (str[i] != '|') {
+            i++;
+            plainText += str[i];
           }
         }
+        plainText += str[i];
+
       }
-      //Equals case not required.
 
-      //Sort all of the slides (again)
-      slides.sort(function sortByStartTime(a,b) {
-        return a.startTime - b.startTime;
-      });
-
-      return slides;
-
+      return plainText;
     }
+
+    return slides;
   }
-  // let d = new Doubtitles("Assets/Hanzawa Naoki - Ep 2.srt");
-  // console.log(new d.Slide('Hello World!'));
+
+  //'00:01:02,400' becomes 62400
+  _srtToMilliseconds (timeString){
+    timeString = timeString.replace(',','');
+    let units = timeString.split(":");
+
+    let ms = 0;
+    ms += parseInt(units[0]) * 3600000;
+    ms += parseInt(units[1]) * 60000;
+    ms += parseInt(units[2]);
+
+    return ms;
+  }
+}
 
 
-  module.exports = Doubtitles;
+module.exports = Doubtitles;
