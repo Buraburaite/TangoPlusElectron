@@ -37,7 +37,6 @@ class Word {
     this.word         = word;
     this.pronun       = pronun;
     this.def          = def;
-    this.trailingText = '';
   }
 }
 
@@ -148,9 +147,10 @@ class Doubtitles {
               def    = parts[2] ? parts[2].slice(0, parts[2].indexOf(']')) : null;
               slide.sequence.push(new Word(word, pronun, def));
 
+
               trailingText = parts[parts.length - 1];
               trailingText = trailingText
-              .slice(trailingText.indexOf(']'), trailingText.length);
+              .slice(trailingText.indexOf(']') + 1, trailingText.length);
 
               slide.sequence.push(trailingText);
 
@@ -160,6 +160,8 @@ class Doubtitles {
           });
 
         }
+
+        console.log(slide);
       });
     }
 
