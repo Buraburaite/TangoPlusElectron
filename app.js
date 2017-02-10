@@ -1,6 +1,7 @@
 //Creates Player object
-var Player = require('../JS/Player.js');
-var myPlayer = new Player('Assets/Hanzawa Naoki - Ep 2.srt', document);
+var Player = require('.././js/Player.js');
+// var myPlayer = new Player('Assets/Hanzawa Naoki - Ep 2.srt', document);
+var myPlayer = new Player('Assets/test.doub', document);
 // var myPlayer = new Player('Assets/example.doub', document);
 // var myPlayer = new Player('Assets/overlap-test.srt', document);
 
@@ -9,7 +10,7 @@ var myPlayer = new Player('Assets/Hanzawa Naoki - Ep 2.srt', document);
 
 /*====TODO
 
--Make dragging the progress bar smootho.
+-Make dragging the progress bar smooth.
 ---Right now, progressDown and progressMove seem to be working differently on slides and time updates. Probably don't even need progressMove, since we have docMove
 -mousemove only gets called on stops, need another solution or an adjustment to this one
 -Need to hide focus events

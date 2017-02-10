@@ -1,6 +1,6 @@
 class Player {
 
-  constructor (srtName, doc) {
+  constructor (filename, doc) {
 
     this.document = doc;
 
@@ -12,7 +12,7 @@ class Player {
 
     //Subtitles related
     let Doubtitles  = require('./Doubtitles.js');
-    let doubs       = new Doubtitles(srtName);
+    let doubs       = new Doubtitles(filename);
     this.slides     = doubs.slides;
 
     this._attachListeners(this);
@@ -95,7 +95,7 @@ class Player {
     function videoOnTimeUpdate(e) {
       //Syncs slides
       while (video.currentTime * 1000 >= slides[nextSlideNum].mark){
-        let text = slides[nextSlideNum].text;
+        let text = slides[nextSlideNum].sequence;
         console.log(text);
         // console.log(addWord(text, "What"));
         // doubsEl.innerHTML = addWord(text, "What");

@@ -20,23 +20,24 @@ slides whose durations overlap.
 class Slide {
   constructor(text, startTime, endTime = startTime + 1) { //Pre: times are in ms
     this.text      = text;   //plain text
-    this.sequence  = [text]; //sequence of plain text and word objects
+    this.sequence  = []; //sequence of plain text and word objects
     this.startTime = startTime;
     this.endTime   = endTime;
   }
 }
 
 Object.defineProperty(Slide.prototype, 'mark', {
-  get : ()        => { return this.startTime;    },
-  set : (newTime) => { this.startTime = newTime; }
+  get : function ()        { return this.startTime; },
+  set : function (newTime) { this.startTime = newTime; }
 });
 
 //=========================================================================-Word
 class Word {
   constructor(word, pronun, def) {
-    this.word   = word;
-    this.pronun = pronun;
-    this.def    = def;
+    this.word         = word;
+    this.pronun       = pronun;
+    this.def          = def;
+    this.trailingText = '';
   }
 }
 
@@ -46,9 +47,9 @@ class Doubtitles {
   constructor (filename) {
 
     this.fileString = this._readFile(filename);
-    this.fileExt    = filename.slice('.')[-1];
-    this.metadata   = this.fileExt === 'doub' ? this._readMetadata() : this._defaultMetadata();
-    this.slides     = this._readSlides();
+    this.fileExt    = '.' + filename.split('.').slice(-1);
+    this.metadata   = this.fileExt === 'doub' ? this._parseMetadata() : this._defaultMetadata();
+    this.slides     = this._parseSlides();
   }
 
   _defaultMetadata () {
@@ -66,9 +67,7 @@ class Doubtitles {
     };
   }
 
-  _readFile (filename) { return require('fs').readFileSync(filename, 'utf8'); }
-
-  _readMetadata () { //need to test this
+  _parseMetadata () { //need to test this
 
     //Extract the metadata into strings
     let lines = this.fileString
@@ -86,7 +85,7 @@ class Doubtitles {
     return metaObj;
   }
 
-  _readSlides () {
+  _parseSlides () {
 
     //Prepare lines of text
     let subs = this.fileString
@@ -94,15 +93,16 @@ class Doubtitles {
     .replace('<i>',   '')
     .replace('</b>',  '')
     .replace('</i>',  '')
-    .split('\r\n')
-    .reject((line) => line === '')
+    .split('\n')
+    .filter((line) => line !== '')
     .map   ((line) => line.trim());
 
 
 
     //Create slide objects with times and text (no definitions nor pronunciation yet)
     let text, startTime, endTime;
-    let slides = [].push(new Slide('', 0));
+    let slides = [];
+    slides.push(new Slide('', 0));
     subs.forEach((line, lineIndex) => {
 
       if (line.includes('-->')){
@@ -137,22 +137,28 @@ class Doubtitles {
           firstPart = segments[0].includes(']') ? '' : segments[0];
           slide.sequence.push(firstPart);
 
+
+          slide.text = firstPart;
           segments.forEach((segment) => {
 
             if (segment.includes(']')) {
               parts  = segment.split('|');
               word   = parts[0];
               pronun = parts[1] || null;
-              def    = parts[2] ? def.slice(0, def.indexOf(']')) : null;
+              def    = parts[2] ? parts[2].slice(0, parts[2].indexOf(']')) : null;
               slide.sequence.push(new Word(word, pronun, def));
 
-              trailingText = parts[-1]
-              .slice(parts[-1].indexOf(']'), parts[-1].length);
+              trailingText = parts[parts.length - 1];
+              trailingText = trailingText
+              .slice(trailingText.indexOf(']'), trailingText.length);
 
               slide.sequence.push(trailingText);
 
+              slide.text += word + trailingText;
+
             }
           });
+
         }
       });
     }
@@ -233,6 +239,8 @@ class Doubtitles {
 
     return slides;
   }
+
+  _readFile (filename) { return require('fs').readFileSync(filename, 'utf8'); }
 
   //'00:01:02,400' becomes 62400
   _srtToMilliseconds (timeString){
