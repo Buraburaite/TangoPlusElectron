@@ -1,4 +1,3 @@
-//========================================================================-Slide
 /*==NOTE==
 Slides represent individual lines of subtitles. This includes time stamps, where
 the 'words' are, definitions, and pronunciation. Much of the functionality of
@@ -11,29 +10,37 @@ than or equal to t. 'Silence' is then represented by slides with empty strings.
 
 startTime is key to understanding how subtitles are synchronized in this program.
 For this reason, there is an redundant property that references startTime,
-called mark, which more clearly emphasizes how slides do not end, only the next
-one starts. However, startTime is maintained in order to have a clearer
+called mark, which more clearly emphasizes how slides do not "end", rather the
+next one begins. However, startTime is maintained in order to have a clearer
 conceptual opposite to endTime, which is useful when implementing features like
 slides whose durations overlap.
 ====NOTE*/
 
+//========================================================================-Slide
 class Slide {
   constructor(text, startTime, endTime = startTime + 1) { //Pre: times are in ms
-    this.text      = text;
-    this.words     = [];
+    this.text      = text;   //plain text
+    this.sequence  = [text]; //sequence of plain text and word objects
     this.startTime = startTime;
     this.endTime   = endTime;
   }
 }
 
 Object.defineProperty(Slide.prototype, 'mark', {
-  get: function()        { return this.startTime; },
-  set: function(newTime) { this.startTime = newTime; }
+  get : ()        => { return this.startTime;    },
+  set : (newTime) => { this.startTime = newTime; }
 });
 
+//=========================================================================-Word
+class Word {
+  constructor(word, pronun, def) {
+    this.word   = word;
+    this.pronun = pronun;
+    this.def    = def;
+  }
+}
 
 //===================================================================-Doubtitles
-
 class Doubtitles {
 
   constructor (filename) {
@@ -59,24 +66,21 @@ class Doubtitles {
     };
   }
 
-  _readFile (filename) {
+  _readFile (filename) { return require('fs').readFileSync(filename, 'utf8'); }
 
-    let fs = require('fs'); //should this be global?
-    return fs.readFileSync(filename, "utf8");
-  }
-
-  _readMetadata () {
+  _readMetadata () { //need to test this
 
     //Extract the metadata into strings
-    let data = this.fileString.replace('\r\n', '');
-    data = data.slice(data.indexOf('/*'), data.indexOf('*/'));
-    let lines = data.split(',');
+    let lines = this.fileString
+    .slice(data.indexOf('/*' + 2), data.indexOf('*/'))
+    .replace('\r\n', '')
+    .split(',');
 
     //Place key-value pairs into an object to return
-    metaObj = {};
-    lines.forEach( function (line) {
-      let keyValuePair = line.split(': ');
-      metaObj[keyValuePair[0]] = keyValuePair[1];
+    let metaObj = {}, keyValuePair = null;
+    lines.forEach((line) => {
+      keyValuePair = line.split(':');
+      metaObj[keyValuePair[0].trim()] = keyValuePair[1].trim();
     });
 
     return metaObj;
@@ -84,34 +88,74 @@ class Doubtitles {
 
   _readSlides () {
 
-    let data = this.fileString;
+    //Prepare lines of text
+    let subs = this.fileString
+    .replace('<b>',   '')
+    .replace('<i>',   '')
+    .replace('</b>',  '')
+    .replace('</i>',  '')
+    .split('\r\n')
+    .reject((line) => line === '')
+    .map   ((line) => line.trim());
 
-    // data.replace(/(\r\n|\n|\r)/gm,"*"); Doesn't work for some reason...?
 
-    data = data.replace("<b>", "").replace("<i>", "").replace("</b>", "").replace("</i>", "");
 
-    let subs = data.split("\r\n");
-    subs = subs.filter(function isNotAnEmptyString(value) { return value !== ""; });
-    //pretty sure I don't want this filter line
-
-    let slides = [];
-    slides.push(new Slide('', 0));
+    //Create slide objects with times and text (no definitions nor pronunciation yet)
     let text, startTime, endTime;
-    for (let i = 0; i < subs.length; i++){
-      if (subs[i].includes("-->")){
-        text      = subs[i + 1];
-        startTime = this._srtToMilliseconds(subs[i].slice(0,12));
-        endTime   = this._srtToMilliseconds(subs[i].slice(17,29));
+    let slides = [].push(new Slide('', 0));
+    subs.forEach((line, lineIndex) => {
+
+      if (line.includes('-->')){
+
+        text      = subs[lineIndex + 1];
+        startTime = this._srtToMilliseconds(line.slice(0,12));
+        endTime   = this._srtToMilliseconds(line.slice(17,29));
+
         slides.push(new Slide(text, startTime, endTime));
-        slides.push(new Slide('', endTime + 1)); //TODO: soon to-be deprecated
+        slides.push(new Slide('', endTime + 1));
       }
-    }
+    });
     slides.push(new Slide('', Number.MAX_SAFE_INTEGER - 1)); //Deprecate?
 
-    //Sort all of the slide
+
+
+    //Sort all of the slides
     let byStartTime = (a,b) => a.startTime - b.startTime;
     slides.sort(byStartTime);
 
+
+
+    //If file is a .doub file, interpret definitions and pronunciations
+    if (this.fileExt === '.doub') {
+
+      let segments, parts, firstPart, word, pronun, def, trailingText;
+      slides.forEach((slide) => {
+
+        if (slide.text !== '' && slide.text.includes('[')) {
+
+          segments  = slide.text.split('[');
+          firstPart = segments[0].includes(']') ? '' : segments[0];
+          slide.sequence.push(firstPart);
+
+          segments.forEach((segment) => {
+
+            if (segment.includes(']')) {
+              parts  = segment.split('|');
+              word   = parts[0];
+              pronun = parts[1] || null;
+              def    = parts[2] ? def.slice(0, def.indexOf(']')) : null;
+              slide.sequence.push(new Word(word, pronun, def));
+
+              trailingText = parts[-1]
+              .slice(parts[-1].indexOf(']'), parts[-1].length);
+
+              slide.sequence.push(trailingText);
+
+            }
+          });
+        }
+      });
+    }
 
     /*OVERLAPPING-SLIDES-LOGIC
 
@@ -155,8 +199,7 @@ class Doubtitles {
     let originalLength = slides.length;
     for (let i = 0; i < originalLength; i++) {
 
-      let sA = slides[i];
-      let sB = slides[i + 1];
+      let sA = slides[i], sB = slides[i + 1];
       if (sA.endTime >= sB.startTime && ![sA.text, sB.text].includes('')) {
 
         let overlappingText = sA.text + '-%-' + sB.text;
@@ -188,57 +231,14 @@ class Doubtitles {
     //Sort all of the slides (again)
     slides.sort(byStartTime);
 
-    //If file is a .doub file, interpret definitions and pronunciations
-    if (this.fileExt === '.doub') { //No no no no no, bad Javi! This is not what words mean!
-      let text, segments, parts, word, pronun, def;
-
-      for (let i = 0; i < slides.length; i++) {
-        text     = slides[i].text;
-        segments = text.split('[');
-
-        for (let j = 0; j < segments.length; j++) {
-          parts = segments.split('|'); //Makes this do words, dammit
-          slides[i].text   = parts[0]; //need to remove trailing bracket
-          slides[i].pronun = parts[1] || parts[2] || null;
-          slides[i].def    = parts[2] || null;
-        }
-        //get text without extra data in it
-      }
-    }
-
-    // function saveParts(seg) {
-    //
-    //   parts = seg.split('|');
-    //   slides[i].text   = parts[0];
-    //   slides[i].pronun = parts[1] || null;
-    //   slides[i].def    = parts[2] || null;
-    // }
-
-    function toPlainText(str) {
-
-      let plainText = '';
-      for (let i = 0; i < str.length; i++) {
-
-        if (str[i] === '[') {
-          while (str[i] != '|') {
-            i++;
-            plainText += str[i];
-          }
-        }
-        plainText += str[i];
-
-      }
-
-      return plainText;
-    }
-
     return slides;
   }
 
   //'00:01:02,400' becomes 62400
   _srtToMilliseconds (timeString){
-    timeString = timeString.replace(',','');
-    let units = timeString.split(":");
+    let units = timeString
+    .replace(',','')
+    .split(":");
 
     let ms = 0;
     ms += parseInt(units[0]) * 3600000;

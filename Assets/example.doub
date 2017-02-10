@@ -10,33 +10,67 @@ Media-filename: 2-2.mp4,
 Media-source: http://www.google.com
 */
 
-1
-00:00:02,400 --> 00:00:08,800
+===========
+.doub lines
+===========
+
 [東京|ようきょうちゅおぎんこう|Tokyo Central Bank] [大阪西支店|おさかにししてん|Western Osaka Branch] [融資課長|ゆうしかちょう|Loan Department Head]の[半沢直樹|はんざわなおき|Hanzawa Naoki]は
 
-2
-00:00:08,820 --> 00:00:11,140
+
 [浅野][支店長]の[指示に従い]
 
-3
-00:00:11,160 --> 00:00:16,460
+
 [西大阪スチール]から [５億円]の[融資契約]を[取り付けた]
 
-[
+========
+Segments
+========
+
 東京|ようきょうちゅおぎんこう|Tokyo Central Bank]
-[
-大阪西支店|おさかにししてん|Western Osaka Branch]
-[
-融資課長|ゆうしかちょう|Loan Department Head]の
-[
-半沢直樹|はんざわなおき|Hanzawa Naoki]は
 
 
-[
-東京|ようきょうちゅおぎんこう|Tokyo Central Bank]
-[
 大阪西支店|おさかにししてん|Western Osaka Branch]
-[
+
+
 融資課長|ゆうしかちょう|Loan Department Head]の
-[
+
+
 半沢直樹|はんざわなおき|Hanzawa Naoki]は
+
+=====
+Parts
+=====
+
+東京
+
+ようきょうちゅおぎんこう
+
+Tokyo Central Bank]
+
+
+
+大阪西支店
+
+おさかにししてん
+
+Western Osaka Branch]
+
+
+
+融資課長
+
+ゆうしかちょう
+
+Loan Department Head]の
+
+
+
+半沢直樹
+
+はんざわなおき
+
+Hanzawa Naoki]は
+
+
+
+Check cases where the line starts with undefined stuff
