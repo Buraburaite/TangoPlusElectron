@@ -10,7 +10,6 @@ Language education nowadays does little to help students select their own learni
 ### Goals
 This program is intended to make translating video easier for language learners who already have a good grasp of their target language's grammar, but need more practice to develop fluency. It makes defining words and providing pronunciations easy, and allows for your work to be saved so that it may be shared with others. The goal is to allow learners to choose their own materials, and to eliminate as much drudgery as possible so that they may focus on learning.
 
-
 ## Features
 * Annotate lines of subtitles with definitions and pronunciations
 * Save your work in a special file format
@@ -19,16 +18,16 @@ This program is intended to make translating video easier for language learners 
 
 ## Installation
 ### From source
-In your preferred working directory, get a copy of this repository:<br><br>
+In your preferred working directory, get a copy of this repository:<br>
 ```
 git clone https://github.com/Buraburaite/TangoPlusElectron
-```
-<br>Install any dependencies (you will need to install NodeJS in order to run this command):<br><br>
-```
 cd TangoPlusElectron
+```
+Install any dependencies (you will need to install NodeJS in order to run this command):<br>
+```
 npm install
 ```
-<br>Finally, run the testing server. This is will start the program, and will refresh the program everytime any of the files specified in the gulpfile.js are changed:<br><br>
+Finally, run the testing server. This is will start the program, and will refresh the program everytime any of the files specified in the gulpfile.js are changed:<br><br>
 ```
 npm start
 ```
