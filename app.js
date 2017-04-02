@@ -1,4 +1,4 @@
-// const dotenv = require('dotenv');s
+const dotenv = require('dotenv');
 
 //Creates Player object
 var Player = require('.././js/Player.js');

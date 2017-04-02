@@ -5,13 +5,13 @@ var electron = require('electron-connect').server.create();
 
 gulp.task('serve', function () {
 
-  // Start browser process
+  // // Start browser process
   electron.start();
 
-  // Restart browser process
+  // // Restart browser process
   gulp.watch('main.js', electron.restart);
 
-  // Reload renderer process
+  // // Reload renderer process
   gulp.watch(['main.js', 'app.js', 'html/index.html', 'css/index.css',
               'js/Doubtitles.js', 'js/Player.js'], electron.reload);
 });

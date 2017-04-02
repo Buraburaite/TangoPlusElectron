@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp serve"
+    "start": "electron .",
+    "dev": "gulp serve"
   },
   "repository": {
     "type": "git",
@@ -15,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^4.0.0",
-    "electron": "^1.4.13"
+    "electron": "^1.6.2"
   },
   "devDependencies": {
     "electron-connect": "^0.6.1",
