@@ -1,3 +1,11 @@
-Assets/IgnoreThis/
+# This file
+.gitignore
+
+# Convenience folders
+IgnoreThis/
+
+# Dependencies
 node_modules/
+
+# Logs
 npm-debug.log

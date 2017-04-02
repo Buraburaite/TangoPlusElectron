@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp serve"
+    "start": "gulp serve",
+    "dev": "gulp serve"
   },
   "repository": {
     "type": "git",
@@ -13,8 +14,11 @@
   },
   "author": "Javier Cueto",
   "license": "ISC",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "electron": "^1.4.13"
+  },
   "devDependencies": {
-    "electron": "1.4.13",
     "electron-connect": "^0.6.1",
     "gulp": "^3.9.1"
   }
