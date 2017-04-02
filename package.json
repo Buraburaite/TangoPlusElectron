@@ -1,12 +1,11 @@
 {
-  "name": "tango-plus",
+  "name": "tango-plus-electron",
   "version": "1.0.0",
   "description": "Video Player for intermediate Japanese language learners",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp serve",
-    "dev": "gulp serve"
+    "start": "gulp serve"
   },
   "repository": {
     "type": "git",

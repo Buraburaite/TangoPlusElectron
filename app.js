@@ -1,3 +1,5 @@
+// const dotenv = require('dotenv');s
+
 //Creates Player object
 var Player = require('.././js/Player.js');
 // var myPlayer = new Player('Assets/Hanzawa Naoki - Ep 2.srt', document);
