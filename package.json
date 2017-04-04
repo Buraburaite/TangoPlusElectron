@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "dev": "gulp serve"
+    "dev": "gulp serve",
+    "build-electron": "ng build --base-href . && cp src/electron/* dist",
+    "electron": "npm run build-electron && electron dist"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
     "electron": "^1.6.2"
   },
   "devDependencies": {
+    "@angular/cli": "^1.0.0",
     "electron-connect": "^0.6.1",
     "gulp": "^3.9.1"
   }
