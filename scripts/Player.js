@@ -6,7 +6,7 @@ class Player {
 
     //Elements inside the player
     this.videoEl    = doc.getElementById('video'); //Video element;
-    this.doubsEl    = doc.getElementById('doubtitles-div'); //Smart subtitles div;
+    this.doubsEl    = doc.getElementById('slide-div'); //Smart subtitles div;
     this.progressEl = doc.getElementById('progress-bar'); //Video progress element;
     this.handleEl   = doc.getElementById('progress-toki'); //Progess bar handle;
 

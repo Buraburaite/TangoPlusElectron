@@ -1,81 +1,88 @@
+@import 'styles';
+
+body, html {
+  box-sizing: border-box;
+}
+
 #video-container {
   position: relative;
   top: 0;
   z-index: 0;
 
   #overlay-div {
+    height: 30%;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    height: calc(30% - 4px);
-    width: calc(100% - 4px);
     position: absolute;
-    top: calc(70% - 4px);
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 70%;
     z-index: 1;
-    border: 2px;
-    border-color: black;
-    border-style: solid;
 
     #doubtitles-div {
-      display: flex;;
-      justify-content: center;
-      height: 60%;
-      width: 80%;
+      height: auto;
+      width: auto;
+      max-height: 60%;
       position: relative;
-      left: 10%;
-      border: 2px;
-      border-color: pink;
-      border-style: solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(white, 0.8);
       font-size: 3.4vw;
+
+      span {
+        width: auto;
+        height: auto;
+        margin-right: 2px;
+        border-radius: 2px;
+      }
 
       .word-container {
         position: relative;
-        display: inline-flex;
+        display: flex;
         align-items: center;
         justify-content: center;
-      }
-
-      .word {
-        height: 50%;
-        background: rgba(200,200,200,0.8);
+        border: 2px solid black;
+        background-color: rgba(white, 0.8);
         outline: none;
 
-        &:hover + .myTooltip {
-          opacity: 1;
-          visibility: visible;
-          transition: opacity 1s, visibility 1s;
+        .word {
+          padding: 2px;
+
+          &:hover + .myTooltip {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s, visibility 1s;
+          }
         }
-      }
 
-      .myTooltip {
-        max-width: 160px;
-        position: absolute;
-        left: 50%;
-        bottom: 150%;
-        transform: translateX(-50%);
-        z-index: 2;
-        text-align: center;
-        font-size: 18px;
-        padding: 4px;
-        border-radius: 48px;
-        background-color: rgb(255,165,0);
-        border: 2px;
-        border-color: black;
-        border-style: solid;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 2s, visibility 1s;
-        transition-delay: 0.1s;
+        .myTooltip {
+          max-width: 160px;
+          position: absolute;
+          left: 50%;
+          bottom: 150%;
+          transform: translateX(-50%);
+          z-index: 2;
+          text-align: center;
+          font-size: 18px;
+          padding: 4px;
+          border-radius: 48px;
+          background-color: rgb(255,165,0);
+          border: 2px;
+          border-color: black;
+          border-style: solid;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 2s, visibility 1s;
+          transition-delay: 0.1s;
 
-        &:focus {
-          z-index: 3;
-          opacity: 1;
-          visibility: visible;
-          transition: opacity 1s;
-          outline: none;
+          &:focus {
+            z-index: 3;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 1s;
+            outline: none;
+          }
         }
       }
     }
@@ -85,9 +92,7 @@
       align-items: center;
       width: calc(100% - 4px);
       height: 15%;
-      border: 2px;
-      border-style: solid;
-      border-color: green;
+      bottom: 0;
 
       &:hover progress{
         -webkit-appearance: none;
@@ -97,10 +102,10 @@
       }
 
       #progress-bar {
-        -webkit-appearance: none;
-        appearance: none;
         width: 100%;
         height: 25%;
+        -webkit-appearance: none;
+        appearance: none;
         transition: height 0.1s;
         position: relative;
         top: 25%;
@@ -142,9 +147,6 @@
     #controls-div {
       height: 25%;
       width: calc(100% - 4px);
-      border: 2px;
-      border-color: cyan;
-      border-style: solid;
     }
   }
 }
