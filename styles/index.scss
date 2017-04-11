@@ -3,7 +3,7 @@
   top: 0;
   z-index: 0;
 
-  #video-overlay {
+  #overlay-div {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -19,7 +19,7 @@
     border-color: black;
     border-style: solid;
 
-    #doubtitles {
+    #doubtitles-div {
       display: flex;;
       justify-content: center;
       height: 60%;
@@ -29,6 +29,7 @@
       border: 2px;
       border-color: pink;
       border-style: solid;
+      font-size: 3.4vw;
 
       .word-container {
         position: relative;
@@ -39,7 +40,6 @@
 
       .word {
         height: 50%;
-        font-size: 3.4vw;
         background: rgba(200,200,200,0.8);
         outline: none;
 
@@ -80,7 +80,7 @@
       }
     }
 
-    #progress-box {
+    #progress-div {
       display: inline-flex;
       align-items: center;
       width: calc(100% - 4px);
@@ -139,7 +139,7 @@
       }
     }
 
-    #player-controls {
+    #controls-div {
       height: 25%;
       width: calc(100% - 4px);
       border: 2px;

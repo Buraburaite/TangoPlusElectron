@@ -2,11 +2,13 @@ class Player {
 
   constructor (filename, doc) {
 
+    this.document = doc;
+
     //Elements inside the player
-    this.videoEl    = $('#video'); //Video element;
-    this.doubsEl    = $('.doubtitles'); //Smart subtitles div;
-    this.progressEl = $('.progress-bar'); //Video progress element;
-    this.handleEl   = $('.progress-toki'); //Progess bar handle;
+    this.videoEl    = doc.getElementById('video'); //Video element;
+    this.doubsEl    = doc.getElementById('doubtitles-div'); //Smart subtitles div;
+    this.progressEl = doc.getElementById('progress-bar'); //Video progress element;
+    this.handleEl   = doc.getElementById('progress-toki'); //Progess bar handle;
 
     //Subtitles related
     const Doubtitles  = require('./Doubtitles.js');
@@ -21,13 +23,13 @@ class Player {
 
     const listeners = this._playerEventListeners();
 
-    this.videoEl.on    ('timeupdate', listeners.videoOnTimeUpdate);
-    this.videoEl.on    ('click',      listeners.videoOnClick);
-    this.progressEl.on ('mousemove',  listeners.progressOnMouseMove);
-    this.progressEl.on ('mousedown',  listeners.progressOnMouseDown);
-    this.progressEl.on ('mouseup',    listeners.progressOnMouseUp);
-    this.document.on   ('mouseup',    listeners.docOnMouseUp);
-    this.document.on   ('mousemove',  listeners.docOnMouseMove);
+    this.videoEl   .addEventListener ('timeupdate', listeners.videoOnTimeUpdate);
+    this.videoEl   .addEventListener ('click',      listeners.videoOnClick);
+    this.progressEl.addEventListener ('mousemove',  listeners.progressOnMouseMove);
+    this.progressEl.addEventListener ('mousedown',  listeners.progressOnMouseDown);
+    this.progressEl.addEventListener ('mouseup',    listeners.progressOnMouseUp);
+    this.document  .addEventListener ('mouseup',    listeners.docOnMouseUp);
+    this.document  .addEventListener ('mousemove',  listeners.docOnMouseMove);
   }
 
   //Closure with relevant variables for the events
@@ -40,6 +42,9 @@ class Player {
       doubsEl,
       slides
     } = this;
+
+    //use jQuery to make changing the contents of doubsEl easier
+    const jDoubs = $(doubsEl);
 
     //Progress related
     let wasPaused     = false;
@@ -96,40 +101,38 @@ class Player {
     function videoOnTimeUpdate(e) {
       //Syncs slides
       while (videoEl.currentTime * 1000 >= slides[nextSlideNum].mark){
-        let text = slides[nextSlideNum].text;
-        console.log(text);
-        // console.log(addWord(text, "What"));
-        // doubsEl.innerHTML = addWord(text, "What");
+        // console.log(slides[nextSlideNum].sequence);
+        jDoubs.empty();
+        jDoubs.append(htmlify(slides[nextSlideNum].sequence));
         nextSlideNum++;
       }
 
       //Syncs progress bar
-      console.log(videoEl);
       progressEl.value  = videoEl.currentTime / videoEl.duration;
-      let handleLeft  = Math.round((progressEl.value * progressEl.offsetWidth) +
+      const handleLeft  = Math.round((progressEl.value * progressEl.offsetWidth) +
       progressEl.offsetLeft - (handleEl.offsetWidth / 2));
       handleEl.style.left = handleLeft.toString() + "px";
     }
 
     //=========================================================-Helper-Functions
 
-    //Creates a Word element for HTML injection
-    function addWord(text, def) {
+    const htmlify = (sequence) => {
+      let htmlString = ``;
+      sequence.forEach((part) => {
+        if (typeof(part) === 'string') {
+          htmlString += `
+          <span>${part}</span>`;
+        } else {
+          htmlString += `
+          <span class="word-container">
+          <span class="word">${part.word}</span>
+          <span class="myTooltip" contenteditable=true>${part.def}</span>
+          </span>`;
+        }
+      });
 
-      /*====
-      span containing spans
-      ====*/
-      // const doub
-      let start = `
-      <span class="word-container">
-      <span class="word">`;
-      let middle = `</span>
-      <span class="tooltip" contenteditable="true">`;
-      let end = `</span>
-      </span>`;
-
-      return start + text + middle + def + end;
-    }
+      return htmlString;
+    };
 
     /*===
     This performs a binary search for the greatest index of slides,
