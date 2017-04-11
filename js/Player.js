@@ -2,49 +2,50 @@ class Player {
 
   constructor (filename, doc) {
 
-    this.document = doc;
-
     //Elements inside the player
-    this.videoEl    = doc.getElementById('video'); //Video element;
-    this.doubsEl    = doc.getElementById('doubtitles'); //Smart subtitles div;
-    this.progressEl = doc.getElementById('progress-bar'); //Video progress element;
-    this.handleEl   = doc.getElementById('progress-toki'); //Progess bar handle;
+    this.videoEl    = $('#video'); //Video element;
+    this.doubsEl    = $('.doubtitles'); //Smart subtitles div;
+    this.progressEl = $('.progress-bar'); //Video progress element;
+    this.handleEl   = $('.progress-toki'); //Progess bar handle;
 
     //Subtitles related
-    let Doubtitles  = require('./Doubtitles.js');
-    let doubs       = new Doubtitles(filename);
+    const Doubtitles  = require('./Doubtitles.js');
+    const doubs       = new Doubtitles(filename);
     this.slides     = doubs.slides;
 
-    this._attachListeners(this);
+    this._attachListeners();
   }
 
   //=======================================================================-Init
-  _attachListeners(player){
+  _attachListeners(){
 
-    let listeners = this._playerEventListeners(player);
+    const listeners = this._playerEventListeners();
 
-    player.videoEl.addEventListener    ('timeupdate', listeners.videoOnTimeUpdate);
-    player.videoEl.addEventListener    ('click',      listeners.videoOnClick);
-    player.progressEl.addEventListener ('mousemove',  listeners.progressOnMouseMove);
-    player.progressEl.addEventListener ('mousedown',  listeners.progressOnMouseDown);
-    player.progressEl.addEventListener ('mouseup',    listeners.progressOnMouseUp);
-    player.document.addEventListener   ('mouseup',    listeners.docOnMouseUp);
-    player.document.addEventListener   ('mousemove',  listeners.docOnMouseMove);
+    this.videoEl.on    ('timeupdate', listeners.videoOnTimeUpdate);
+    this.videoEl.on    ('click',      listeners.videoOnClick);
+    this.progressEl.on ('mousemove',  listeners.progressOnMouseMove);
+    this.progressEl.on ('mousedown',  listeners.progressOnMouseDown);
+    this.progressEl.on ('mouseup',    listeners.progressOnMouseUp);
+    this.document.on   ('mouseup',    listeners.docOnMouseUp);
+    this.document.on   ('mousemove',  listeners.docOnMouseMove);
   }
 
   //Closure with relevant variables for the events
-  _playerEventListeners(player) {
+  _playerEventListeners() {
+
+    const {
+      videoEl,
+      progressEl,
+      handleEl,
+      doubsEl,
+      slides
+    } = this;
 
     //Progress related
-    let video         = player.videoEl;
-    let progress      = player.progressEl;
-    let toki          = player.handleEl;
     let wasPaused     = false;
-    let isUserDraggingProgressBar   = false;
+    let isUserDraggingProgressBar = false;
 
     //Subtitles related
-    let doubsEl       = player.doubsEl;
-    let slides        = player.slides;
     let nextSlideNum  = 0;
 
 
@@ -53,8 +54,8 @@ class Player {
       if (isUserDraggingProgressBar){
         // console.log('Hello World!');
         let desiredProgress = e.offsetX / document.body.clientWidth;
-        video.currentTime = desiredProgress * video.duration;
-        nextSlideNum = findSlideNum(video.currentTime) + 1;
+        videoEl.currentTime = desiredProgress * videoEl.duration;
+        nextSlideNum = findSlideNum(videoEl.currentTime) + 1;
       }
     }
 
@@ -66,25 +67,25 @@ class Player {
 
     //======================================================-Progress-Bar-Events
     function progressOnMouseDown(e)  {
-      if (video.paused) { wasPaused = true; }
-      video.pause();
+      if (videoEl.paused) { wasPaused = true; }
+      videoEl.pause();
       isUserDraggingProgressBar = true;
 
-      let desiredProgress = e.offsetX / progress.offsetWidth;
-      video.currentTime = desiredProgress * video.duration;
-      nextSlideNum = findSlideNum(video.currentTime) + 1;
+      let desiredProgress = e.offsetX / progressEl.offsetWidth;
+      videoEl.currentTime = desiredProgress * videoEl.duration;
+      nextSlideNum = findSlideNum(videoEl.currentTime) + 1;
     }
 
     function progressOnMouseMove(e) {
-      let desiredProgress = e.offsetX / progress.offsetWidth;
-      let selectedTime    = Math.floor(desiredProgress * video.duration);
+      let desiredProgress = e.offsetX / progressEl.offsetWidth;
+      let selectedTime    = Math.floor(desiredProgress * videoEl.duration);
       let correctSlide    = slides[findSlideNum(selectedTime)];
 
       // console.log(correctSlide);
     }
 
     function progressOnMouseUp(e) {
-      if (!wasPaused) { video.play(); }
+      if (!wasPaused) { videoEl.play(); }
       wasPaused = false;
       isUserDraggingProgressBar = false;
     }
@@ -94,8 +95,8 @@ class Player {
 
     function videoOnTimeUpdate(e) {
       //Syncs slides
-      while (video.currentTime * 1000 >= slides[nextSlideNum].mark){
-        let text = slides[nextSlideNum].sequence;
+      while (videoEl.currentTime * 1000 >= slides[nextSlideNum].mark){
+        let text = slides[nextSlideNum].text;
         console.log(text);
         // console.log(addWord(text, "What"));
         // doubsEl.innerHTML = addWord(text, "What");
@@ -103,18 +104,24 @@ class Player {
       }
 
       //Syncs progress bar
-      progress.value  = video.currentTime / video.duration;
-      let handleLeft  = Math.round((progress.value * progress.offsetWidth) +
-      progress.offsetLeft - (toki.offsetWidth / 2));
-      toki.style.left = handleLeft.toString() + "px";
+      console.log(videoEl);
+      progressEl.value  = videoEl.currentTime / videoEl.duration;
+      let handleLeft  = Math.round((progressEl.value * progressEl.offsetWidth) +
+      progressEl.offsetLeft - (handleEl.offsetWidth / 2));
+      handleEl.style.left = handleLeft.toString() + "px";
     }
 
     //=========================================================-Helper-Functions
 
     //Creates a Word element for HTML injection
     function addWord(text, def) {
+
+      /*====
+      span containing spans
+      ====*/
+      // const doub
       let start = `
-      <span class='word-container">
+      <span class="word-container">
       <span class="word">`;
       let middle = `</span>
       <span class="tooltip" contenteditable="true">`;
@@ -155,17 +162,17 @@ class Player {
 
     //Bool: Is the video currently playing?
     function isPlaying() {
-      return (video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2);
+      return (videoEl.currentTime > 0 && !videoEl.paused && !videoEl.ended && videoEl.readyState > 2);
     }
 
     //Convenience function for playing and pausing the video
     function playPause() {
-      if (video.readyState > 2){
-        if (video.paused || video.ended){
-          video.play();
+      if (videoEl.readyState > 2){
+        if (videoEl.paused || videoEl.ended){
+          videoEl.play();
         }
         else {
-          video.pause();
+          videoEl.pause();
         }
       }
     }

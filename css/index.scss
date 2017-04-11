@@ -42,15 +42,15 @@
         font-size: 3.4vw;
         background: rgba(200,200,200,0.8);
         outline: none;
+
+        &:hover + .myTooltip {
+          opacity: 1;
+          visibility: visible;
+          transition: opacity 1s, visibility 1s;
+        }
       }
 
-      &:hover + .tooltip {
-        opacity: 1;
-        visibility: visible;
-        transition: opacity 1s, visibility 1s;
-      }
-
-      .tooltip {
+      .myTooltip {
         max-width: 160px;
         position: absolute;
         left: 50%;

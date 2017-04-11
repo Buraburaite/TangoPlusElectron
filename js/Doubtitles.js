@@ -19,7 +19,7 @@ slides whose durations overlap.
 //========================================================================-Slide
 class Slide {
   constructor(text, startTime, endTime = startTime + 1) { //Pre: times are in ms
-    this.text      = text;   //plain text
+    this.text      = text; //plain text
     this.sequence  = []; //sequence of plain text and word objects
     this.startTime = startTime;
     this.endTime   = endTime;
