@@ -160,8 +160,6 @@ class Doubtitles {
           });
 
         }
-
-        console.log(slide);
       });
     }
 

@@ -16,7 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^4.0.0",
-    "electron": "^1.6.2"
+    "electron": "^1.6.2",
+    "jquery": "^3.2.1"
   },
   "devDependencies": {
     "electron-connect": "^0.6.1",

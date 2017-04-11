@@ -2,9 +2,24 @@
 <html>
 <head>
   <title>TangoPlusElectron</title>
-  <script type="text/javascript" src="../app.js" defer></script>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="../css/index.min.css">
+  <!-- Set-up for local dependencies  -->
+  <script defer>
+  if (typeof module === 'object') {
+    window.module = module; module = undefined;
+  }
+  </script>
+
+  <!-- add local dependency scripts here  -->
+  <script src="../vendor/jquery.min.js" defer></script>
+
+  <script defer>
+  if (window.module) {
+    module = window.module;
+  }
+  </script>
+  <script src="../app.js" defer></script>
 </head>
 <body>
   <div id="video-container">
@@ -33,6 +48,3 @@
   </div>
 </body>
 </html>
-<!--
-TODO
--->
