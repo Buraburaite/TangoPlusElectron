@@ -8,6 +8,12 @@ body, html {
   position: relative;
   top: 0;
   z-index: 0;
+  border: 1px solid blue;
+
+  &:hover + #overlay-div {
+    opacity: 1;
+    transition: opacity 1s;
+  }
 
   #overlay-div {
     height: 30%;
@@ -18,22 +24,31 @@ body, html {
     position: absolute;
     top: 70%;
     z-index: 1;
+    opacity: 0;
 
     #doubtitles-div {
-      height: auto;
-      width: auto;
-      max-height: 60%;
+      height: 60%;
+      width: 100%;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: rgba(white, 0.8);
       font-size: 3.4vw;
+
+      #slide-div {
+        height: auto;
+        width: auto;
+        max-height: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(white, 0.5);
+        border-radius: 6px;
+      }
 
       span {
         width: auto;
         height: auto;
-        margin-right: 2px;
         border-radius: 2px;
       }
 
@@ -42,12 +57,17 @@ body, html {
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 2px solid black;
-        background-color: rgba(white, 0.8);
         outline: none;
 
         .word {
-          padding: 2px;
+          padding: 1px;
+          border: 1px solid transparent;
+
+          &:hover {
+            border-color: black;
+            background-color: white;
+            transition: border-color 0.5s, background-color 0.5s;
+          }
 
           &:hover + .myTooltip {
             opacity: 1;
@@ -57,7 +77,8 @@ body, html {
         }
 
         .myTooltip {
-          max-width: 160px;
+          width: auto;
+          height: auto;
           position: absolute;
           left: 50%;
           bottom: 150%;
@@ -66,11 +87,8 @@ body, html {
           text-align: center;
           font-size: 18px;
           padding: 4px;
-          border-radius: 48px;
           background-color: rgb(255,165,0);
-          border: 2px;
-          border-color: black;
-          border-style: solid;
+          border: 2px black solid;
           opacity: 0;
           visibility: hidden;
           transition: opacity 2s, visibility 1s;
@@ -111,17 +129,19 @@ body, html {
         top: 25%;
 
         &:hover {
+          height: 50%;
         }
+
 
         &::-webkit-progress-bar {
           background-color: rgba(255, 255, 255, .25);
-          border-radius: 2px;
+          border-radius: 4px;
         }
 
         &::-webkit-progress-value {
           -webkit-appearance: none;
           appearance: none;
-          border-radius: 16px;
+          border-radius: 4px;
           background-image:
           -webkit-linear-gradient(-45deg,
           transparent 33%, rgba(0, 0, 0, .1) 33%,
@@ -138,8 +158,8 @@ body, html {
         top: 63.75%;
         left: 0px;
         z-index: 5;
-        width: 2%;
-        height: auto;
+        width: auto;
+        height: 25%;
         pointer-events: none;
       }
     }
@@ -148,5 +168,6 @@ body, html {
       height: 25%;
       width: calc(100% - 4px);
     }
+
   }
 }
