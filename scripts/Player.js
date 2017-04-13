@@ -122,11 +122,34 @@ class Player {
         if (typeof(part) === 'string') {
           htmlString += `
           <span>${part}</span>`;
+        } else if (part.def === '#name') {
+          htmlString += `
+          <span class="word-container">
+          <span class="word">${part.word}</span>
+          <div class="tip-container nameTip" contenteditable=true>
+            ${part.pronun}
+          </div>
+          </span>`;
+        } else if (part.pronun === '#kana') {
+          htmlString += `
+          <span class="word-container">
+          <span class="word">${part.word}</span>
+          <div class="tip-container kanaTip" contenteditable=true>
+            ${part.def}
+          </div>
+          </span>`;
         } else {
           htmlString += `
           <span class="word-container">
           <span class="word">${part.word}</span>
-          <span class="myTooltip" contenteditable=true>${part.def}</span>
+          <div class="tip-container fullTip">
+            <div class="defTip" contenteditable=true>
+              ${part.def}
+            </div>
+            <div class="pronunTip" contenteditable=true>
+              ${part.pronun}
+            </div>
+          </div>
           </span>`;
         }
       });
