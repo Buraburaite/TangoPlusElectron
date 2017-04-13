@@ -74,7 +74,6 @@ body, html {
         }
 
         .tip-container {
-          white-space: nowrap;
           width: auto;
           height: auto;
           position: absolute;
@@ -82,13 +81,15 @@ body, html {
           bottom: 150%;
           transform: translateX(-50%);
           z-index: 2;
-          font-size: 18px;
+          white-space: nowrap;
           padding: 8px;
           opacity: 0;
           visibility: hidden;
           transition: opacity 2s, visibility 1s;
           transition-delay: 0.1s;
 
+          //This doesn't work once you start putting the text into
+          //children. Need a different solution, probably jQuery
           &:focus {
             z-index: 3;
             opacity: 1;
@@ -105,7 +106,6 @@ body, html {
 
           .defTip {
             border-bottom: 1px solid black;
-
           }
 
           .pronunTip {
