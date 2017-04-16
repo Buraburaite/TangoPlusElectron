@@ -1,0 +1,3 @@
+const words = $('.word').forEach(()=> {
+  
+});
