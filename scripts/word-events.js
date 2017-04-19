@@ -1,7 +1,15 @@
 const slideDiv = $('#slide-div');
 
+
+
 slideDiv.on('mouseover', '.word', (e) => {
-  console.log($(e.target)
+  $(e.target)
   .next('.tip-container')
-  .css('background-color', 'green'));
+  .show(200);
+});
+
+slideDiv.on('mouseout', '.word', (e) => {
+  $(e.target)
+  .next('.tip-container')
+  .hide(100);
 });
