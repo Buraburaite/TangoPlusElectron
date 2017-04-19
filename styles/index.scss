@@ -1,4 +1,4 @@
-@import 'styles';
+@import '../styles';
 
 body, html {
   box-sizing: border-box;
@@ -60,17 +60,26 @@ body, html {
           padding: 1px;
           border: 1px solid transparent;
 
-          &:hover {
-            border-color: black;
-            background-color: white;
-            transition: border-color 0.5s, background-color 0.5s;
-          }
-
-          &:hover + .tip-container {
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.5s, visibility 1s;
-          }
+          // &:hover {
+          //   border-color: black;
+          //   background-color: white;
+          //   transition: border-color 0.5s, background-color 0.5s;
+          // }
+          //
+          // &:hover + .tip-container {
+          //   opacity: 1;
+          //   visibility: visible;
+          //   transition: opacity 0.5s, visibility 1s;
+          // }
+          //
+          // &:focus {
+          //   background-color: green;
+          // }
+          //
+          // &:focus + .tip-container {
+          //   opacity: 1;
+          //   visibility: visible;
+          // }
         }
 
         .tip-container {
@@ -83,20 +92,20 @@ body, html {
           z-index: 2;
           white-space: nowrap;
           padding: 8px;
-          opacity: 0;
-          visibility: hidden;
-          transition: opacity 2s, visibility 1s;
-          transition-delay: 0.1s;
+          // opacity: 0;
+          // visibility: hidden;
+          // transition: opacity 2s, visibility 1s;
+          // transition-delay: 0.1s;
 
           //This doesn't work once you start putting the text into
           //children. Need a different solution, probably jQuery
-          &:focus {
-            z-index: 3;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 1s, visibility 1s;
-            outline: none;
-          }
+          // &:focus {
+          //   z-index: 3;
+          //   opacity: 1;
+          //   visibility: visible;
+          //   transition: opacity 1s, visibility 1s;
+          //   outline: none;
+          // }
         }
 
         .fullTip {
@@ -106,10 +115,17 @@ body, html {
 
           .defTip {
             border-bottom: 1px solid black;
+
+            // &:hover {
+            //   background-color: rgb(230,135,0);
+            // }
           }
 
           .pronunTip {
 
+            // &:hover {
+            //   background-color: rgb(200,135,0);
+            // }
           }
 
         }
