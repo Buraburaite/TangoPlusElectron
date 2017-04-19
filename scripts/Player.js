@@ -127,7 +127,7 @@ class Player {
           <span class="word-container">
           <span class="word">${part.word}</span>
           <div class="tip-container nameTip" contenteditable=true>
-            ${part.pronun}
+          ${part.pronun}
           </div>
           </span>`;
         } else if (part.pronun === '#kana') {
@@ -135,7 +135,7 @@ class Player {
           <span class="word-container">
           <span class="word">${part.word}</span>
           <div class="tip-container kanaTip" contenteditable=true>
-            ${part.def}
+          ${part.def}
           </div>
           </span>`;
         } else {
@@ -143,12 +143,12 @@ class Player {
           <span class="word-container">
           <span class="word">${part.word}</span>
           <div class="tip-container fullTip">
-            <div class="defTip" contenteditable=true>
-              ${part.def}
-            </div>
-            <div class="pronunTip" contenteditable=true>
-              ${part.pronun}
-            </div>
+          <div class="defTip" contenteditable=true>
+          ${part.def}
+          </div>
+          <div class="pronunTip" contenteditable=true>
+          ${part.pronun}
+          </div>
           </div>
           </span>`;
         }
@@ -196,6 +196,13 @@ class Player {
       if (videoEl.readyState > 2){
         if (videoEl.paused || videoEl.ended){
           videoEl.play();
+
+          //Remove 'fake-focus' from the selected word element
+          $(selectedWord)
+          .css('background-color', 'transparent')
+          .css('border-color', 'transparent')
+          .next('.tip-container')
+          .hide(100);
         }
         else {
           videoEl.pause();
