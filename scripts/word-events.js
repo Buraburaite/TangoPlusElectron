@@ -2,10 +2,13 @@ const slideDiv = $('#slide-div');
 
 let selectedWord;
 const doubs = myPlayer.slides;
-console.log(doubs);
 
 slideDiv.on('mouseover', '.word', (e) => {
-  $(e.target)
+
+  const word = $(e.target);
+
+  word
+  .css('background-color', 'white')
   .next('.tip-container')
   .show(200);
 });
@@ -16,13 +19,16 @@ slideDiv.on('mouseout', '.word', (e) => {
 
   if (e.target !== selectedWord) {
 
-    $(e.target)
+    word
+    .css('background-color', 'transparent')
     .next('.tip-container')
     .hide(100);
   }
 });
 
 slideDiv.on('click', '.word', (e) => {
+
+  myPlayer.videoEl.pause();
 
   $(selectedWord)
   .css('background-color', 'transparent')

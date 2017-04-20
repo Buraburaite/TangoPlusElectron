@@ -90,6 +90,7 @@ body, html {
           z-index: 2;
           white-space: nowrap;
           padding: 8px;
+          outline: none;
 
           display: none;
 
@@ -113,6 +114,10 @@ body, html {
           background-color: rgb(255,165,0);
           font-size: 2vw;
           border: 2px black solid;
+
+          div {
+            outline: none;
+          }
 
           .defTip {
             border-bottom: 1px solid black;
