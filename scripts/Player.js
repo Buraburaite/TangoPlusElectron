@@ -143,9 +143,9 @@ class Player {
           <span class="word-container">
           <span class="word">${part.word}</span>
           <div class="tip-container fullTip">
-          <div class="defTip" contenteditable=true>
-          ${part.def}
-          </div>
+          <input type="text" class="defTip">
+                    ${part.def}
+          </input>
           <div class="pronunTip" contenteditable=true>
           ${part.pronun}
           </div>
