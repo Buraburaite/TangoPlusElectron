@@ -42,3 +42,12 @@ slideDiv.on('click', '.word', (e) => {
 
   selectedWord = e.target;
 });
+
+slideDiv.on('change', '.tip-container input', (e) => {
+
+  const value = $(e.target).val();
+
+  console.log(value);
+
+
+});
