@@ -144,11 +144,11 @@ class Player {
           <span class="word">${part.word}</span>
           <div class="tip-container fullTip">
           <input type="text" class="defTip">
-                    ${part.def}
+          ${part.def}
           </input>
-          <div class="pronunTip" contenteditable=true>
+          <input type="text" class="pronunTip">
           ${part.pronun}
-          </div>
+          </input>
           </div>
           </span>`;
         }
