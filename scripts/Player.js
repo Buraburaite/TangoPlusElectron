@@ -131,15 +131,15 @@ class Player {
 
           if (part.def === '#name') {
             htmlString += `nameTip">
-            <input type="text" value="${part.pronun}">`;
+            <textarea>${part.pronun}</textarea>`;
           } else if (part.pronun === '#kana') {
             htmlString += `kanaTip">
-            <input type="text" value="${part.def}">`;
+            <textarea>${part.def}</textarea>`;
           } else {
             htmlString += `
             fullTip">
-            <textarea type="text" class="defTip">${part.def}</textarea>
-            <textarea type="text" class="pronunTip">${part.pronun}</textarea>`;
+            <textarea class="defTip">${part.def}</textarea>
+            <textarea class="pronunTip">${part.pronun}</textarea>`;
           }
 
           htmlString += `
