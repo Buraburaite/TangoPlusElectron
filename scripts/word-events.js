@@ -46,8 +46,12 @@ slideDiv.on('click', '.word', (e) => {
 slideDiv.on('change', '.tip-container input', (e) => {
 
   const value = $(e.target).val();
+});
 
-  console.log(value);
-
-
+slideDiv.on('input', '.tip-container textarea', (e) => {
+  const textAreaEl = $(e.target);
+  textAreaEl.css('height', 'auto');
+  textAreaEl.css('width', 'auto');
+  textAreaEl.width(e.target.scrollWidth);
+  textAreaEl.height(e.target.scrollHeight);
 });

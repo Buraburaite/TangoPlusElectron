@@ -81,6 +81,7 @@ body, html {
         }
 
         .tip-container {
+          display: none;
           width: auto;
           height: auto;
           position: absolute;
@@ -92,22 +93,20 @@ body, html {
           padding: 8px;
           outline: none;
 
-          display: none;
+          textarea {
+            width: auto;
+            height: auto;
+            min-width: 10px;
+            display: block;
+            font-size: 2vw;
+            outline: none;
+            resize: none;
+            border: none;
+            background: transparent;
+            overflow-y: hidden;
 
-          // opacity: 0;
-          // visibility: hidden;
-          // transition: opacity 2s, visibility 1s;
-          // transition-delay: 0.1s;
+          }
 
-          //This doesn't work once you start putting the text into
-          //children. Need a different solution, probably jQuery
-          // &:focus {
-          //   z-index: 3;
-          //   opacity: 1;
-          //   visibility: visible;
-          //   transition: opacity 1s, visibility 1s;
-          //   outline: none;
-          // }
         }
 
         .fullTip {
@@ -115,23 +114,11 @@ body, html {
           font-size: 2vw;
           border: 2px black solid;
 
-          div {
-            outline: none;
-          }
-
           .defTip {
             border-bottom: 1px solid black;
-
-            // &:hover {
-            //   background-color: rgb(230,135,0);
-            // }
           }
 
           .pronunTip {
-
-            // &:hover {
-            //   background-color: rgb(200,135,0);
-            // }
           }
 
         }
