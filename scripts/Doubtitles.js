@@ -20,9 +20,10 @@ slides whose durations overlap.
 //=========================================================================-Word
 class Word {
   constructor(word, pronun, def) {
-    this.word         = word;
-    this.pronun       = pronun;
-    this.def          = def;
+    this.word   = word;
+    this.pronun = pronun;
+    this.def    = def;
+    this.id     = -1;
   }
 }
 
@@ -46,6 +47,7 @@ class Doubtitles {
 
   constructor (filename) {
 
+    this.nextWordId = 0; //id counter for word objects
     this.fileString = this._readFile(filename);
     this.fileExt    = '.' + filename.split('.').slice(-1);
     this.metadata   = this.fileExt === 'doub' ? this._parseMetadata() : this._defaultMetadata();
@@ -70,7 +72,8 @@ class Doubtitles {
   _parseMetadata () { //need to test this
 
     //Extract the metadata into strings
-    let lines = this.fileString
+    let lines =
+    this.fileString
     .slice(data.indexOf('/*' + 2), data.indexOf('*/'))
     .replace('\r\n', '')
     .split(',');
@@ -146,7 +149,9 @@ class Doubtitles {
               word   = parts[0];
               pronun = parts[1] || null;
               def    = parts[2] ? parts[2].slice(0, parts[2].indexOf(']')) : null;
-              slide.sequence.push(new Word(word, pronun, def));
+              let wordObj = new Word(word, pronun, def);
+              wordObj.id = this.nextWordId++;
+              slide.sequence.push(wordObj);
 
 
               trailingText = parts[parts.length - 1];
@@ -244,17 +249,14 @@ class Doubtitles {
   _readFile (filename) { return require('fs').readFileSync(filename, 'utf8'); }
 
   //'00:01:02,400' becomes 62400
-  _srtToMilliseconds (timeString){
-    let units = timeString
-    .replace(',','')
-    .split(":");
+  _srtToMilliseconds (timeString) {
 
-    let ms = 0;
-    ms += parseInt(units[0]) * 3600000;
-    ms += parseInt(units[1]) * 60000;
-    ms += parseInt(units[2]);
-
-    return ms;
+    const units = timeString.replace(',','').split(":");
+    return (
+      parseInt(units[0]) * 3600000 +
+      parseInt(units[1]) * 60000 +
+      parseInt(units[2])
+    );
   }
 
   update(fieldId, newValue) {

@@ -61,28 +61,16 @@ slideDiv.on('change', '.tip-container textarea', (e) => {
   //the field corresponds to.
   const fieldId = $(e.target).attr('data-fieldId').split('-');
   const type = fieldId[0];
+  console.log(fieldId[1]);
   const word =
   jDoubs.currentSlide.sequence
-  .find((word) => word.wordId === parseInt(fieldId[1]));
+  .find((word) => word.id === parseInt(fieldId[1]));
 
-  console.log(word);
-
-  switch(type) {
-    case 'D':
-    word.def = jWord.val();
-    break;
+  if ('NKDP'.includes(type)) {
+    if ('KD'.includes(type)) { word.def    = jWord.val(); }
+    else                     { word.pronun = jWord.val(); }
   }
-
-  console.log(word);
+  else {
+    console.log('ERROR: fieldId\'s type is not valid');
+  }
 });
-
-// switch(expression) {
-//     case n:
-//         code block
-//         break;
-//     case n:
-//         code block
-//         break;
-//     default:
-//         code block
-// }
