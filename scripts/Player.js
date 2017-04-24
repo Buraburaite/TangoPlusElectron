@@ -113,15 +113,19 @@ class Player {
     //=========================================================-Helper-Functions
 
     const updateSlide = (slide) => {
-      this.jDoubs.currentSlide = slide;
       this.jDoubs.empty();
+      this.jDoubs.currentSlide = slide;
+      let partId = -1;
 
       slide.sequence.forEach((part) => {
+        partId++;
+
         if (typeof(part) === 'string') {
           this.jDoubs.append(`
-            <span>${part}</span>`
+            <span data-fieldId="T-${partId}">${part}</span>`
           );
         } else {
+          part.wordId = partId;
           let htmlString = `
           <span class="word-container">
           <span class="word">${part.word}</span>
@@ -129,15 +133,15 @@ class Player {
 
           if (part.def === '#name') {
             htmlString += `nameTip">
-            <textarea>${part.pronun}</textarea>`;
+            <textarea data-fieldId="N-${partId}">${part.pronun}</textarea>`;
           } else if (part.pronun === '#kana') {
             htmlString += `kanaTip">
-            <textarea>${part.def}</textarea>`;
+            <textarea data-fieldId="K-${partId}">${part.def}</textarea>`;
           } else {
             htmlString += `
             fullTip">
-            <textarea class="defTip">${part.def}</textarea>
-            <textarea class="pronunTip">${part.pronun}</textarea>`;
+            <textarea data-fieldId="D-${partId}" class="defTip">${part.def}</textarea>
+            <textarea data-fieldId="P-${partId}" class="pronunTip">${part.pronun}</textarea>`;
           }
 
           htmlString += `

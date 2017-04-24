@@ -5,9 +5,9 @@ const { jDoubs } = myPlayer;
 
 slideDiv.on('mouseover', '.word', (e) => {
 
-  const word = $(e.target);
+  const jWord = $(e.target);
 
-  word
+  jWord
   .css('background-color', 'white')
   .next('.tip-container')
   .show(200);
@@ -15,11 +15,11 @@ slideDiv.on('mouseover', '.word', (e) => {
 
 slideDiv.on('mouseout', '.word', (e) => {
 
-  const word = $(e.target);
+  const jWord = $(e.target);
 
   if (e.target !== selectedWord) {
 
-    word
+    jWord
     .css('background-color', 'transparent')
     .next('.tip-container')
     .hide(100);
@@ -53,7 +53,36 @@ slideDiv.on('input', '.tip-container textarea', (e) => {
 
 slideDiv.on('change', '.tip-container textarea', (e) => {
 
-  const value = $(e.target).val();
+  const jWord = $(e.target);
+
+  //fieldId is a two-part id. The first part is the field type
+  //(kana, name, pronun, or def), and the second part is the wordId,
+  //which is used to find the word object in the current slide that
+  //the field corresponds to.
+  const fieldId = $(e.target).attr('data-fieldId').split('-');
+  const type = fieldId[0];
+  const word =
+  jDoubs.currentSlide.sequence
+  .find((word) => word.wordId === parseInt(fieldId[1]));
+
+  console.log(word);
+
+  switch(type) {
+    case 'D':
+    word.def = jWord.val();
+    break;
+  }
+
+  console.log(word);
 });
 
-console.log(jDoubs);
+// switch(expression) {
+//     case n:
+//         code block
+//         break;
+//     case n:
+//         code block
+//         break;
+//     default:
+//         code block
+// }
