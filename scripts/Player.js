@@ -6,7 +6,7 @@ class Player {
 
     //Elements inside the player
     this.videoEl    = doc.getElementById('video'); //Video element;
-    this.doubsEl    = doc.getElementById('slide-div'); //Smart subtitles div;
+    this.jDoubs     = $('#slide-div'); //doubtitles div;
     this.progressEl = doc.getElementById('progress-bar'); //Video progress element;
     this.handleEl   = doc.getElementById('progress-toki'); //Progess bar handle;
 
@@ -39,12 +39,9 @@ class Player {
       videoEl,
       progressEl,
       handleEl,
-      doubsEl,
+      jDoubs,
       slides
     } = this;
-
-    //use jQuery to make changing the contents of doubsEl easier
-    const jDoubs = $(doubsEl);
 
     //Progress related
     let wasPaused     = false;
@@ -102,8 +99,7 @@ class Player {
       //Syncs slides
       while (videoEl.currentTime * 1000 >= slides[nextSlideNum].mark){
         // console.log(slides[nextSlideNum].sequence);
-        jDoubs.empty();
-        jDoubs.append(htmlify(slides[nextSlideNum].sequence));
+        updateSlide(slides[nextSlideNum]);
         nextSlideNum++;
       }
 
@@ -116,18 +112,20 @@ class Player {
 
     //=========================================================-Helper-Functions
 
-    const htmlify = (sequence) => {
-      let htmlString = ``;
-      sequence.forEach((part) => {
+    const updateSlide = (slide) => {
+      this.jDoubs.currentSlide = slide;
+      this.jDoubs.empty();
+
+      slide.sequence.forEach((part) => {
         if (typeof(part) === 'string') {
-          htmlString += `
-          <span>${part}</span>`;
+          this.jDoubs.append(`
+            <span>${part}</span>`
+          );
         } else {
-          htmlString += `
+          let htmlString = `
           <span class="word-container">
           <span class="word">${part.word}</span>
           <div class="tip-container `;
-
 
           if (part.def === '#name') {
             htmlString += `nameTip">
@@ -145,10 +143,10 @@ class Player {
           htmlString += `
           </div>
           </span>`;
+
+          this.jDoubs.append(htmlString);
         }
       });
-
-      return htmlString;
     };
 
     /*===

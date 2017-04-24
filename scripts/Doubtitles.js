@@ -1,4 +1,5 @@
 /*==NOTE==
+Class structure: A Doubtitles has Slides, Slides have Words
 Slides represent individual lines of subtitles. This includes time stamps, where
 the 'words' are, definitions, and pronunciation. Much of the functionality of
 this program is dependent upon slide objects, all of which are kept within their
@@ -16,6 +17,15 @@ conceptual opposite to endTime, which is useful when implementing features like
 slides whose durations overlap.
 ====NOTE*/
 
+//=========================================================================-Word
+class Word {
+  constructor(word, pronun, def) {
+    this.word         = word;
+    this.pronun       = pronun;
+    this.def          = def;
+  }
+}
+
 //========================================================================-Slide
 class Slide {
   constructor(text, startTime, endTime = startTime + 1) { //Pre: times are in ms
@@ -30,15 +40,6 @@ Object.defineProperty(Slide.prototype, 'mark', {
   get : function ()        { return this.startTime; },
   set : function (newTime) { this.startTime = newTime; }
 });
-
-//=========================================================================-Word
-class Word {
-  constructor(word, pronun, def) {
-    this.word         = word;
-    this.pronun       = pronun;
-    this.def          = def;
-  }
-}
 
 //===================================================================-Doubtitles
 class Doubtitles {
@@ -254,6 +255,10 @@ class Doubtitles {
     ms += parseInt(units[2]);
 
     return ms;
+  }
+
+  update(fieldId, newValue) {
+
   }
 }
 
