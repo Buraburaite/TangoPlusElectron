@@ -5,10 +5,10 @@ jWin.resize((e) => {
   if (jWin.width() >  jWin.height()) {
     jVideo
     .width('auto')
-    .height('100vh');
+    .height('92vh');
   } else {
     jVideo
-    .width('100vw')
+    .width('92vw')
     .height('auto');
   }
 });
