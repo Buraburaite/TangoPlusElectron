@@ -128,7 +128,8 @@ class Doubtitles {
 
 
 
-    //If file is a .doub file, interpret definitions and pronunciations
+    //If the filetype is .doub, interpret the text as a sequence of plain text
+    //and word objects, stored inside of the corresponding slide.
     if (this.fileExt === '.doub') {
 
       let segments, parts, firstPart, word, pronun, def, trailingText;
@@ -169,7 +170,7 @@ class Doubtitles {
       });
     }
 
-    /*OVERLAPPING-SLIDES-LOGIC
+    /*OVERLAPPING-SLIDES-ALGORITHM
 
     //NOTE: Only works for up to two overlapping slides. Otherwise, there may be
     //      unexpected behavior.

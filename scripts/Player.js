@@ -112,39 +112,54 @@ class Player {
 
     //=========================================================-Helper-Functions
 
+    //Changes the contents of slideDiv to the provided slide
     const updateSlide = (slide) => {
+
+      //First, empty slideDiv
       this.jDoubs.empty();
+
+      //Save the slide -- this is used elsewhere but is important
       this.jDoubs.currentSlide = slide;
 
+      //Then, for each part of the slide's sequence...
       slide.sequence.forEach((part) => {
 
+        //...if it's a string, just add it inside a span
         if (typeof(part) === 'string') {
           this.jDoubs.append(`
             <span data-fieldId="T-69696969">${part}</span>`
           );
         } else {
+
+          //...otherwise, it's a word object, which needs more stuff.
+          //All word elements start with this html string
           let htmlString = `
           <span class="word-container">
           <span class="word">${part.word}</span>
           <div class="tip-container `;
 
+          //Then, based on what kind of word object it is, add more html.
+          //Note: fieldId denotes the kind of word object, and which word
+          //object so that values can be updated correctly in the GUI
           if (part.def === '#name') {
             htmlString += `nameTip">
-            <textarea data-fieldId="N-${part.id}">${part.pronun}</textarea>`;
+            <textarea class="nameArea" data-fieldId="N-${part.id}" rows="1">${part.pronun}</textarea>`;
           } else if (part.pronun === '#kana') {
             htmlString += `kanaTip">
-            <textarea data-fieldId="K-${part.id}">${part.def}</textarea>`;
+            <textarea class="kanaArea" data-fieldId="K-${part.id}" rows="1">${part.def}</textarea>`;
           } else {
             htmlString += `
             fullTip">
-            <textarea data-fieldId="D-${part.id}" class="defTip">${part.def}</textarea>
-            <textarea data-fieldId="P-${part.id}" class="pronunTip">${part.pronun}</textarea>`;
+            <textarea data-fieldId="D-${part.id}" class="defArea" rows="1">${part.def}</textarea>
+            <textarea data-fieldId="P-${part.id}" class="pronunArea" rows="1">${part.pronun}</textarea>`;
           }
 
+          //Finally, add the ending string...
           htmlString += `
           </div>
           </span>`;
 
+          //...and add it to slideDiv.
           this.jDoubs.append(htmlString);
         }
       });
@@ -174,7 +189,9 @@ class Player {
         }
       }
 
-      if (slides[average].mark <= time) { return low; }
+      if (slides[average].mark <= time) {
+        return low;
+      }
 
       return high;
     }
@@ -204,7 +221,7 @@ class Player {
     }
 
 
-    //Listeners for attaching to relevant elements
+    //Store all the event functions in an object, for legibility.
     return {
       "videoOnTimeUpdate"   : videoOnTimeUpdate,
       "videoOnClick"        : videoOnClick,

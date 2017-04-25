@@ -23,30 +23,32 @@
   <script src="scripts/word-events.js" defer></script>
 </head>
 <body>
-  <div id="video-container">
-    <video
-    id="video"
-    class="video-js"
-    preload="auto"
-    autoplay muted
-    poster="assets/Icons/Stop.png"
-    width="100%"
-    onloadstart="this.volume=0.7"
-    data-setup='{
-    }'
-    <source src="IgnoreThis/2-1.mp4">
-    </video>
-    <div id="overlay-div">
-      <div id="doubtitles-div">
-        <div id="slide-div">
-          <!-- slides get injected here -->
+  <div class="theater-background">
+    <div id="video-container">
+      <video
+      id="video"
+      class="video-js"
+      preload="auto"
+      autoplay muted
+      poster="assets/Icons/Stop.png"
+      width="100%"
+      onloadstart="this.volume=0.7"
+      data-setup='{
+      }'
+      <source src="IgnoreThis/2-1.mp4">
+      </video>
+      <div id="overlay-div">
+        <div id="doubtitles-div">
+          <div id="slide-div">
+            <!-- slides get injected here -->
+          </div>
         </div>
-      </div>
-      <div id="progress-div">
-        <img id="progress-toki" src="assets/Icons/tokiIcon.png">
-        <progress id="progress-bar" value="0"></progress>
-      </div>
-      <div id="controls-div">
+        <div id="progress-div">
+          <img id="progress-toki" src="assets/Icons/tokiIcon.png">
+          <progress id="progress-bar" value="0"></progress>
+        </div>
+        <div id="controls-div">
+        </div>
       </div>
     </div>
   </div>

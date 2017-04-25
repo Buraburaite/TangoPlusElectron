@@ -43,10 +43,15 @@ slideDiv.on('click', '.word', (e) => {
   selectedWord = e.target;
 });
 
+const resizeTextarea = (el) => {
+  const jEl = $(el);
+  jEl.css('height', 'auto');
+  jEl.height(el.scrollHeight);
+};
+
+
 slideDiv.on('input', '.tip-container textarea', (e) => {
-  const textAreaEl = $(e.target);
-  textAreaEl.css('height', 'auto');
-  textAreaEl.height(e.target.scrollHeight);
+  resizeTextarea(e.target);
   //TODO: Textareas' width is based on the cols attribute. Very annoying
   //to change, would need custom behavior based on number of characters.
 });
