@@ -1,14 +1,18 @@
 const jWin = $(window);
 const jVideo = $(myPlayer.videoEl);
 
+const videoAspectRatio = 1.76;
+
 const scaleWithVWidth  = (jel) => { jel.width ('100vw'); jel.height('auto'); };
 const scaleWithVHeight = (jel) => { jel.width('auto'); jel.height('100vh'); };
 
 const setVidSize = () => {
+  console.log("ratio:" + videoAspectRatio + ", but should be: " + jVideo.width() / jVideo.height());
   const winWidth = jWin.width();
   const winHeight = jWin.height();
   if (winWidth >  winHeight) { //if window is wide
-    if (jVideo.width() >= winWidth) { // <==This is a bad measurement of what you want
+    console.log("Width would be: " + (videoAspectRatio * winHeight) + ", win: " + winWidth);
+    if (videoAspectRatio * winHeight > winWidth) {
       console.log(jVideo.width(), winWidth);
       scaleWithVWidth(jVideo);
       console.log('here1');
