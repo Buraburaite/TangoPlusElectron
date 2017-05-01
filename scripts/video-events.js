@@ -20,6 +20,8 @@ const resizeVideoToFitWindow = () => {
   else {
     scaleWithVWidth(jVideo);
   }
+
+  shrinkBar();
 };
 
 jWin.resize(resizeVideoToFitWindow);

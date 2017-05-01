@@ -135,6 +135,7 @@ body, html {
       width: calc(100% - 4px);
       height: 8%;
       bottom: 0;
+      border: 1px solid pink;
 
       #progress-bar {
         width: 94%;
@@ -168,7 +169,9 @@ body, html {
         z-index: 5;
         pointer-events: none;
         border-radius: 50%;
-        background-color: $my-purple;
+        background-color: lighten($my-purple, 10%);
+        box-shadow: inset 0px 0px 10px darkgrey;
+        transition: width 0.2s, height 0.2s;
       }
     }
 
