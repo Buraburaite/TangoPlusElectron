@@ -5,22 +5,21 @@ const scaleWithVWidth  = (jel) => jel.width ('100vw').height('auto');
 const scaleWithVHeight = (jel) => jel.width('auto').height('100vh');
 const videoAspectRatio = () => jVideo.width() / jVideo.height();
 
-//Strategy
-//window is wide and video fits:    scaleWithVHeight
-//window is wide but video clipped: scaleWithVWidth
-//window is tall and video fits:    scaleWithVWidth
-jWin.resize(() => {
+//Strategy (keeping the aspect ratio the same)
+//window is wide and video would fit entirely:    scaleWithVHeight
+//window is wide but video would be clipped:      scaleWithVWidth
+//window is tall and video would fit entirely:    scaleWithVWidth
+//window is tall but video would be clipped:      scaleWithVHeight
+//Note: this code /probably/ does not work with vertical videos yet
+const resizeVideoToFitWindow = () => {
   const winWidth = jWin.width();
   const winHeight = jWin.height();
-  if (winWidth >  winHeight) { //if window is wide
-    if (videoAspectRatio() * winHeight > winWidth) { //if video would be too wide to fit
-      scaleWithVWidth(jVideo);
-    }
-    else {
+  if (winWidth >  winHeight && videoAspectRatio() * winHeight < winWidth) {
       scaleWithVHeight(jVideo);
     }
-  }
-  else { //if window is tall or square
+  else {
     scaleWithVWidth(jVideo);
   }
-});
+};
+
+jWin.resize(resizeVideoToFitWindow);
