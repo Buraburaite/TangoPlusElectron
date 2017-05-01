@@ -190,12 +190,13 @@ body, html {
 
       #progress-toki {
         position: absolute;
-        top: 63.75%;
         left: 0px;
         z-index: 5;
-        width: auto;
-        height: 16%;
+        width: 1vw;
+        height: 8%;
         pointer-events: none;
+        border-radius: 50%;
+        background-color: $my-purple;
       }
     }
 
