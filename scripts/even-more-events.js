@@ -4,13 +4,13 @@ const jHandle = myPlayer.jHandle;
 const divHeight = $('#progress-div').height();
 
 const growBar = () => {
-  jProgress.height('100%');
+  jProgress.height(divHeight / 1.5);
     jHandle
     .width(divHeight)
     .height(divHeight);
 };
 const shrinkBar = () => {
-  jProgress.height('50%');
+  jProgress.height(divHeight / 3);
     jHandle
     .width(divHeight / 1.5)
     .height(divHeight / 1.5);
