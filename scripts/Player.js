@@ -8,7 +8,7 @@ class Player {
     this.videoEl    = doc.getElementById('video'); //Video element;
     this.jDoubs     = $('#slide-div'); //doubtitles div;
     this.progressEl = doc.getElementById('progress-bar'); //Video progress element;
-    this.jHandle    = $('#progress-toki'); //Progess bar handle;
+    this.jHandle    = $('#progress-handle'); //Progess bar handle;
 
     //Subtitles related
     const Doubtitles  = require('./Doubtitles.js');
@@ -105,7 +105,6 @@ class Player {
 
       //Syncs progress bar
       progressEl.value  = videoEl.currentTime / videoEl.duration;
-      console.log(jHandle.outerWidth());
       const handleLeft  = Math.round((progressEl.value * progressEl.offsetWidth) +
       progressEl.offsetLeft - (jHandle.outerWidth() / 2));
       jHandle.css("left", handleLeft.toString() + "px");

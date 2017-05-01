@@ -75,25 +75,6 @@ body, html {
         .word {
           padding: 1px;
           border: 1px solid transparent;
-
-          // &:hover {
-          //   border-color: black;
-          //   background-color: white;
-          //   transition: border-color 0.5s, background-color 0.5s;
-          // }
-          //
-          // &:hover + .tip-container {
-          //   opacity: 1;
-          //   visibility: visible;
-          //   transition: opacity 0.5s, visibility 1s;
-          // }
-          //
-          // }
-          //
-          // &:focus + .tip-container {
-          //   opacity: 1;
-          //   visibility: visible;
-          // }
         }
 
         .tip-container {
@@ -155,13 +136,6 @@ body, html {
       height: 8%;
       bottom: 0;
 
-      &:hover #progress-bar {
-        -webkit-appearance: none;
-        appearance: none;
-        height: 100%;
-        transition: height 0.1s;
-      }
-
       #progress-bar {
         width: 94%;
         margin-left: 3%;
@@ -188,12 +162,10 @@ body, html {
         }
       }
 
-      #progress-toki {
+      #progress-handle {
         position: absolute;
         left: 0px;
         z-index: 5;
-        width: 1vw;
-        height: 8%;
         pointer-events: none;
         border-radius: 50%;
         background-color: $my-purple;
