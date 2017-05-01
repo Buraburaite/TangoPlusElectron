@@ -32,25 +32,26 @@ const lyrics =
 "息をしてみて",
 "ただの幸せに気づいたらもう二度と溺れないよ"];
 
-const twoSpaces = (n) => {
-  if (n.length === 1) { return '0' + n; }
-  else                { return ''  + n; }
-};
+const leftPad = require('left-pad');
 
+let newFileText =
+nums.reduce((text, ms) => {
+  let remainder = ms;
+  remainder %= 3600000;
+  let hours = ms - remainder;
+  remainder %= 60000;
+  let minutes = ms - hours - remainder;
 
-// for i in range(len(nums)):
-//     r = nums[i]
-//     r %= 3600000
-//     hours = nums[i] - r
-//     r %= 60000
-//     minutes = nums[i] - hours - r
-//
-//     hours = twoSpaces(hours // 3600000)
-//     minutes = twoSpaces(minutes // 60000)
-//     r = str(r)
-//
-//     nums[i] = hours + ":" + minutes + ":" + r[0:2] + "," + r[2:]
-//
+  hours = leftPad(Math.floor(hours /3600000), 2, '0');
+  minutes = leftPad(Math.floor(minutes /60000), 2, '0');
+  remainder += '';
+
+  return text + hours + ':' + minutes + ':' +
+  remainder.slice(0,2) + ',' + leftPad(remainder.slice(2), 3, '0') + '\n';
+}, '');
+
+console.log(newFileText);
+
 // nums = [str(i//2 + 1) + "\n" + nums[i] + " --> " + nums[i+1] + "\n" + lyrics[i//2] + "\n\n" for i in range(0, len(nums)) if i % 2 == 0]
 // nums = "".join(nums)
 //
