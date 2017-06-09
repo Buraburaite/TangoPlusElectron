@@ -14,7 +14,7 @@ const videoAspectRatio = () => jVideo.width() / jVideo.height();
 const resizeVideoToFitWindow = () => {
   const winWidth = jWin.width();
   const winHeight = jWin.height();
-  if (winWidth >  winHeight && videoAspectRatio() * winHeight < winWidth) {
+  if ((winWidth > winHeight) && (videoAspectRatio() * winHeight < winWidth)) {
       scaleWithVHeight(jVideo);
     }
   else {
