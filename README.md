@@ -1,5 +1,5 @@
 # Recruiters
-This program takes a lot of work to download and set up currently. However, it's months along in development, so I went ahead and made a silly 9-minute movie about it! It's technicially work to watch it, [right](https://youtu.be/9T9-q2NZY2M)?
+This program takes a lot of work to download and set up currently. However, it's months along in development, so I went ahead and made a silly 9-minute movie about it! It's technically work to watch it, [right](https://youtu.be/9T9-q2NZY2M)?
 
 # TangoPlusElectron: Video player for language learners
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)](https://github.com/Buraburaite/TangoPlusElectron)
