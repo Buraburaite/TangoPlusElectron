@@ -4,7 +4,7 @@
   <title>TangoPlusElectron</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="meyer-reset.css">
-  <link rel="stylesheet" href="styles/index.min.css">
+  <link rel="stylesheet" href="index.min.css">
   <!-- Set-up for local dependencies  -->
   <script defer>
   if (typeof module === 'object') {
@@ -20,10 +20,10 @@
     module = window.module;
   }
   </script>
-  <script src="app.js" defer></script>
-  <script src="scripts/video-events.js" defer></script>
-  <script src="scripts/word-events.js" defer></script>
-  <script src="scripts/even-more-events.js" defer></script>
+  <script src="src/app.js" defer></script>
+  <script src="src/Player/Events/grow-shrink-progress-bar.events.js" defer></script>
+  <script src="src/Player/Events/scale-player.events.js" defer></script>
+  <script src="src/Player/Events/slides.events.js" defer></script>
 </head>
 <body>
   <div class="theater-background">
@@ -34,7 +34,7 @@
       preload="auto"
       autoplay
       muted
-      poster="assets/Icons/Stop.png"
+      poster="src/assets/Icons/Stop.png"
       onloadstart="this.volume=0.7"
       data-setup='{
       }'

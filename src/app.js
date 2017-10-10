@@ -1,9 +1,9 @@
 const dotenv = require('dotenv');
 
 //Creates Player object
-var Player = require('./scripts/Player.js');
+var Player = require('./src/Player/Player.js');
 // var myPlayer = new Player('../assets/Hanzawa Naoki - Ep 2.srt', document);
-var myPlayer = new Player('./assets/diver.doub', document);
+var myPlayer = new Player('./src/assets/diver.doub', document);
 // var myPlayer = new Player('../assets/example.doub', document);
 // var myPlayer = new Player('../assets/overlap-test.srt', document);
 

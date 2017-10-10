@@ -1,5 +1,4 @@
-// !compileOnSave;
-@import '../styles';
+@import 'styles';
 
 body, html {
   box-sizing: border-box;
@@ -156,7 +155,7 @@ body, html {
           border-radius: 2px 8px 8px 2px;
           background: linear-gradient(to right,
           rgba(white, 0.5),
-          rgba($my-purple, 0.5)
+          rgba(purple, 0.5)
           ), linear-gradient(to top,
           black,
           white);
@@ -169,7 +168,7 @@ body, html {
         z-index: 5;
         pointer-events: none;
         border-radius: 50%;
-        background-color: lighten($my-purple, 10%);
+        background-color: lighten(purple, 10%);
         box-shadow: inset 0px 0px 10px darkgrey;
         transition: width 0.2s, height 0.2s;
       }
