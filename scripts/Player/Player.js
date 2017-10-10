@@ -11,7 +11,7 @@ class Player {
     this.jHandle    = $('#progress-handle'); //Progess bar handle;
 
     //Subtitles related
-    const Doubtitles  = require('./Doubtitles.js');
+    const Doubtitles  = require('../Doubtitles/Doubtitles.js');
     const doubs       = new Doubtitles(filename);
     this.slides     = doubs.slides;
 
