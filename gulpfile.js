@@ -1,7 +1,9 @@
 'use strict';
 
 var gulp = require('gulp');
-var electron = require('electron-connect').server.create();
+var electron = require('electron-connect').server.create({
+  stopOnClose: true // stop electron server if last window is closed
+});
 
 gulp.task('serve', function () {
 
@@ -9,11 +11,10 @@ gulp.task('serve', function () {
   electron.start();
 
   // // Restart browser process
-  gulp.watch('main.js', electron.restart);
+  gulp.watch('electron-start.js', electron.restart);
 
   // // Reload renderer process
-  gulp.watch(['main.js', 'app.js', 'index.html', 'views/*', 'styles/**.css',
-              'scripts/*'], electron.reload);
+  gulp.watch(['src/*'], electron.reload);
 });
 
 gulp.task('reload:browser', function () {

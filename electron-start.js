@@ -2,7 +2,7 @@
 This code is provided by the Electron team. It's almost entirely untouched.
 ====*/
 
-const {app, BrowserWindow} = require('electron');
+const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 const client = require('electron-connect').client;
@@ -18,7 +18,7 @@ function createWindow () {
 
   // and load the index.html of the app.
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    pathname: path.join(__dirname, 'src/index.html'),
     protocol: 'file:',
     slashes: true
   }));

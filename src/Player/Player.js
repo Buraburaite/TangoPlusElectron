@@ -12,7 +12,7 @@ class Player {
 
     //Subtitles related
     const Doubtitles  = require('../Doubtitles/Doubtitles.js');
-    const doubs       = new Doubtitles(filename);
+    const doubs       = new Doubtitles(`../Doubtitles/${filename}`);
     this.slides     = doubs.slides;
 
     this._attachListeners();
