@@ -14,7 +14,13 @@ gulp.task('serve', function () {
   gulp.watch('electron-start.js', electron.restart);
 
   // // Reload renderer process
-  gulp.watch(['src/*'], electron.reload);
+  gulp.watch([
+    'src/**/*.js',
+    'src/**/*.css',
+    'src/**/*.html'
+  ],
+  electron.reload
+);
 });
 
 gulp.task('reload:browser', function () {
