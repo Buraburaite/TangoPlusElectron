@@ -1,0 +1,45 @@
+body, html {
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: black;
+}
+
+#content {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  #Player {
+    height: auto;
+    width: 100vw;
+    position: relative;
+    top: 0;
+    z-index: 0;
+  }
+
+  #video-overlay {
+    height: 100vh;
+    width: 100vw;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    pointer-events: none;
+
+    & * { // selector for all children
+      pointer-events: auto;
+    }
+
+    #load-btn {
+      height: 40px;
+      width: auto;
+      background: none;
+      border: none;
+      outline: none;
+    }
+  }
+}

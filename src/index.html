@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>TangoPlusElectron</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="vendor/meyer-reset.css">
+  <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="index.min.css">
+
+  <!-- HACK: Set-up for local dependencies -->
+  <script defer>
+  if (typeof module === 'object') {
+    window.module = module; module = undefined;
+  }
+  </script>
+
+  <!-- add local dependency scripts here  -->
+  <script src="vendor/jquery.min.js" defer></script>
+
+  <script defer>
+  if (window.module) {
+    module = window.module;
+  }
+  </script>
+
+  <!-- Component scripts -->
+  <script src="app.js" defer></script>
+
+
+</head>
+<body>
+  <div id="content">
+    <video
+    id="Player"
+    preload="auto"
+    autoplay
+    muted
+    poster="assets/Icons/Stop.png"
+    data-setup='{
+    }'
+    <source src="assets/diver.mp4">
+    </video>
+    <div id="video-overlay">
+      <button id="load-btn">
+        <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</body>
+</html>
