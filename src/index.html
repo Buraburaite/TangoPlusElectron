@@ -35,16 +35,18 @@
 </head>
 <body>
   <div id="content">
-    <video
-    id="Player"
-    preload="auto"
-    autoplay
-    muted
-    poster="assets/Icons/Stop.png"
-    data-setup='{
-    }'
-    <source src="assets/diver.mp4">
-    </video>
+    <div id="video-container">
+      <video
+      id="Player"
+      preload="auto"
+      autoplay
+      muted
+      poster="assets/Icons/Stop.png"
+      data-setup='{
+      }'
+      <source src="assets/diver.mp4">
+      </video>
+    </div>
     <div id="control-overlay">
       <button id="load-btn">
         <i class="fa fa-folder-open" aria-hidden="true"></i>

@@ -17,10 +17,10 @@ class Player {
     const jWin = $(window);
     jWin.resize(theaterizeVideoFactory(videoTag));
 
-    // #PLAYER:CLICK
+    // #VIDEO-CONTAINER:CLICK
 
-    // make player play/pause on click
-    this.jel.click(playPauseFactory(videoTag));
+    // play/pause on click
+    $('#video-container').click(playPauseFactory(videoTag));
   }
 }
 

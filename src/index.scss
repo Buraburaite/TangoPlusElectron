@@ -7,16 +7,21 @@ body, html {
 #content {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  #Player {
-    height: auto;
-    width: 100vw;
+  #video-container {
+    height: 100%;
+    width: 100%;
     position: relative;
     top: 0;
     z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    #Player {
+      height: auto;
+      width: 100%;
+    }
   }
 
   #control-overlay {
@@ -28,11 +33,6 @@ body, html {
     left: 0;
     z-index: 1;
     display: flex;
-    pointer-events: none;
-
-    & * { // selector for all children
-      pointer-events: auto;
-    }
 
     & button {
       background: none;
@@ -41,7 +41,7 @@ body, html {
       color: white;
 
       &:hover {
-        color: blue;
+        color: purple;
       }
     }
 
