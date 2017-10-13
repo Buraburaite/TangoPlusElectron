@@ -19,12 +19,12 @@ body, html {
     z-index: 0;
   }
 
-  #video-overlay {
-    height: 100vh;
+  #control-overlay {
+    height: auto;
     width: 100vw;
-    padding: 10px;
+    padding: 4px 16px;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     z-index: 1;
     display: flex;
@@ -34,12 +34,20 @@ body, html {
       pointer-events: auto;
     }
 
-    #load-btn {
-      height: 40px;
-      width: auto;
+    & button {
       background: none;
       border: none;
       outline: none;
+      color: white;
+
+      &:hover {
+        color: blue;
+      }
+    }
+
+    #load-btn {
+      height: 36px;
+      width: 36px;
     }
   }
 }
