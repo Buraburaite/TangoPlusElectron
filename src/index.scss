@@ -35,6 +35,9 @@ body, html {
     display: flex;
 
     & button {
+      height: auto;
+      width: auto;
+      padding: none;
       background: none;
       border: none;
       outline: none;
@@ -43,11 +46,14 @@ body, html {
       &:hover {
         color: purple;
       }
+
+      & i {
+        font-size: 36px;
+      }
     }
 
     #load-btn {
-      height: 36px;
-      width: 36px;
+
     }
   }
 }
