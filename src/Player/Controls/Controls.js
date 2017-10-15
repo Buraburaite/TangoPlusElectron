@@ -1,4 +1,4 @@
-const changeVideoSourceFactory = require('./factories/changeVideoSource.js');
+const changeSourceFactory = require('../Video/factories/changeSource.js');
 
 class Controls {
 
@@ -8,7 +8,7 @@ class Controls {
 
     // LOAD-BTN:CLICK
 
-    $('#load-btn').click(changeVideoSourceFactory(tags.videoTag));
+    $('#load-btn').click(changeSourceFactory(tags.videoTag));
   }
 }
 

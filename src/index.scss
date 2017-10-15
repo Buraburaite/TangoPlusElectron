@@ -4,7 +4,7 @@ body, html {
   background-color: black;
 }
 
-#content {
+#Player {
   width: 100vw;
   height: 100vh;
 
@@ -18,7 +18,7 @@ body, html {
     align-items: center;
     justify-content: center;
 
-    #Player {
+    #Video {
       height: auto;
       width: 100%;
     }

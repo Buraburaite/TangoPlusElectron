@@ -3,7 +3,7 @@ const dialog = require('electron').remote.dialog;
 module.exports = (videoTag) => {
   const jVideo = $(videoTag);
 
-  return () => {
+  const changeSource = () => {
     dialog.showOpenDialog( // open a file dialog, async returns list of paths
       {
         filters: [
@@ -14,4 +14,6 @@ module.exports = (videoTag) => {
       (fileNames) => { jVideo.attr('src', fileNames[0]); } // callback
     );
   };
+
+  return changeSource;
 };

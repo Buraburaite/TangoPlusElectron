@@ -15,7 +15,7 @@ module.exports = (videoTag) => {
   NOTE: this code /probably/ does not work with vertical videos yet
 
   */
-  const theaterizeVideo = () => {
+  const theaterize = () => {
     const winWidth = jWin.width();
     const winHeight = jWin.height();
     if ((winWidth > winHeight) && (videoAspectRatio() * winHeight < winWidth)) {
@@ -26,5 +26,5 @@ module.exports = (videoTag) => {
     }
   };
 
-  return theaterizeVideo;
+  return theaterize;
 };
