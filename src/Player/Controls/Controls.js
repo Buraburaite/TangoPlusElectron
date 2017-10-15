@@ -2,13 +2,12 @@ const changeSourceFactory = require('../Video/factories/changeSource.js');
 
 class Controls {
 
-  constructor(tags) {
-    this.tag = tags.controlsTag;
-    this.jel = $(this.tag);
+  constructor(tagTree) {
+    this.tag = tagTree.compTag;
 
     // LOAD-BTN:CLICK
 
-    $('#load-btn').click(changeSourceFactory(tags.videoTag));
+    $('#load-btn').click(changeSourceFactory(tagTree.videoTag));
   }
 }
 
