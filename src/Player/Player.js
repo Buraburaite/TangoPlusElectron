@@ -3,12 +3,16 @@ const theaterizeVideoFactory = require('./factories/theaterizeVideo.js');
 
 const playPauseFactory = require('./Video/factories/playPause.js');
 
+const Controls = require('./Controls/Controls.js');
+
 
 class Player {
 
   constructor(tags) {
     this.tag = tags.videoTag;
     this.jel = $(this.tag);
+
+    this.controls = new Controls(tags);
 
     // WINDOW:RESIZE
 
