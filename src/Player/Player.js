@@ -12,13 +12,12 @@ class Player {
 
     this.controls = new Controls(tags);
     this.video = new Video(tags);
-    // WINDOW:RESIZE
 
+    // WINDOW:RESIZE
     // make video scale with window
     $(window).resize(theaterizeFactory(tags.videoTag));
 
     // #VIDEO-CONTAINER:CLICK
-
     $('#video-container').click(playPauseFactory(tags.videoTag));
   }
 }
