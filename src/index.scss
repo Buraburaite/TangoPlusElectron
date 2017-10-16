@@ -33,27 +33,49 @@ body, html {
     left: 0;
     z-index: 1;
     display: flex;
+    flex-direction: column;
 
-    & button {
-      height: auto;
-      width: auto;
-      padding: none;
-      background: none;
-      border: none;
-      outline: none;
-      color: white;
+    .control-row {
+      display: flex;
+      flex-direction: row;
+      margin-top: 6px;
 
-      &:hover {
-        color: purple;
+      .control-group {
       }
 
-      & i {
-        font-size: 36px;
+      & button {
+        height: auto;
+        width: auto;
+        padding: none;
+        background: none;
+        border: none;
+        outline: none;
+        color: white;
+
+        &:hover {
+          color: purple;
+        }
+
+        & i {
+          font-size: 36px;
+        }
       }
-    }
 
-    #load-btn {
+      #progress-bar {
+        height: 4px;
+        width: 94%;
+        appearance: none; //remove default chrome styling
+        -webkit-appearance: none;
+        transition: height 0.1s;
 
+        &:hover {
+          height: 6px;
+        }
+      }
+
+      #load-btn {
+
+      }
     }
   }
 }

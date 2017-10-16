@@ -3,6 +3,7 @@ const Controls = require('./Controls/Controls.js');
 const Video = require('./Video/Video.js');
 
 // Factories whose return functions will be passed to various event listeners
+const playPauseFactory = require('./Video/factories/playPause.js');
 
 class Player {
 
@@ -11,6 +12,11 @@ class Player {
 
     this.controls = new Controls(tagTree.controls);
     this.video = new Video(tagTree.video);
+
+    // #VIDEO-CONTAINER:CLICK
+
+    // play/pause on click
+    $('#video-container').click(playPauseFactory(tagTree.videoTag));
   }
 }
 
