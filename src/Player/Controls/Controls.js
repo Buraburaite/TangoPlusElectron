@@ -1,13 +1,15 @@
-const changeSourceFactory = require('../Video/factories/changeSource.js');
+const askForSourceFactory = require('../Video/factories/askForSource.js');
+const fullscreenFactory = require('../Video/factories/fullscreen.js');
 
 class Controls {
 
   constructor(tagTree) {
     this.tag = tagTree.compTag;
 
-    // LOAD-BTN:CLICK
+    // various buttons:CLICK
 
-    $('#load-btn').click(changeSourceFactory(tagTree.videoTag));
+    $('#load-btn').click(askForSourceFactory(tagTree.videoTag));
+    $('#Player').click(fullscreenFactory(tagTree.videoTag));
   }
 }
 

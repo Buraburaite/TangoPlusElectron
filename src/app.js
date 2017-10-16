@@ -6,6 +6,7 @@ const player = new Player(
     controls: {
       compTag: '#Controls',
       loadTag: '#load-btn',
+      fullscreenTag: '#fullscreen-btn',
       videoTag: '#Video'
     },
     video: {
@@ -13,3 +14,5 @@ const player = new Player(
     }
   }
 );
+
+$('#Video').attr('src', 'assets/diver.mp4');

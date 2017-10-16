@@ -36,15 +36,7 @@
 <body>
   <div id="Player">
     <div id="video-container">
-      <video
-      id="Video"
-      preload="auto"
-      autoplay
-      muted
-      poster="assets/Icons/Stop.png"
-      src="assets/diver.mp4"
-      data-setup='{
-      }'
+      <video id="Video" preload="auto" autoplay muted poster="assets/Icons/Stop.png" data-setup='{}'>
       </video>
     </div>
     <div id="Controls">
@@ -53,8 +45,13 @@
       </div>
       <div class="control-row">
         <div class="control-group">
+        </div>
+        <div class="control-group">
           <button id="load-btn">
             <i class="fa fa-folder-open" aria-hidden="true"></i>
+          </button>
+          <button id="fullscreen-btn">
+            <i class="fa fa-arrows-alt" aria-hidden="true"></i>
           </button>
         </div>
       </div>
