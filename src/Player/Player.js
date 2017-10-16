@@ -1,22 +1,25 @@
 // Scripts for our subcomponents
-const Controls = require('./Controls/Controls.js');
-const Video = require('./Video/Video.js');
+const Controls = require('./components/Controls.js');
+const Video = require('./components/Video.js');
 
 // Factories whose return functions will be passed to various event listeners
-const playPauseFactory = require('./Video/factories/playPause.js');
+const theaterizeFactory = require('./factories/theaterize.js');
+const playPauseFactory = require('./factories/playPause.js');
 
 class Player {
 
-  constructor(tagTree) {
-    this.tag = tagTree.compTag;
+  constructor(tags) {
 
-    this.controls = new Controls(tagTree.controls);
-    this.video = new Video(tagTree.video);
+    this.controls = new Controls(tags);
+    this.video = new Video(tags);
+    // WINDOW:RESIZE
+
+    // make video scale with window
+    $(window).resize(theaterizeFactory(tags.videoTag));
 
     // #VIDEO-CONTAINER:CLICK
 
-    // play/pause on click
-    $('#video-container').click(playPauseFactory(tagTree.videoTag));
+    $('#video-container').click(playPauseFactory(tags.videoTag));
   }
 }
 
