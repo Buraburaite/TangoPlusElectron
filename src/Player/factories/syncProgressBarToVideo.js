@@ -5,6 +5,8 @@ module.exports = (videoTag, progressTag) => {
   const progressEl = $(progressTag).get(0);
 
   const syncProgressBarToVideo = (e) => {
+    if (!videoEl.duration) { return; } // in case the video source changes
+    
     progressEl.value = videoEl.currentTime / videoEl.duration;
   };
 
