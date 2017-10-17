@@ -6,27 +6,37 @@ class Controls {
 
   constructor(tags) {
 
-    this.isAutoReplayEnabled = false;
+    this.tags = tags;
 
     // various buttons:CLICK
-    $(tags.playPauseTag).click( playPauseFactory(tags));
-    $(tags.loadTag).click(      askForSourceFactory(tags));
-    $(tags.fullscreenTag).click(fullscreenFactory(tags));
+    $(tags.playPauseBtn).click( playPauseFactory(tags));
+    $(tags.loadBtn).click(      askForSourceFactory(tags));
+    $(tags.fullscreenBtn).click(fullscreenFactory(tags));
+    $(tags.autoReplayBtn).click(
+      () => $(tags.autoReplayBtn).toggleClass('enabled')
+    );
+
+    // automatically restart the video when video ends
+    $(tags.video).on(
+      'ended',
+      () => {
+        if (this.isAutoReplayEnabled()) {
+          $(tags.video).get(0).play();
+        }
+      }
+    );
 
     // ensure playPauseBtn icon always matches the video state
-    const jPlayPauseIcon = $(tags.playPauseTag + ' i');
-    $(tags.videoTag).on(
+    const jPlayPauseIcon = $(tags.playPauseBtn + ' i');
+    $(tags.video).on(
       'play pause', // #Video:PLAY & #Video:PAUSE
       () => jPlayPauseIcon.toggleClass('fa-play fa-pause')
     );
 
-    $(tags.videoTag).on(
-      'ended',
-      () => {
-        if (this.isAutoReplayEnabled) { $(tags.videoTag).get(0).play(); }
-      }
-    );
+  }
 
+  isAutoReplayEnabled() {
+    return $(this.tags.autoReplayBtn).hasClass('enabled');
   }
 }
 

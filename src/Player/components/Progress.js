@@ -2,12 +2,12 @@ class Progress {
 
   constructor(tags) {
 
-    const videoEl = $(tags.videoTag).get(0);
-    const progressEl = $(tags.progressTag).get(0);
+    const videoEl = $(tags.video).get(0);
+    const progressEl = $(tags.progress).get(0);
     let wasPaused = false;
 
     // #Progress:MOUSEDOWN
-    $(tags.progressTag).mousedown((e) => {
+    $(tags.progress).mousedown((e) => {
       if (videoEl.paused) { wasPaused = true; }
       videoEl.pause();
 
@@ -16,7 +16,7 @@ class Progress {
     });
 
     // #Progress:MOUSEUP
-    $(tags.progressTag).mouseup(() => {
+    $(tags.progress).mouseup(() => {
       if (!wasPaused) { videoEl.play(); }
       wasPaused = false;
     });

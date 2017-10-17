@@ -1,13 +1,14 @@
 const Player = require('./Player/Player.js');
 const player = new Player(
   {
-    playerTag: '#Player',
-    controlsTag: '#Controls',
-    progressTag: '#Progress',
-    playPauseTag: '#play-pause-btn',
-    loadTag: '#load-btn',
-    fullscreenTag: '#fullscreen-btn',
-    videoTag: '#Video',
+    player: '#Player',
+    controls: '#Controls',
+    progress: '#Progress',
+    playPauseBtn: '#play-pause-btn',
+    autoReplayBtn: '#auto-replay-btn',
+    loadBtn: '#load-btn',
+    fullscreenBtn: '#fullscreen-btn',
+    video: '#Video',
   }
 );
 

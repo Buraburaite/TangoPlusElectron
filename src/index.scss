@@ -55,7 +55,7 @@ body, html {
         outline: none;
         color: white;
 
-        &:hover {
+        &:hover, &.enabled {
           color: purple;
         }
 
