@@ -1,5 +1,6 @@
 // Scripts for our subcomponents
 const Controls = require('./components/Controls.js');
+const Progress = require('./components/Progress.js');
 const Video = require('./components/Video.js');
 
 // Factories whose return functions will be passed to various event listeners
@@ -11,13 +12,14 @@ class Player {
   constructor(tags) {
 
     this.controls = new Controls(tags);
+    this.progress = new Progress(tags);
     this.video = new Video(tags);
 
-    // WINDOW:RESIZE
+    // window:RESIZE
     // make video scale with window
     $(window).resize(theaterizeFactory(tags.videoTag));
 
-    // #VIDEO-CONTAINER:CLICK
+    // #video-container:CLICK
     $('#video-container').click(playPauseFactory(tags.videoTag));
   }
 }

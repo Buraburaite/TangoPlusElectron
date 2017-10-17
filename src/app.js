@@ -3,10 +3,10 @@ const player = new Player(
   {
     playerTag: '#Player',
     controlsTag: '#Controls',
-    videoTag: '#Video',
+    progressTag: '#Progress',
     loadTag: '#load-btn',
     fullscreenTag: '#fullscreen-btn',
-    progressTag: '#progress-bar',
+    videoTag: '#Video',
   }
 );
 

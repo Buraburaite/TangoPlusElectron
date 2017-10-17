@@ -4,10 +4,18 @@ const syncProgressBarToVideoFactory = require('../factories/syncProgressBarToVid
 class Video {
 
   constructor(tags) {
+    const videoEl = $(videoTag).get(0);
+    const progressEl = $(progressTag).get(0);
 
-    // TIMEUPDATE
-    $(tags.videoTag).bind('timeupdate', syncProgressBarToVideoFactory(tags.videoTag, tags.progressTag));
+    // #Video:TIMEUPDATE
+    $(tags.videoTag).bind(
+      'timeupdate',
+      () => {
+        if (!videoEl.duration) { return; } // in case the video source changes
 
+        progressEl.value = videoEl.currentTime / videoEl.duration;
+      }
+    );
   }
 }
 
