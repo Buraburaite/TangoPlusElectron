@@ -1,6 +1,3 @@
-const askForSourceFactory = require('../factories/askForSource.js');
-const fullscreenFactory = require('../factories/fullscreen.js');
-
 class Progress {
 
   constructor(tags) {

@@ -1,11 +1,8 @@
-// Factories whose return functions will be passed to various event listeners
-const syncProgressBarToVideoFactory = require('../factories/syncProgressBarToVideo.js');
-
 class Video {
 
   constructor(tags) {
-    const videoEl = $(videoTag).get(0);
-    const progressEl = $(progressTag).get(0);
+    const videoEl = $(tags.videoTag).get(0);
+    const progressEl = $(tags.progressTag).get(0);
 
     // #Video:TIMEUPDATE
     $(tags.videoTag).bind(
