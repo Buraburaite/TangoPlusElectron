@@ -44,6 +44,8 @@ body, html {
       margin-top: 6px;
 
       .control-group {
+        display: flex;
+        align-items: center;
       }
 
       & button {
@@ -64,11 +66,7 @@ body, html {
         }
       }
 
-      #Progress {
-        height: 4px;
-        width: 100%;
-        transition: height 0.1s;
-
+      & progress {
         appearance: none; //remove default chrome styling
         -webkit-appearance: none;
 
@@ -80,6 +78,12 @@ body, html {
           background-color: purple;
           border-radius: 4px;
         }
+      }
+
+      #Progress {
+        height: 4px;
+        width: 100%;
+        transition: height 0.1s;
 
         &:hover {
           height: 6px;

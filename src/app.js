@@ -5,6 +5,7 @@ const player = new Player(
     controls: '#Controls',
     progress: '#Progress',
     playPauseBtn: '#play-pause-btn',
+    muteBtn: '#mute-btn',
     autoReplayBtn: '#auto-replay-btn',
     loadBtn: '#load-btn',
     fullscreenBtn: '#fullscreen-btn',
