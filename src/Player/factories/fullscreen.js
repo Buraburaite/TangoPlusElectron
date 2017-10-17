@@ -1,5 +1,5 @@
-module.exports = (videoTag) => {
-  const videoEl = $(videoTag).get(0);
+module.exports = (tags) => {
+  const videoEl = $(tags.videoTag).get(0);
 
   const fullscreen = () => {
     videoEl.webkitRequestFullscreen();

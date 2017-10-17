@@ -17,10 +17,10 @@ class Player {
 
     // window:RESIZE
     // make video scale with window
-    $(window).resize(theaterizeFactory(tags.videoTag));
+    $(window).resize(theaterizeFactory(tags));
 
     // #video-container:CLICK
-    $('#video-container').click(playPauseFactory(tags.videoTag));
+    $('#video-container').click(playPauseFactory(tags));
   }
 }
 

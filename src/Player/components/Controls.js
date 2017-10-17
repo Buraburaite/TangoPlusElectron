@@ -6,8 +6,8 @@ class Controls {
   constructor(tags) {
 
     // various buttons:CLICK
-    $(tags.loadTag).click(      askForSourceFactory(tags.videoTag));
-    $(tags.fullscreenTag).click(fullscreenFactory(tags.videoTag));
+    $(tags.loadTag).click(      askForSourceFactory(tags));
+    $(tags.fullscreenTag).click(fullscreenFactory(tags));
   }
 }
 

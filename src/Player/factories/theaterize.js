@@ -1,5 +1,5 @@
-module.exports = (videoTag) => {
-  const jVideo = $(videoTag);
+module.exports = (tags) => {
+  const jVideo = $(tags.videoTag);
   const jWin = $(window);
 
   const scaleWithVWidth  = (jel) => jel.width ('100vw').height('auto');

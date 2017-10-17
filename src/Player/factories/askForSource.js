@@ -1,7 +1,7 @@
 const dialog = require('electron').remote.dialog;
 
-module.exports = (videoTag) => {
-  const jVideo = $(videoTag);
+module.exports = (tags) => {
+  const jVideo = $(tags.videoTag);
   const changeSource = (filepath) => { jVideo.attr('src', filepath); };
 
   const askForSource = () => {
