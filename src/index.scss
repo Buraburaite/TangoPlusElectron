@@ -67,9 +67,19 @@ body, html {
       #Progress {
         height: 4px;
         width: 100%;
+        transition: height 0.1s;
+
         appearance: none; //remove default chrome styling
         -webkit-appearance: none;
-        transition: height 0.1s;
+
+        &::-webkit-progress-bar {
+          border-radius: 4px;
+        }
+
+        &::-webkit-progress-value {
+          background-color: purple;
+          border-radius: 4px;
+        }
 
         &:hover {
           height: 6px;
