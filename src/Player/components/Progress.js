@@ -24,5 +24,3 @@ class Progress {
 }
 
 module.exports = Progress;
-
-//meaningless addition
