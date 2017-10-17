@@ -6,6 +6,13 @@ class Controls {
 
   constructor(tags) {
 
+    // ensure playPauseBtn icon always matches the video state
+    const jPlayPauseIcon = $(tags.playPauseTag + ' i');
+    $(tags.videoTag).on(
+      'play pause', // #Video:PLAY & #Video:PAUSE
+      () => jPlayPauseIcon.toggleClass('fa-play fa-pause')
+    );
+
     // various buttons:CLICK
     $(tags.playPauseTag).click( playPauseFactory(tags));
     $(tags.loadTag).click(      askForSourceFactory(tags));
