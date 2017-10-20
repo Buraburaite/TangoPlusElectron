@@ -1,7 +1,7 @@
 module.exports = (tags) => {
-  const videoEl = $(tags.video).get(0); // the video to play or pause
+  const videoEl = $(tags.video).get(0);
 
-  return () => {
+  playPause = () => {
     if (videoEl.readyState > 2) { // meaning the video can play, see HTML5 docs
       if (videoEl.paused || videoEl.ended){
         videoEl.play();
@@ -10,4 +10,6 @@ module.exports = (tags) => {
       }
     }
   };
+
+  return playPause;
 };

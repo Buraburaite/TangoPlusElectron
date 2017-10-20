@@ -46,6 +46,10 @@ body, html {
       .control-group {
         display: flex;
         align-items: center;
+
+        & > * {
+          margin-right: 8px;
+        }
       }
 
       & button {
@@ -84,31 +88,32 @@ body, html {
       }
 
       & input[type="range"] {
+        height: auto;
+        width: 100px;
 
+        $track-height: 4px;
         &::-webkit-slider-runnable-track {
-          width: 300px;
-          height: 5px;
-          background: #ddd;
+          height: $track-height;
+          width: 100%;
+          background: white;
           border: none;
-          border-radius: 3px;
         }
 
         &::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          border: none;
           height: 16px;
           width: 16px;
+          border: none;
           border-radius: 50%;
-          background: goldenrod;
-          margin-top: -4px;
+          background: purple;
+          // margin-top: -4px;
+          transform: translateY(-6px); //center the thumb
+
+
+          -webkit-appearance: none;
         }
 
         &:focus {
           outline: none;
-        }
-
-        &:focus::-webkit-slider-runnable-track {
-          background: #ccc;
         }
       }
 
