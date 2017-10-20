@@ -36,7 +36,7 @@
 <body>
   <div id="Player">
     <div id="video-container">
-      <video id="Video" preload="auto" autoplay muted poster="assets/Icons/Stop.png" data-setup='{}'>
+      <video id="Video" preload="auto" autoplay  poster="assets/Icons/Stop.png" data-setup='{}'>
       </video>
     </div>
     <div id="Controls">
@@ -50,9 +50,9 @@
             <i class="fa fa-play" aria-hidden="true"></i>
           </button>
           <button id="mute-btn">
-            <i class="fa fa-volume-off" aria-hidden="true"></i>
+            <i class="fa fa-volume-up" aria-hidden="true"></i>
           </button>
-          <progress id="volume-sldr" value="0.5"></progress>
+          <input id="volume-sldr" type="range">
         </div>
         <div class="control-group">
           <button id="auto-replay-btn">

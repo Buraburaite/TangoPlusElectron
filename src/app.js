@@ -6,6 +6,7 @@ const player = new Player(
     progress: '#Progress',
     playPauseBtn: '#play-pause-btn',
     muteBtn: '#mute-btn',
+    volumeSldr: '#volume-sldr',
     autoReplayBtn: '#auto-replay-btn',
     loadBtn: '#load-btn',
     fullscreenBtn: '#fullscreen-btn',

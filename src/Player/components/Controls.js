@@ -33,6 +33,20 @@ class Controls {
       () => jPlayPauseIcon.toggleClass('fa-play fa-pause')
     );
 
+    let preVol = 0;
+    $(tags.muteBtn).click(() => {
+      let icon = $(tags.muteBtn + ' i');
+      if (icon.hasClass('fa-volume-up')) {
+        preVol = $(tags.video).prop('volume');
+        icon.attr('class', 'fa fa-volume-off');
+        $(tags.video).prop('volume', 0);
+      } else {
+        icon.attr('class', 'fa fa-volume-up');
+        $(tags.video).prop('volume', preVol);
+      }
+    });
+    $(tags.volumeSldr).on('input', (e) => $(tags.video).prop('volume', e.target.value / 100));
+
   }
 
   isAutoReplayEnabled() {

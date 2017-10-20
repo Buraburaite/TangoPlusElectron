@@ -49,9 +49,9 @@ body, html {
       }
 
       & button {
-        height: auto;
-        width: auto;
-        padding: none;
+        height: 40px;
+        width: 40px;
+        padding: 0;
         background: none;
         border: none;
         outline: none;
@@ -66,9 +66,12 @@ body, html {
         }
       }
 
-      & progress {
+      & progress, & input[type="range"] {
         appearance: none; //remove default chrome styling
         -webkit-appearance: none;
+      }
+
+      & progress {
 
         &::-webkit-progress-bar {
           border-radius: 4px;
@@ -77,6 +80,35 @@ body, html {
         &::-webkit-progress-value {
           background-color: purple;
           border-radius: 4px;
+        }
+      }
+
+      & input[type="range"] {
+
+        &::-webkit-slider-runnable-track {
+          width: 300px;
+          height: 5px;
+          background: #ddd;
+          border: none;
+          border-radius: 3px;
+        }
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          border: none;
+          height: 16px;
+          width: 16px;
+          border-radius: 50%;
+          background: goldenrod;
+          margin-top: -4px;
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        &:focus::-webkit-slider-runnable-track {
+          background: #ccc;
         }
       }
 
