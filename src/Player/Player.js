@@ -21,6 +21,12 @@ class Player {
 
     // #video-container:CLICK
     $('#video-container').click(playPauseFactory(tags));
+
+    // #skip-back:CLICK
+    $('.skip').click(playPauseFactory(tags));
+
+    // #skip-back:DOUBLECLICK
+    $('.skip').dblclick(() => $('.skip').css('background-color', 'red'));
   }
 }
 

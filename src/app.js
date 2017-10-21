@@ -2,6 +2,8 @@ const Player = require('./Player/Player.js');
 const player = new Player(
   {
     player: '#Player',
+    skipBack: '#skip-back',
+    skipForward: '#skip-forward',
     controls: '#Controls',
     progress: '#Progress',
     playPauseBtn: '#play-pause-btn',

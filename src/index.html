@@ -36,9 +36,11 @@
 <body>
   <div id="Player">
     <div id="video-container">
-      <video id="Video" preload="auto" autoplay poster="assets/Icons/Stop.png" data-setup='{}'>
+      <video id="Video" preload="auto" autoplay muted poster="assets/Icons/Stop.png" data-setup='{}'>
       </video>
     </div>
+    <div id="skip-back" class="skip"></div>
+    <div id="skip-forward" class="skip"></div>
     <div id="Controls">
       <div class="control-row">
         <progress id="Progress" value="0"></progress>
@@ -55,7 +57,7 @@
           <input id="volume-sldr" type="range" min="0" max="1" step="0.01">
         </div>
         <div class="control-group">
-          <button id="auto-replay-btn">
+          <button id="auto-replay-btn" class="enabled">
             <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
           </button>
           <button id="load-btn">
