@@ -29,16 +29,17 @@ body, html {
 
   .skip {
     height: 100%;
-    width: 100px;
+    width: 200px;
     position: absolute;
     top: 0;
     z-index: 1;
+    background-color: white;
+    opacity: 0;
   }
 
   #skip-forward {
     right: 0;
   }
-
 
   #Controls {
     height: auto;

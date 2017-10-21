@@ -16,6 +16,8 @@ class Player {
     this.progress = new Progress(tags);
     this.video = new Video(tags);
 
+    const jSkip = $(tags.skipRegion);
+
     // window:RESIZE
     // make video scale with window
     $(window).resize(theaterizeFactory(tags));
@@ -24,7 +26,18 @@ class Player {
     $(tags.videoContainer).click(playPauseFactory(tags));
 
     // .skip:CLICK
-    $(tags.skipRegion).click(playPauseFactory(tags));
+    jSkip.click(playPauseFactory(tags));
+
+    // .skip:DOUBLECLICK
+    jSkip.dblclick(
+      (e) => {
+        $(e.target).animate(
+          {opacity: 0.5 },
+          200,
+          () => $(e.target).animate({ opacity: 0 }, 100)
+        );
+      }
+    );
 
     // #skip-back:DOUBLECLICK
     $(tags.skipBack).dblclick(changeTimeFactory(tags, (t) => t - 10));
@@ -32,6 +45,8 @@ class Player {
     // #skip-forward:DOUBLECLICK
     $(tags.skipForward).dblclick(changeTimeFactory(tags, (t) => t + 10));
   }
+
+
 }
 
 module.exports = Player;
