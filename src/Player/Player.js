@@ -6,6 +6,7 @@ const Video = require('./components/Video.js');
 // Factories whose return functions will be passed to various event listeners
 const theaterizeFactory = require('./factories/theaterize.js');
 const playPauseFactory = require('./factories/playPause.js');
+const changeTimeFactory = require('./factories/changeTime.js');
 
 class Player {
 
@@ -20,13 +21,16 @@ class Player {
     $(window).resize(theaterizeFactory(tags));
 
     // #video-container:CLICK
-    $('#video-container').click(playPauseFactory(tags));
+    $(tags.videoContainer).click(playPauseFactory(tags));
 
-    // #skip-back:CLICK
-    $('.skip').click(playPauseFactory(tags));
+    // .skip:CLICK
+    $(tags.skipRegion).click(playPauseFactory(tags));
 
     // #skip-back:DOUBLECLICK
-    $('.skip').dblclick(() => $('.skip').css('background-color', 'red'));
+    $(tags.skipBack).dblclick(changeTimeFactory(tags, (t) => t - 10));
+
+    // #skip-forward:DOUBLECLICK
+    $(tags.skipForward).dblclick(changeTimeFactory(tags, (t) => t + 10));
   }
 }
 

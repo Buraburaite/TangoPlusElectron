@@ -2,6 +2,7 @@ const Player = require('./Player/Player.js');
 const player = new Player(
   {
     player: '#Player',
+    skipRegion: '.skip',
     skipBack: '#skip-back',
     skipForward: '#skip-forward',
     controls: '#Controls',
@@ -13,6 +14,7 @@ const player = new Player(
     loadBtn: '#load-btn',
     fullscreenBtn: '#fullscreen-btn',
     video: '#Video',
+    videoContainer: '#video-container'
   }
 );
 
