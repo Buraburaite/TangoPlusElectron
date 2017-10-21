@@ -1,5 +1,4 @@
 const askForSourceFactory = require('../factories/askForSource.js');
-const fullscreenFactory = require('../factories/fullscreen.js');
 const playPauseFactory = require('../factories/playPause.js');
 
 class Controls {
@@ -9,17 +8,19 @@ class Controls {
     this.tags = tags;
     const jVideo = $(tags.video);
 
-    // various buttons:CLICK
+    // various buttons:CLICK (these functions need to be reusable, hence factories)
     $(tags.playPauseBtn).click( playPauseFactory(tags));
     $(tags.loadBtn).click(      askForSourceFactory(tags));
-    $(tags.fullscreenBtn).click(fullscreenFactory(tags));
 
+    // #fullscreen-btn:CLICK
+    $(tags.fullscreenBtn).click(() => jVideo.get(0).webkitRequestFullscreen());
 
+    // #auto-replay-btn:CLICK
     $(tags.autoReplayBtn).click(
       () => $(tags.autoReplayBtn).toggleClass('enabled')
     );
 
-    // ensure playPauseBtn icon always matches the video state
+    // #Video:PLAY || PAUSE
     const jPlayPauseIcon = $(tags.playPauseBtn + ' i');
     jVideo.on(
       'play pause', // #Video:PLAY & #Video:PAUSE
