@@ -75,7 +75,14 @@ body, html {
         -webkit-appearance: none;
       }
 
-      & progress {
+      & #Progress {
+        height: 4px;
+        width: 100%;
+        transition: height 0.1s;
+
+        &:hover {
+          height: 6px;
+        }
 
         &::-webkit-progress-bar {
           border-radius: 4px;
@@ -87,11 +94,11 @@ body, html {
         }
       }
 
-      & input[type="range"] {
+      & #volume-sldr {
         height: auto;
         width: 100px;
 
-        $track-height: 4px;
+        $track-height: 8px;
         &::-webkit-slider-runnable-track {
           height: $track-height;
           width: 100%;
@@ -100,12 +107,11 @@ body, html {
         }
 
         &::-webkit-slider-thumb {
-          height: 16px;
-          width: 16px;
+          height: 20px;
+          width: 20px;
           border: none;
           border-radius: 50%;
           background: purple;
-          // margin-top: -4px;
           transform: translateY(-6px); //center the thumb
 
 
@@ -115,20 +121,6 @@ body, html {
         &:focus {
           outline: none;
         }
-      }
-
-      #Progress {
-        height: 4px;
-        width: 100%;
-        transition: height 0.1s;
-
-        &:hover {
-          height: 6px;
-        }
-      }
-
-      #load-btn {
-
       }
     }
   }

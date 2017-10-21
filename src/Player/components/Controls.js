@@ -21,10 +21,9 @@ class Controls {
     );
 
     // #Video:PLAY || PAUSE
-    const jPlayPauseIcon = $(tags.playPauseBtn + ' i');
     jVideo.on(
       'play pause', // #Video:PLAY & #Video:PAUSE
-      () => jPlayPauseIcon.toggleClass('fa-play fa-pause')
+      () => $(tags.playPauseBtn + ' i').toggleClass('fa-play fa-pause')
     );
 
     // #Video:VOLUMECHANGE
