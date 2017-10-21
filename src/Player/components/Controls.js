@@ -1,7 +1,5 @@
 const askForSourceFactory = require('../factories/askForSource.js');
-const changeVolumeFactory = require('../factories/changeVolume.js');
 const fullscreenFactory = require('../factories/fullscreen.js');
-const muteUnmuteFactory = require('../factories/muteUnmute.js');
 const playPauseFactory = require('../factories/playPause.js');
 
 class Controls {
@@ -10,12 +8,13 @@ class Controls {
 
     this.tags = tags;
     const jVideo = $(tags.video);
-    const jVolSldr = $(tags.volumeSldr);
 
     // various buttons:CLICK
     $(tags.playPauseBtn).click( playPauseFactory(tags));
     $(tags.loadBtn).click(      askForSourceFactory(tags));
     $(tags.fullscreenBtn).click(fullscreenFactory(tags));
+
+
     $(tags.autoReplayBtn).click(
       () => $(tags.autoReplayBtn).toggleClass('enabled')
     );
@@ -27,40 +26,66 @@ class Controls {
       () => jPlayPauseIcon.toggleClass('fa-play fa-pause')
     );
 
-    // NOTE: always change the video's volume through the video slider
-    $(tags.volumeSldr).on('input', changeVolumeFactory(tags, true));
+    // #Video:VOLUMECHANGE
+    // NOTE: Always change volume directly, not through altering the
+    // slider, simulating a click, or anything else.
+    jVideo.on(
+      'volumechange',
+      (e) => {
 
-    let preMuteVol = 0.5;
+        let newVol = e.target.volume;
+
+        // 1) update slider's value
+        $(tags.volumeSldr).val(newVol);
+
+        // 2) update mute button's icon
+        let iconClass = 'fa fa-volume-';
+
+        if      (newVol > 0.5) { iconClass += 'up'; }
+        else if (newVol > 0)   { iconClass += 'down'; }
+        else                   { iconClass += 'off'; }
+
+        $(tags.muteBtn + ' i').attr('class', iconClass);
+      }
+    );
+
+    // initialize slider (works because this is loaded after html)
+    $(tags.volumeSldr).val(jVideo.prop('volume'));
+
+    // #volume-sldr:INPUT
+    $(tags.volumeSldr).on('input', (e) => jVideo.prop('volume', e.target.value));
+
+    // #mute-btn:CLICK
+    let preMuteVol = 0.5; // 0.5 is a failsafe value
     $(tags.muteBtn).click(
       () => {
-        let currVol = jVolSldr.val();
+        let currVol = jVideo.prop('volume');
 
-        if (currVol > 0) { // if volume is greater than 0, mute
+        if (currVol > 0) {
           preMuteVol = currVol;
-          jVolSldr.val(0);
-        } else {          // else, 'unmute'
-        jVolSldr.val(preMuteVol);
+          jVideo.prop('volume', 0);
+        }
+        else { jVideo.prop('volume', preMuteVol); }
       }
+    );
 
-      jVolSldr.trigger('input'); // we need to trigger the event manually
-    }
-  );
-
-  // automatically restart the video when video ends
-  jVideo.on(
-    'ended',
-    () => {
-      if (this.isAutoReplayEnabled()) {
-        jVideo.get(0).play();
+    // #Video:ENDED
+    jVideo.on(
+      'ended',
+      () => { // automatically restart the video when video ends
+        if (this.isAutoReplayEnabled()) {
+          jVideo.get(0).play();
+        }
       }
-    }
-  );
+    );
 
-}
+  }
 
-isAutoReplayEnabled() {
-  return $(this.tags.autoReplayBtn).hasClass('enabled');
-}
+  isAutoReplayEnabled() {
+    return $(this.tags.autoReplayBtn).hasClass('enabled');
+  }
+
+
 }
 
 module.exports = Controls;
