@@ -139,6 +139,15 @@ body, html {
           outline: none;
         }
       }
+
+      #time-display {
+        padding: 2px 4px;
+        border-radius: 4px;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+      }
+
     }
   }
 }
