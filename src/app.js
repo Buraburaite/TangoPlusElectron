@@ -11,7 +11,7 @@ const player = new Player(
     playPauseBtn: '#play-pause-btn',
     muteBtn: '#mute-btn',
     volumeSldr: '#volume-sldr',
-    timeDisplay: '#time-display',
+    timeBtn: '#time-btn',
     cTime: '#current-time',
     duration: '#duration',
     autoReplayBtn: '#auto-replay-btn',

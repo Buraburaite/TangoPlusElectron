@@ -4,6 +4,13 @@ body, html {
   background-color: black;
 }
 
+a:not([href]){
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none
+}
+
 #Player {
   width: 100vw;
   height: 100vh;
@@ -140,12 +147,19 @@ body, html {
         }
       }
 
-      #time-display {
-        padding: 2px 4px;
+      & #time-btn {
+        width: auto;
+        height: auto;
+        padding: 8px;
         border-radius: 4px;
         background-color: black;
         color: white;
+        font-size: 24px;
         font-weight: bold;
+
+        &:hover {
+          color: purple;
+        }
       }
 
     }
