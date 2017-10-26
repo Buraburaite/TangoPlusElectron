@@ -19,6 +19,8 @@ class Video {
 
         // update time display
         jTime.text(secToTime(videoEl.currentTime));
+
+        console.log(videoEl.currentTime);
       }
     );
 
