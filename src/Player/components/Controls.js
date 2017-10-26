@@ -69,6 +69,9 @@ class Controls {
       }
     );
 
+    // #timeBtn:CLICK
+    $(tags.timeBtn).click(playPauseFactory(tags));
+
     // #Video:ENDED
     jVideo.on(
       'ended',

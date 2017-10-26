@@ -5,7 +5,6 @@ class Video {
   constructor(tags) {
     const videoEl = $(tags.video).get(0);
     const progressEl = $(tags.progress).get(0);
-    const timeDisplay = $(tags.timeDisplay);
     const jTime = $(tags.cTime);
     const jDuration = $(tags.duration);
 
