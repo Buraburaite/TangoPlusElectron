@@ -1,6 +1,7 @@
 // Scripts for our subcomponents
 const Controls = require('./components/Controls.js');
 const Progress = require('./components/Progress.js');
+const Slide = require('./components/Slide.js');
 const Video = require('./components/Video.js');
 
 // Factories whose return functions will be passed to various event listeners
@@ -12,6 +13,7 @@ class Player {
 
   constructor(tags) {
 
+    this.slide = new Slide(tags);
     this.controls = new Controls(tags);
     this.progress = new Progress(tags);
     this.video = new Video(tags);

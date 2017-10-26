@@ -69,8 +69,6 @@ class Controls {
       }
     );
 
-    //
-
     // #Video:ENDED
     jVideo.on(
       'ended',
