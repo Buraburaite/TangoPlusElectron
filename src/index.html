@@ -10,6 +10,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="vendor/meyer-reset.css">
   <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="vendor/tooltipster/dist/css/tooltipster.bundle.min.css"/>
   <link rel="stylesheet" href="index.min.css">
 
   <!-- HACK: Set-up for local dependencies -->
@@ -21,6 +22,7 @@
 
   <!-- add local dependency scripts here  -->
   <script src="vendor/jquery.min.js" defer></script>
+  <script type="text/javascript" src="vendor/tooltipster/dist/js/tooltipster.bundle.min.js" defer></script>
 
   <script defer>
   if (window.module) {
@@ -60,7 +62,7 @@
           <input id="volume-sldr" type="range" min="0" max="1" step="0.01">
         </div>
         <div class="control-group">
-          <button id="time-btn">
+          <button id="time-btn" class="tooltip" title="Timestamp copied!">
             <span id="current-time">0:00</span>
             /
             <span id="duration">1:00</span>

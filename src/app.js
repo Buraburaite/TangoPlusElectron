@@ -24,3 +24,16 @@ tags = {
 const player = new Player(tags);
 
 $('#Video').attr('src', 'assets/diver.mp4');
+
+
+$(document).ready(function() {
+  $('.tooltip').tooltipster({
+    trigger: 'custom',
+    triggerOpen: {
+      click: true
+    },
+    triggerClose: {
+      mouseleave: true
+    }
+  });
+});
