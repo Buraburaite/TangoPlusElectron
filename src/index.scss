@@ -1,14 +1,16 @@
+
+
 body, html {
   box-sizing: border-box;
   overflow: hidden;
   background-color: black;
+
+  font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
 
 a:not([href]){
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none
+  user-select: none;
 }
 
 #Player {
@@ -84,6 +86,7 @@ a:not([href]){
         border: none;
         outline: none;
         color: white;
+        cursor: pointer;
 
         &:hover, &.enabled {
           color: purple;
@@ -97,6 +100,16 @@ a:not([href]){
       & progress, & input[type="range"] {
         appearance: none; //remove default chrome styling
         -webkit-appearance: none;
+      }
+
+      & #Slide {
+        width: 100%;
+        height: auto;
+        padding: 2px;
+        text-align: center;
+        color: white;
+        font-size: 32px;
+        text-shadow: 2px 2px black;
       }
 
       & #Progress {
@@ -137,6 +150,7 @@ a:not([href]){
           border-radius: 50%;
           background: purple;
           transform: translateY(-6px); //center the thumb
+          cursor: pointer;
 
 
           -webkit-appearance: none;
