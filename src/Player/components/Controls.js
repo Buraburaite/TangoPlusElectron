@@ -1,5 +1,9 @@
+const clipboard = require('electron').clipboard;
+
 const askForSourceFactory = require('../factories/askForSource.js');
 const playPauseFactory = require('../factories/playPause.js');
+
+const secToTimestamp = require('../functions/secToTimestamp.js');
 
 class Controls {
 
@@ -69,7 +73,13 @@ class Controls {
       }
     );
 
-    //
+    // #timeBtn:CLICK
+    $(tags.timeBtn).click(playPauseFactory(tags));
+
+    // get timestamp copied to clipboard when clicking on timeBtn
+    $(tags.timeBtn).click(() => {
+      clipboard.writeText(secToTimestamp(jVideo.get(0).currentTime));
+    });
 
     // #Video:ENDED
     jVideo.on(

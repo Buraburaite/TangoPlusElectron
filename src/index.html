@@ -10,6 +10,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="vendor/meyer-reset.css">
   <link rel="stylesheet" href="vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="vendor/tooltipster/dist/css/tooltipster.bundle.min.css"/>
   <link rel="stylesheet" href="index.min.css">
 
   <!-- HACK: Set-up for local dependencies -->
@@ -21,6 +22,7 @@
 
   <!-- add local dependency scripts here  -->
   <script src="vendor/jquery.min.js" defer></script>
+  <script type="text/javascript" src="vendor/tooltipster/dist/js/tooltipster.bundle.min.js" defer></script>
 
   <script defer>
   if (window.module) {
@@ -36,11 +38,14 @@
 <body>
   <div id="Player">
     <div id="video-container">
-      <video id="Video" preload="auto" autoplay muted poster="assets/Icons/Stop.png" data-setup='{}'>
+      <video id="Video" preload="auto" autoplay muted data-setup='{}'>
       </video>
     </div>
     <div id="skip-back" class="skip"></div>
     <div id="skip-forward" class="skip"></div>
+    <div id="Slide">
+      This is text and it continues for a little bit
+    </div>
     <div id="Controls">
       <div class="control-row">
         <progress id="Progress" value="0"></progress>
@@ -57,11 +62,11 @@
           <input id="volume-sldr" type="range" min="0" max="1" step="0.01">
         </div>
         <div class="control-group">
-          <div id="time-display">
+          <button id="time-btn" class="tooltip" title="Timestamp copied!">
             <span id="current-time">0:00</span>
             /
             <span id="duration">1:00</span>
-          </div>
+          </button>
           <button id="auto-replay-btn" class="enabled">
             <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
           </button>
