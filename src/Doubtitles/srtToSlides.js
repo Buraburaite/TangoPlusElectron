@@ -1,5 +1,5 @@
-//'00:01:02,400' becomes 62400
-const timestampToMs = (stamp) => {
+//'00:01:02,400' becomes 62.4
+const timestampToSec = (stamp) => {
 
   const units = stamp
   .replace(',','')
@@ -7,8 +7,8 @@ const timestampToMs = (stamp) => {
   .map((unit) => parseInt(unit));
 
   return (
-    units[0] * 3600000 +
-    units[1] * 60000   +
+    units[0] * 3600 +
+    units[1] * 60   +
     units[2]
   );
 };
@@ -38,8 +38,8 @@ const srtToSlides = (fileString) => {
     if (line.includes('-->')){
 
       // ...get and process the times from the line...
-      startTime = timestampToMs(line.slice(0,12));
-      endTime   = timestampToMs(line.slice(17,29));
+      startTime = timestampToSec(line.slice(0,12));
+      endTime   = timestampToSec(line.slice(17,29));
 
       // ...get the text from the next line...
       text      = subs[lineIndex + 1];
