@@ -14,7 +14,7 @@ class Controls {
 
     // various buttons:CLICK (these functions need to be reusable, hence factories)
     $(tags.playPauseBtn).click( playPauseFactory(tags));
-    $(tags.loadBtn).click(      askForSourceFactory(tags));
+    $(tags.videoSourceBtn).click(askForSourceFactory(tags));
 
     // #fullscreen-btn:CLICK
     $(tags.fullscreenBtn).click(() => jVideo.get(0).webkitRequestFullscreen());

@@ -15,7 +15,7 @@ const tags = {
   cTime: '#current-time',
   duration: '#duration',
   autoReplayBtn: '#auto-replay-btn',
-  loadBtn: '#load-btn',
+  videoSourceBtn: '#video-source-btn',
   fullscreenBtn: '#fullscreen-btn',
   video: '#Video',
   videoContainer: '#video-container'
