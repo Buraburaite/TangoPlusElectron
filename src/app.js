@@ -1,6 +1,6 @@
 const Player = require('./Player/Player.js');
 
-tags = {
+const tags = {
   player: '#Player',
   skipRegion: '.skip',
   skipBack: '#skip-back',
@@ -23,7 +23,7 @@ tags = {
 
 const player = new Player(tags);
 
-$('#Video').attr('src', 'assets/diver.mp4');
+$('#Video').attr('src', 'assets/hanzawa.mp4');
 
 // initialize tooltipster (only used once)
 $(document).ready(function() {

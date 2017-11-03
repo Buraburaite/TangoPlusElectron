@@ -1,16 +1,20 @@
+const Slide = require('./Slide.js');
+
 //'00:01:02,400' becomes 62.4
 const timestampToSec = (stamp) => {
 
   const units = stamp
   .replace(',','')
   .split(':')
-  .map((unit) => parseInt(unit));
+  .map((unit) => parseInt(unit)); // [hr, min, ms]
 
-  return (
-    units[0] * 3600 +
-    units[1] * 60   +
-    units[2]
-  );
+  let sum = (
+    units[0] * 3600  +  // hr => ms
+    units[1] * 60000 +  // min => ms
+    units[2]            // ms
+  ) / 1000;             // sum in ms => sum in seconds
+
+  return sum;
 };
 
 const srtToSlides = (fileString) => {
@@ -26,11 +30,12 @@ const srtToSlides = (fileString) => {
   .map   ((line) => line.trim()); // ['This is a line of text,', 'dammit']
 
 
-  let text, startTime, endTime;
+  let text, startTime, endTime, prevSlide;
   let slides = [];
 
   // Start with an empty slide at 0...
   slides.push(new Slide('', 0));
+  prevSlide = slides[0];
   // ...then, for each line of text...
   subs.forEach((line, lineIndex) => {
 
@@ -45,9 +50,17 @@ const srtToSlides = (fileString) => {
       text      = subs[lineIndex + 1];
 
       // ...finally, create the slide with all three fields...
-      slides.push(new Slide(text, startTime, endTime));
-      // ...plus an intermediate 'silence slide'.
-      slides.push(new Slide('', endTime + 1));
+      cSlide = new Slide(text, startTime, endTime);
+      slides.push(cSlide);
+
+      // ...plus an intermediate 'silence slide', if there's a large enough gap.
+      let gap = startTime - prevSlide.endTime;
+      if (gap > 1) {
+        slides[slides.length - 1] = new Slide('', prevSlide.endTime + 0.001);
+        slides.push(cSlide);
+      }
+
+      prevSlide = cSlide;
     }
   });
 

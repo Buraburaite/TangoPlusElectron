@@ -1,3 +1,6 @@
+// Singleton class for processing and storing subtitles
+const Doubtitles = require('../Doubtitles/Doubtitles.js');
+
 // Scripts for our subcomponents
 const Controls = require('./components/Controls.js');
 const Progress = require('./components/Progress.js');
@@ -13,7 +16,12 @@ class Player {
 
   constructor(tags) {
 
-    this.slide = new Slide(tags);
+    // to obsolete soon
+    this.doubtitles = new Doubtitles(__dirname + '/../assets/hanzawa.srt');
+
+
+
+    this.slide = new Slide(tags, this.doubtitles);
     this.controls = new Controls(tags);
     this.progress = new Progress(tags);
     this.video = new Video(tags);
