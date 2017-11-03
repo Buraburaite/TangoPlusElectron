@@ -25,7 +25,7 @@ const player = new Player(tags);
 
 $('#Video').attr('src', 'assets/diver.mp4');
 
-
+// initialize tooltipster (only used once)
 $(document).ready(function() {
   $('.tooltip').tooltipster({
     trigger: 'custom',
