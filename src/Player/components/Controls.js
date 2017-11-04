@@ -1,13 +1,14 @@
 const clipboard = require('electron').clipboard;
 
 const askForSourceFactory = require('../factories/askForSource.js');
+const askForSubsFactory = require('../factories/askForSubs.js');
 const playPauseFactory = require('../factories/playPause.js');
 
 const secToTimestamp = require('../functions/secToTimestamp.js');
 
 class Controls {
 
-  constructor(tags) {
+  constructor(tags, services) {
 
     this.tags = tags;
     const jVideo = $(tags.video);
@@ -15,6 +16,7 @@ class Controls {
     // various buttons:CLICK (these functions need to be reusable, hence factories)
     $(tags.playPauseBtn).click( playPauseFactory(tags));
     $(tags.videoSourceBtn).click(askForSourceFactory(tags));
+    $(tags.subsBtn).click(askForSubsFactory(tags, services));
 
     // #fullscreen-btn:CLICK
     $(tags.fullscreenBtn).click(() => jVideo.get(0).webkitRequestFullscreen());

@@ -1,6 +1,3 @@
-// Singleton class for processing and storing subtitles
-const Doubtitles = require('../Doubtitles/Doubtitles.js');
-
 // Scripts for our subcomponents
 const Controls = require('./components/Controls.js');
 const Progress = require('./components/Progress.js');
@@ -12,17 +9,20 @@ const theaterizeFactory = require('./factories/theaterize.js');
 const playPauseFactory = require('./factories/playPause.js');
 const changeTimeFactory = require('./factories/changeTime.js');
 
+// Services, or singleton classes that centralize and protect certain pieces
+// of state in our application
+const DoubtitlesService = require('./services/doubtitles.service.js');
+
 class Player {
 
   constructor(tags) {
 
-    // to obsolete soon
-    this.doubtitles = new Doubtitles(__dirname + '/../assets/hanzawa.srt');
+    this.services = {
+      doubtitles: new DoubtitlesService()
+    };
 
-
-
-    this.slide = new Slide(tags, this.doubtitles);
-    this.controls = new Controls(tags);
+    this.slide = new Slide(tags, this.services);
+    this.controls = new Controls(tags, this.services);
     this.progress = new Progress(tags);
     this.video = new Video(tags);
 
@@ -42,7 +42,7 @@ class Player {
     jSkip.dblclick(
       (e) => {
         $(e.target).animate(
-          {opacity: 0.5 },
+          { opacity: 0.5 },
           200,
           () => $(e.target).animate({ opacity: 0 }, 100)
         );

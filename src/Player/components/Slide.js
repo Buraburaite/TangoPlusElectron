@@ -1,6 +1,11 @@
 class Slide {
 
-  constructor(tags, doubs) {
+  get doubs() { return this.doubsService.doubs; }
+
+  constructor(tags, services) {
+
+    // Save our connection to the application state
+    this.doubsService = services.doubtitles;
 
     const jSlide = $(tags.slide);
     const videoEl = $(tags.video).get(0);
@@ -9,7 +14,9 @@ class Slide {
     $(tags.video).bind(
       'timeupdate',
       () => {
-        jSlide.text(doubs.getSlide(videoEl.currentTime).text);
+        if (!this.doubs) { return; }
+        const text = this.doubs.getSlide(videoEl.currentTime).text;
+        jSlide.text(text);
       }
     );
   }

@@ -4,7 +4,7 @@ module.exports = (tags) => {
   const jVideo = $(tags.video);
 
   const changeSource = (filepath) => {
-    jVideo.attr('src', filepath);
+    jVideo.attr('src', filepath[0]);
   };
 
 
