@@ -1,3 +1,5 @@
+const define = require('../functions/define.js');
+
 class Slide {
 
   constructor(tags, services) {
@@ -19,6 +21,16 @@ class Slide {
         jSlide.text(text);
       }
     );
+
+    $(tags.slide).click(() => {
+      const def = define('猫')
+      .then((matchs) => {
+        console.log(matchs);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    });
   }
 
   // getter used here to allow updates to flow from the service
