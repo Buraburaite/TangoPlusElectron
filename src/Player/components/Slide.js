@@ -22,14 +22,24 @@ class Slide {
       }
     );
 
-    $(tags.slide).click(() => {
-      const def = define('猫')
-      .then((matchs) => {
-        console.log(matchs);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    $(tags.slide).click(() => $(tags.video).get(0).pause());
+
+    $(tags.slide).mouseup(() => {
+
+      // Get highlighted text, if there is any...
+      const word = window.getSelection().toString();
+
+      if (word) {
+        // ...then, log the word's definitions!
+
+        const def = define(word)
+        .then((matchs) => {
+          console.log(matchs);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
     });
   }
 
