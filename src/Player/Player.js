@@ -32,6 +32,9 @@ class Player {
     // make video scale with window
     $(window).resize(theaterizeFactory(tags));
 
+    // #Video.LOADSTART
+    $(tags.video).on('loadstart', () => $(tags.instructions).hide());
+
     // #video-container:CLICK
     $(tags.videoContainer).click(playPauseFactory(tags));
 

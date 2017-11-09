@@ -32,6 +32,24 @@ a:not([href]){
       top: 0;
       z-index: 0;
     }
+
+    #instructions {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      z-index: -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: white;
+
+      li {
+        margin-bottom: 10px;
+      }
+    }
   }
 
   .skip {

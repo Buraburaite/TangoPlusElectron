@@ -1,7 +1,21 @@
 const Player = require('./Player/Player.js');
 
+// initialize tooltipster (only used once)
+$(document).ready(function() {
+  $('.tooltip').tooltipster({
+    trigger: 'custom',
+    triggerOpen: {
+      click: true
+    },
+    triggerClose: {
+      mouseleave: true
+    }
+  });
+});
+
 const tags = {
   player: '#Player',
+  instructions: '#instructions',
   skipRegion: '.skip',
   skipBack: '#skip-back',
   skipForward: '#skip-forward',
@@ -26,17 +40,4 @@ const tags = {
 
 const player = new Player(tags);
 
-$('#Video').attr('src', 'assets/hanzawa.mp4');
-
-// initialize tooltipster (only used once)
-$(document).ready(function() {
-  $('.tooltip').tooltipster({
-    trigger: 'custom',
-    triggerOpen: {
-      click: true
-    },
-    triggerClose: {
-      mouseleave: true
-    }
-  });
-});
+// $('#Video').attr('src', 'assets/hanzawa.mp4');
