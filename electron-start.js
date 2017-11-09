@@ -24,7 +24,7 @@ function createWindow () {
   }));
 
   // Open the DevTools.
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   // Quit the app (end all processes, I think) when all windows are closed
   app.on('window-all-closed', function () {
