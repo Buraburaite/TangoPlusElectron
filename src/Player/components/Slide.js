@@ -66,7 +66,7 @@ class Slide {
     });
 
     $(tags.definition).hide();
-    $(tags.video).on('play', () => $(tags.definition).hide());
+    $(tags.video).on('timeupdate', () => $(tags.definition).hide());
   }
 
   // getter used here to allow updates to flow from the service

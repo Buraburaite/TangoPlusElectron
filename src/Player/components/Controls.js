@@ -18,9 +18,6 @@ class Controls {
     $(tags.videoSourceBtn).click(askForSourceFactory(tags));
     $(tags.subsBtn).click(askForSubsFactory(tags, services));
 
-    // #fullscreen-btn:CLICK
-    $(tags.fullscreenBtn).click(() => jVideo.get(0).webkitRequestFullscreen());
-
     // #auto-replay-btn:CLICK
     $(tags.autoReplayBtn).click(
       () => $(tags.autoReplayBtn).toggleClass('enabled')

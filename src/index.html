@@ -38,11 +38,18 @@
 <body>
   <div id="Player">
     <div id="video-container">
-      <video id="Video" preload="auto" autoplay muted data-setup='{}'>
-      </video>
+      <video
+      id="Video"
+      preload="auto"
+      autoplay
+      ></video>
     </div>
-    <div id="skip-back" class="skip"></div>
-    <div id="skip-forward" class="skip"></div>
+    <div id="skip-back" class="skip">
+      <i class="fa fa-step-backward" aria-hidden="true"></i>
+    </div>
+    <div id="skip-forward" class="skip">
+      <i class="fa fa-step-forward" aria-hidden="true"></i>
+    </div>
     <div id="Controls">
       <div class="control-row">
         <div id="Slide">
@@ -78,9 +85,6 @@
           </button>
           <button id="subs-btn">
             <i class="fa fa-file-text-o" aria-hidden="true"></i>
-          </button>
-          <button id="fullscreen-btn">
-            <i class="fa fa-arrows-alt" aria-hidden="true"></i>
           </button>
         </div>
       </div>

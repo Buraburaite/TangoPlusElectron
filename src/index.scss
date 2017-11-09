@@ -1,5 +1,3 @@
-
-
 body, html {
   box-sizing: border-box;
   overflow: hidden;
@@ -42,8 +40,16 @@ a:not([href]){
     position: absolute;
     top: 0;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: white;
     opacity: 0;
+
+    i {
+      pointer-events: none;
+      font-size: 100px;
+    }
   }
 
   #skip-forward {

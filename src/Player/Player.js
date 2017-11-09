@@ -49,12 +49,20 @@ class Player {
       }
     );
 
+    const areThereDoubs = () => !!this.doubs;
+
     // #skip-back:DOUBLECLICK
-    $(tags.skipBack).dblclick(changeTimeFactory(tags, (t) => t - 10));
+    $(tags.skipBack).dblclick(changeTimeFactory(tags,
+      (t) => areThereDoubs() ? this.doubs.getPrevSlide().startTime : t - 10)
+    );
 
     // #skip-forward:DOUBLECLICK
-    $(tags.skipForward).dblclick(changeTimeFactory(tags, (t) => t + 10));
+    $(tags.skipForward).dblclick(changeTimeFactory(tags,
+      (t) => areThereDoubs() ? this.doubs.getNextSlide().startTime : t + 10)
+    );
   }
+
+  get doubs() { return this.services.doubtitles.doubs; }
 
 
 }

@@ -30,7 +30,7 @@ const srtToSlides = (fileString) => {
   .map   ((line) => line.trim()); // ['This is a line of text,', 'dammit']
 
 
-  let text, startTime, endTime, prevSlide;
+  let text, startTime, endTime, cSlide, prevSlide;
   let slides = [];
 
   // Start with an empty slide at 0...
@@ -67,6 +67,17 @@ const srtToSlides = (fileString) => {
   //Sort all of the slides
   let byStartTime = (a,b) => a.startTime - b.startTime;
   slides.sort(byStartTime);
+
+  //Add doubly-linked property
+  slides[0]         .prev = slides[slides.length - 1];
+  slides[slides.length - 1].next = slides[0];
+
+  cSlide = slides[0];
+  for (let i = 0; i < slides.length - 1; i++) {
+    cSlide.next = slides[i + 1];
+    cSlide.next.prev = cSlide;
+    cSlide = cSlide.next;
+  }
 
   return slides;
 };
