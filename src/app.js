@@ -6,6 +6,8 @@ const tags = {
   skipBack: '#skip-back',
   skipForward: '#skip-forward',
   slide: '#Slide',
+  definition: '#definition',
+  slideText: '#slide-text',
   controls: '#Controls',
   progress: '#Progress',
   playPauseBtn: '#play-pause-btn',

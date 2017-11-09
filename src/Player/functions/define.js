@@ -9,7 +9,7 @@ module.exports = (word) => {
     matchs = [];
 
     db.each(
-      'SELECT * FROM jisho WHERE kanji = ?',
+      'SELECT kanji, kana, def FROM jisho WHERE ? IN (kanji, kana)',
       word,
       (err, row) => { // foreach callback (this happens after all results are found)
 

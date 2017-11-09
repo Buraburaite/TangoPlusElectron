@@ -7,7 +7,7 @@ class Slide {
     // Save our connection to the application state
     this.doubsService = services.doubtitles;
 
-    const jSlide = $(tags.slide);
+    const jSlideText = $(tags.slideText);
     const videoEl = $(tags.video).get(0);
 
     // #Video:TIMEUPDATE
@@ -18,29 +18,55 @@ class Slide {
         if (!this.doubs) { return; }
         // ...otherwise, update #slide html contents to match the correct slide
         const text = this.doubs.getSlide(videoEl.currentTime).text;
-        jSlide.text(text);
+        jSlideText.text(text);
       }
     );
 
-    $(tags.slide).click(() => $(tags.video).get(0).pause());
+    // #Slide:MOUSEDOWN
+    $(tags.slide).mousedown(() => $(tags.video).get(0).pause());
 
+    // #Slide:MOUSEUP
     $(tags.slide).mouseup(() => {
 
       // Get highlighted text, if there is any...
-      const word = window.getSelection().toString();
+      const selection = window.getSelection();
+      const word = selection.toString();
 
       if (word) {
-        // ...then, log the word's definitions!
 
+        // ...then find the definition of the word...
         const def = define(word)
         .then((matchs) => {
-          console.log(matchs);
+
+          // ... if no definitions were found, let the user know...
+          if (matchs.length === 0) {
+            $(tags.definition).html('Nothing was found, try something else?');
+          }
+          // ...it definitions were found...
+          else {
+            // ...parse them into a human-readable string...
+            matchs = matchs.reduce(
+              (str, m) => str + `${m.kanji} (${m.kana}): ${m.def}<br>`,
+              ''
+            );
+            // ...update the definition in the html...
+            $(tags.definition).html(matchs);
+          }
+
+          // ...and show the definition to the user...
+          $(tags.definition).show();
         })
         .catch((err) => {
           console.log(err);
         });
       }
+
+      // ...finally, clear the selection for the user's convenience.
+      selection.empty();
     });
+
+    $(tags.definition).hide();
+    $(tags.video).on('play', () => $(tags.definition).hide());
   }
 
   // getter used here to allow updates to flow from the service

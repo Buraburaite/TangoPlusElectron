@@ -105,11 +105,34 @@ a:not([href]){
       & #Slide {
         width: 100%;
         height: auto;
-        padding: 2px;
-        text-align: center;
-        color: white;
-        font-size: 32px;
-        text-shadow: 2px 2px black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        #definition {
+          width: auto;
+          height: auto;
+          max-height: 300px;
+          padding: 4px 10px;
+          margin-bottom: 8px;
+          overflow: auto;
+          overflow-x: hidden;
+          color: white;
+          font-size: 32px;
+          border: 1px solid black;
+          border-radius: 4px;
+          background-color: purple;
+        }
+
+        #slide-text {
+          width: auto;
+          height: auto;
+          padding: 4px 10px;
+          color: white;
+          text-align: center;
+          font-size: 32px;
+          background-color: black;
+        }
       }
 
       & #Progress {
