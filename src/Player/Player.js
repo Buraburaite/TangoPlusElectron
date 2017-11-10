@@ -30,7 +30,9 @@ class Player {
 
     // window:RESIZE
     // make video scale with window
-    $(window).resize(theaterizeFactory(tags));
+    const theaterize = theaterizeFactory(tags);
+    $(window).resize(theaterize);
+    theaterize();
 
     // #Video.LOADSTART
     $(tags.video).on('loadstart', () => $(tags.instructions).hide());
