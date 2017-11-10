@@ -133,6 +133,10 @@ a:not([href]){
         flex-direction: column;
         align-items: center;
 
+        & #slide-text:empty {
+          opacity: 0;
+        }
+
         #definition {
           width: auto;
           height: auto;
