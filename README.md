@@ -11,8 +11,7 @@
 ## Installation and sample media
 [MacOSX](https://s3-us-west-1.amazonaws.com/tpe/TangoPlusElectron.zip), v1.0.0
 
-Windows _(coming soon)_
-
+Windows _(coming soon)_  
 
 [_Gojira_ trailer](https://s3-us-west-1.amazonaws.com/tpe/Gojira_trailer_512kb.mp4) (1954, exists in the public domain)
 
@@ -24,4 +23,4 @@ This program requires two external files to function: a video, and a subtitles f
 
 This software is licensed under the MIT License.
 ___
-Copyright (c) Javier Cueto 2017
+Copyright &copy; Javier Cueto 2017
