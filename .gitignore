@@ -2,9 +2,9 @@ node_modules/
 IgnoreThis/
 bin/
 
+*.DS_Store*
+
 .jshintrc
-.env
-*.env
 *.env*
 *.mp4
 *.mp3
