@@ -9,7 +9,7 @@
 - Supports Japanese -> English vocabulary
 
 ## Installation and sample media
-[MacOSX](https://s3-us-west-1.amazonaws.com/tpe/TangoPlusElectron.zip), v1.0.0
+[MacOSX](https://s3-us-west-1.amazonaws.com/tpe/TangoPlusElectron-mac.zip), v1.0.0
 
 Windows _(coming soon)_  
 
