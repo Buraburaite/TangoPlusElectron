@@ -5,7 +5,7 @@ This code is provided by the Electron team. It's almost entirely untouched.
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
-const client = require('electron-connect').client;
+// const client = require('electron-connect').client;
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -39,7 +39,7 @@ function createWindow () {
     win = null;
   });
 
-  client.create(win);
+  // client.create(win);
 }
 
 // This method will be called when Electron has finished

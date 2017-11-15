@@ -1,14 +1,13 @@
 {
-  "name": "tangoplus-electron",
+  "name": "TangoPlusElectron",
   "version": "1.0.0",
   "description": "Video Player for intermediate Japanese language learners",
-  "main": "src/electron-start.js",
+  "main": "app/electron-start.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp serve",
+    "start": "electron .",
     "dev": "gulp serve",
     "postinstall": "electron-builder install-app-deps",
-    "dist": "build"
+    "build": "concurrently \"node builder-mac.js\" \"node builder-win.js\""
   },
   "repository": {
     "type": "git",
@@ -17,14 +16,16 @@
   "author": "Javier Cueto",
   "license": "MIT",
   "dependencies": {
-    "electron": "^1.6.2",
     "jquery": "^3.2.1",
     "left-pad": "^1.1.3",
     "sqlite3": "^3.1.13"
   },
   "devDependencies": {
+    "concurrently": "^3.5.0",
+    "electron": "^1.6.2",
     "electron-builder": "^19.45.4",
     "electron-connect": "^0.6.1",
+    "electron-packager": "^9.1.0",
     "gulp": "^3.9.1"
   }
 }

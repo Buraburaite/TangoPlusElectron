@@ -11,13 +11,13 @@ gulp.task('serve', function () {
   electron.start();
 
   // // Restart browser process
-  gulp.watch('src/electron-start.js', electron.restart);
+  gulp.watch('app/electron-start.js', electron.restart);
 
   // // Reload renderer process
   gulp.watch([
-    'src/**/*.js',
-    'src/**/*.css',
-    'src/**/*.html'
+    'app/**/*.js',
+    'app/**/*.css',
+    'app/**/*.html'
   ],
   electron.reload
 );

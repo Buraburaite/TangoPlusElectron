@@ -1,5 +1,6 @@
 node_modules/
 IgnoreThis/
+bin/
 
 .jshintrc
 .env
@@ -9,3 +10,5 @@ IgnoreThis/
 *.mp3
 *.srt
 *.doub
+
+build*

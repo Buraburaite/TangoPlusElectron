@@ -1,37 +1,10 @@
-# Recruiters
-This program takes a lot of work to download and set up currently. However, it's months along in development, so I went ahead and made a silly 9-minute movie about it! It's technically work to watch it, [right](https://youtu.be/9T9-q2NZY2M)?
-
 # TangoPlusElectron: Video player for language learners
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)](https://github.com/Buraburaite/TangoPlusElectron)
 
-### Philosophy
-Motivation is the only absolute requirement for learning. Therefore, students should be given as much freedom to explore as possible.
+## Installation and sample media
+### Installation packages: MacOSX, Windows
+### 1954, Gojira (Godzilla) trailer (exists in the public domain)
+### Example subtitles file
 
-### Context
-Language education nowadays does little to help students select their own learning materials. Trying to learn from the "source" (tv, music videos, movies, news, etc.) is very laborous, because subtitles may not be available in the original language. In addition, over time, looking up words in a dictionary constitutes a lot of unnecessary, repetitive work. This is especially true for pictographic languages like Japanese and Mandarin, where characters do not provide the pronunciation one would need to look them up in an online dictionary.
-
-### Goals
-This program is intended to make translating video easier for language learners who already have a good grasp of their target language's grammar, but need more practice to develop fluency. It makes defining words and providing pronunciations easy, and allows for your work to be saved so that it may be shared with others. The goal is to allow learners to choose their own materials, and to eliminate as much drudgery as possible so that they may focus on learning.
-
-## Features
-* Annotate lines of subtitles with definitions and pronunciations
-* Save your work in a special file format
-* Save your work with others
-* Do all of this from one place: never need your browser!
-
-## Installation
-### From source
-In your preferred working directory, get a copy of this repository:<br>
-```
-git clone https://github.com/Buraburaite/TangoPlusElectron
-cd TangoPlusElectron
-```
-Install any dependencies (you will need to install NodeJS in order to run this command):<br>
-```
-npm install
-```
-Finally, run the testing server. This is will start the program, and will refresh the program everytime any of the files specified in the gulpfile.js are changed:<br><br>
-```
-npm start
-```
-<br>At this point, a video may play, but it also may not. If so, make sure to provide your own video (or use the one provided in the Assets folder, called Border-Collies.mp4), and link to it in the index.html's video source tag.
+## Concerning Copyright
+This program requires two external things to function: a video, and a subtitles file (often a .srt file). The video is (in the vast majority of cases) under the ownership of the copyright holder, as well as the text contained within the corresponding subtitles file (including the case wherein you add the timestamps yourself). Even if the video is legally obtained, and the text is acquired from a site that paid for a distribution license (as is often the case with sites that host song lyrics), converting the text into a captions format and playing it along with the video may not be legal, even if the use is personal and educational. The same can be said for distributing that file. I am not qualified to give legal advice, and your use of media with this program is at your own risk.

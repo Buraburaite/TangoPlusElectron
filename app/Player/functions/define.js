@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 module.exports = (word) => {
 
-  const db = new sqlite3.Database('./src/vendor/JMdict/JMdict.db');
+  const db = new sqlite3.Database(__dirname + '/../../vendor/JMdict/JMdict.db');
 
   const lookupWord = new Promise((resolve, reject) => {
 
