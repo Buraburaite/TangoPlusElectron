@@ -52,8 +52,8 @@ class Controls {
       }
     );
 
-    // initialize slider (works because this is loaded after html)
-    $(tags.volumeSldr).val(jVideo.prop('volume'));
+    // initialize volume (therefore syncing everything else)
+    jVideo.prop('volume', 0.5);
 
     // #volume-sldr:INPUT
     $(tags.volumeSldr).on('input', (e) => jVideo.prop('volume', e.target.value));
