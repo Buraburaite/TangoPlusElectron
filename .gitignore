@@ -2,6 +2,7 @@ node_modules/
 IgnoreThis/
 bin/
 
+*DS_Store*
 
 .jshintrc
 *.env*
