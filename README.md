@@ -12,7 +12,8 @@
 ## How does it work?
 This program features an in-app tutorial.
 ### 1) Download and start the app
-[MacOSX](https://s3-us-west-1.amazonaws.com/tpe/TangoPlusElectron-mac.zip), v1.0.1
+[MacOSX](https://s3-us-west-1.amazonaws.com/tpe/TangoPlusElectron-mac.zip), v1.0.1,
+
 Windows _(coming soon)_  
 ### 2) Start the tutorial
 Using the two white buttons in the bottom right, load the .mp4 and .srt files included with the download. The first will start the video, and the second will load the subtitles. You can see what those buttons look like in the image at the top of this document.
