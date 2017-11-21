@@ -11,9 +11,16 @@ a:not([href]){
   user-select: none;
 }
 
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 #Player {
   width: 100vw;
   height: 100vh;
+
+  animation: fadein 0.5s;
 
   #video-container {
     height: 100%;
