@@ -1,7 +1,7 @@
 # TangoPlusElectron: Study language with video
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)](https://github.com/Buraburaite/TangoPlusElectron)
 
-![alt text](https://s3-us-west-1.amazonaws.com/tpe/One+Piece+sample.png "Sample image")
+![alt text](https://s3-us-west-1.amazonaws.com/tpe/One+Piece+sample.png? "Sample image")
 #### Part video player, part study tool, this desktop application aims to enable language-learners to off syllabus and choose their own study materials.
 
 ## Features (v1.0.1)
