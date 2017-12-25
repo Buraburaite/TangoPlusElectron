@@ -48,11 +48,24 @@ class Progress {
           // get the x-position of the mouse, relative to the viewport...
           let pageX = progressEl.offsetLeft + mouseX;
 
-          // ...align the tooltip arrow with the mouse...
+          // ...and the width of the tooltip...
+          let tooltipWidth = $(helper.tooltip).width();
+
+          // ...then align the tooltip arrow with the mouse...
           position.target = pageX;
 
-          // ...center the tooltip on the arrow.
-          position.coord.left = position.target - ($(helper.tooltip).width() / 2);
+          // ...and center the tooltip on the arrow.
+          position.coord.left = position.target - (tooltipWidth / 2);
+
+          // Finally, adjust tooltip position to prevent it from
+          // going outside the viewport.
+          let leftX  = position.coord.left;
+          if (leftX < 0) { position.coord.left += -leftX; }
+
+          let rightX = leftX + tooltipWidth;
+          let windowWidth = $(window).width();
+          if (rightX > windowWidth) { position.coord.left -= rightX - windowWidth; }
+
           return position;
         },
         updateAnimation: null
