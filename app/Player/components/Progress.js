@@ -40,34 +40,36 @@ class Progress {
     // setup progress tooltip
     $(document).ready(() => {
 
+      const snapToMouse = (instance, helper, position) => {
+        // get the x-position of the mouse, relative to the viewport...
+        let pageX = progressEl.offsetLeft + mouseX;
+
+        // ...and the width of the tooltip...
+        let tooltipWidth = $(helper.tooltip).width();
+
+        // ...then align the tooltip arrow with the mouse...
+        position.target = pageX;
+
+        // ...and center the tooltip on the arrow.
+        position.coord.left = position.target - (tooltipWidth / 2);
+
+        // Finally, adjust tooltip position to prevent it from
+        // going outside the viewport.
+        let leftX  = position.coord.left;
+        if (leftX < 0) { position.coord.left += -leftX; }
+
+        let rightX = leftX + tooltipWidth;
+        let windowWidth = $(window).width();
+        if (rightX > windowWidth) { position.coord.left -= rightX - windowWidth; }
+
+        return position;
+      };
+
       tooltip.tooltipster({
         trigger: 'custom',
         triggerOpen:  { mouseenter: true },
         triggerClose: { mouseleave: true },
-        functionPosition: (instance, helper, position) => {
-          // get the x-position of the mouse, relative to the viewport...
-          let pageX = progressEl.offsetLeft + mouseX;
-
-          // ...and the width of the tooltip...
-          let tooltipWidth = $(helper.tooltip).width();
-
-          // ...then align the tooltip arrow with the mouse...
-          position.target = pageX;
-
-          // ...and center the tooltip on the arrow.
-          position.coord.left = position.target - (tooltipWidth / 2);
-
-          // Finally, adjust tooltip position to prevent it from
-          // going outside the viewport.
-          let leftX  = position.coord.left;
-          if (leftX < 0) { position.coord.left += -leftX; }
-
-          let rightX = leftX + tooltipWidth;
-          let windowWidth = $(window).width();
-          if (rightX > windowWidth) { position.coord.left -= rightX - windowWidth; }
-
-          return position;
-        },
+        functionPosition: snapToMouse,
         updateAnimation: null
       });
     });
