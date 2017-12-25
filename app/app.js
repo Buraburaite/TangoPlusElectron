@@ -1,18 +1,5 @@
 const Player = require('./Player/Player.js');
 
-// initialize tooltipster (only used once)
-$(document).ready(function() {
-  $('.tooltip-onclick').tooltipster({
-    trigger: 'custom',
-    triggerOpen: {
-      click: true
-    },
-    triggerClose: {
-      mouseleave: true
-    }
-  });
-});
-
 const tags = {
   player: '#Player',
   instructions: '#instructions',

@@ -1,18 +1,29 @@
 class Progress {
 
-  constructor(tags) {
+  constructor(tags, services) {
+
+    // Save our connection to the application state
+    this.doubsService = services.doubtitles;
 
     const videoEl = $(tags.video).get(0);
     const progressEl = $(tags.progress).get(0);
     let wasPaused = false;
+    let tooltip = $('.tooltip-progress');
     let hoverPos = 0;
 
-    $('.tooltip-progress').tooltipster({
-      trigger: 'hover',
-      functionPosition: (instance, helper, position) => {
-        position.coord.left = hoverPos;//helper.origin.offsetWidth;
-        return position;
-      }
+    $(document).ready(() => {
+
+      $('.tooltip-progress').tooltipster({
+        trigger: 'custom',
+        triggerOpen:  { mouseenter: true },
+        triggerClose: { mouseleave: true },
+        functionPosition: (instance, helper, position) => {
+          let tipbox = $(helper.tooltip);
+          position.coord.left = hoverPos - (tipbox.width() / 2) + 16;
+          return position;
+        },
+        updateAnimation: null
+      });
     });
 
     // #Progress:MOUSEDOWN
@@ -22,9 +33,6 @@ class Progress {
 
       let desiredProgress = e.offsetX / progressEl.offsetWidth;
       videoEl.currentTime = desiredProgress * videoEl.duration;
-
-      hoverPos = e.offsetX;
-
     });
 
     // #Progress:MOUSEUP
@@ -36,9 +44,15 @@ class Progress {
     // #Progress:MOUSEMOVE
     $(tags.progress).mousemove((e) => {
       hoverPos = e.offsetX;
-      $('.tooltip-progress').tooltipster('reposition');
+      let desiredTime = e.offsetX / progressEl.offsetWidth * videoEl.duration;
+      tooltip.tooltipster('content', this.doubs.getSlide(desiredTime).text);
+
+      // tooltip.tooltipster('reposition');
     });
   }
+
+  // getter used here to allow updates to flow from the service
+  get doubs() { return this.doubsService.doubs; }
 }
 
 module.exports = Progress;

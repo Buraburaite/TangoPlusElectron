@@ -171,12 +171,12 @@ a:not([href]){
       }
 
       & #Progress {
-        height: 4px;
+        height: 8px;
         width: 100%;
         transition: height 0.1s;
 
         &:hover {
-          height: 6px;
+          height: 16px;
         }
 
         &::-webkit-progress-bar {

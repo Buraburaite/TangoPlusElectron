@@ -23,7 +23,7 @@ class Player {
 
     this.slide = new Slide(tags, this.services);
     this.controls = new Controls(tags, this.services);
-    this.progress = new Progress(tags);
+    this.progress = new Progress(tags, this.services);
     this.video = new Video(tags);
 
     const jSkip = $(tags.skipRegion);
