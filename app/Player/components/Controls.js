@@ -80,7 +80,7 @@ class Controls {
       clipboard.writeText(secToTimestamp(jVideo.get(0).currentTime));
     });
 
-    // set-up timeBtn's tooltip
+    // setup timeBtn's tooltip
     $(document).ready(() => {
       $('.tooltip-onclick').tooltipster({
         trigger: 'custom',
