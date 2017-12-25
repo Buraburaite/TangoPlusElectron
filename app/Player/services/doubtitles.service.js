@@ -11,7 +11,7 @@ class DoubtitlesService {
     else           { return  instance; }
 
     // initial value for testing
-    // this._doubs = new Doubtitles(__dirname + '/../../assets/hanzawa.srt');
+    this._doubs = new Doubtitles(__dirname + '/../../../IgnoreThis/hope.srt');
   }
 
   get doubs() { return this._doubs; }

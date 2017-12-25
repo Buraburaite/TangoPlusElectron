@@ -15,6 +15,7 @@ gulp.task('serve', function () {
 
   // // Reload renderer process
   gulp.watch([
+    'app/app.js',
     'app/**/*.js',
     'app/**/*.css',
     'app/**/*.html'

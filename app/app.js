@@ -2,7 +2,7 @@ const Player = require('./Player/Player.js');
 
 // initialize tooltipster (only used once)
 $(document).ready(function() {
-  $('.tooltip').tooltipster({
+  $('.tooltip-onclick').tooltipster({
     trigger: 'custom',
     triggerOpen: {
       click: true
@@ -40,4 +40,4 @@ const tags = {
 
 const player = new Player(tags);
 
-// $('#Video').attr('src', 'assets/hanzawa.mp4');
+$('#Video').attr('src', '../IgnoreThis/hope.mp4') ;
