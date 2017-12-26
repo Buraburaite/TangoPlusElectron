@@ -1,3 +1,10 @@
+/*
+play/pause - spacebar
+skip - left and right (left could also be a replay slide on the first click)
+volume - up and down
+mute - m
+*/
+
 const Player = require('./Player/Player.js');
 
 const tags = {
@@ -27,4 +34,7 @@ const tags = {
 
 const player = new Player(tags);
 
-$('#Video').attr('src', '../IgnoreThis/hope.mp4') ;
+$('#Video').attr('src', '../IgnoreThis/hope.mp4');
+
+// add keyboard shortcuts
+require('./keybindings.js')(tags);

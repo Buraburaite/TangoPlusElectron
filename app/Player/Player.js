@@ -4,7 +4,7 @@ const Progress = require('./components/Progress.js');
 const Slide = require('./components/Slide.js');
 const Video = require('./components/Video.js');
 
-// Factories whose return functions will be passed to various event listeners
+// Factories whose return functions can be passed to various event listeners
 const theaterizeFactory = require('./factories/theaterize.js');
 const playPauseFactory = require('./factories/playPause.js');
 const changeTimeFactory = require('./factories/changeTime.js');
