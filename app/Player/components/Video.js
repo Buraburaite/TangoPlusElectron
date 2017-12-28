@@ -2,7 +2,7 @@ const secToTime = require('../functions/secToTime.js'); // 1398 => 23:18
 
 class Video {
 
-  constructor(tags) {
+  constructor(tags, services) {
     const videoEl = $(tags.video).get(0);
     const progressEl = $(tags.progress).get(0);
     const jTime = $(tags.cTime);

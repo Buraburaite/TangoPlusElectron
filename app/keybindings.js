@@ -1,7 +1,11 @@
-module.exports = (tags) => {
+module.exports = (tags, services) => {
 
   // Functions to be bound to keys
   const playPause = require('./Player/factories/playPause.js')(tags);
+
+  const changeTimeFactory = require('./Player/factories/changeTime.js');
+  const rewind      = changeTimeFactory(tags, services, 'skip back');
+  const fastForward = changeTimeFactory(tags, services, 'skip forward');
 
   // Bind keys
   $(document).keyup((e) => {
@@ -11,10 +15,10 @@ module.exports = (tags) => {
       playPause();
       break;
       case 37: // left arrow
-      console.log('left clicked');
+      rewind();
       break;
       case 39: // right arrow
-      console.log('right clicked');
+      fastForward();
       break;
       case 38: // up arrow
       console.log('up clicked');

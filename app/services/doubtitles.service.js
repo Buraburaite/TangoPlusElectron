@@ -1,4 +1,4 @@
-const Doubtitles = require('../../Doubtitles/Doubtitles.js');
+const Doubtitles = require('../Doubtitles/Doubtitles.js');
 
 let instance;
 
@@ -11,7 +11,7 @@ class DoubtitlesService {
     else           { return  instance; }
 
     // initial value for testing
-    this._doubs = new Doubtitles(__dirname + '/../../../IgnoreThis/hope.srt');
+    this._doubs = new Doubtitles(__dirname + '/../../IgnoreThis/hope.srt');
   }
 
   get doubs() { return this._doubs; }

@@ -16,7 +16,7 @@ class Slide {
       () => {
         // if there's no doubtitles instance, do nothing...
         if (!this.doubs) { return; }
-        // ...otherwise, update #slide html contents to match the correct slide
+        // ...otherwise, update #Slide html contents to match the correct slide
         const text = this.doubs.getSlide(videoEl.currentTime).text;
         jSlideText.text(text);
       }

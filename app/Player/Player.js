@@ -9,22 +9,14 @@ const theaterizeFactory = require('./factories/theaterize.js');
 const playPauseFactory = require('./factories/playPause.js');
 const changeTimeFactory = require('./factories/changeTime.js');
 
-// Services, or singleton classes that centralize and protect certain pieces
-// of state in our application
-const DoubtitlesService = require('./services/doubtitles.service.js');
-
 class Player {
 
-  constructor(tags) {
+  constructor(tags, services) {
 
-    this.services = {
-      doubtitles: new DoubtitlesService()
-    };
-
-    this.slide = new Slide(tags, this.services);
-    this.controls = new Controls(tags, this.services);
-    this.progress = new Progress(tags, this.services);
-    this.video = new Video(tags);
+    this.slide = new Slide(tags, services);
+    this.controls = new Controls(tags, services);
+    this.progress = new Progress(tags, services);
+    this.video = new Video(tags, services);
 
     const jSkip = $(tags.skipRegion);
 
@@ -54,22 +46,10 @@ class Player {
       }
     );
 
-    const areThereDoubs = () => !!this.doubs;
-
     // #skip-back:DOUBLECLICK
-    $(tags.skipBack).dblclick(changeTimeFactory(tags,
-      (t) => areThereDoubs() ? this.doubs.getPrevSlide().startTime : t - 10)
-    );
-
-    // #skip-forward:DOUBLECLICK
-    $(tags.skipForward).dblclick(changeTimeFactory(tags,
-      (t) => areThereDoubs() ? this.doubs.getNextSlide().startTime : t + 10)
-    );
+    $(tags.skipBack).dblclick(changeTimeFactory(tags, services, 'back'));
+    $(tags.skipForward).dblclick(changeTimeFactory(tags, services, 'forward'));
   }
-
-  get doubs() { return this.services.doubtitles.doubs; }
-
-
 }
 
 module.exports = Player;

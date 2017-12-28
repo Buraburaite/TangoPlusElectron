@@ -5,6 +5,10 @@ volume - up and down
 mute - m
 */
 
+// Services, or singleton classes that centralize and protect certain pieces
+// of state in our application
+const DoubtitlesService = require('./services/doubtitles.service.js');
+
 const Player = require('./Player/Player.js');
 
 const tags = {
@@ -32,9 +36,13 @@ const tags = {
   videoContainer: '#video-container'
 };
 
-const player = new Player(tags);
+ const services = {
+  doubtitles: new DoubtitlesService()
+};
+
+const player = new Player(tags, services);
 
 $('#Video').attr('src', '../IgnoreThis/hope.mp4');
 
 // add keyboard shortcuts
-require('./keybindings.js')(tags);
+require('./keybindings.js')(tags, services);
