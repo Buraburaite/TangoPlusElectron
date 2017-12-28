@@ -1,4 +1,4 @@
-module.exports = (tags) => {
+module.exports = (tags, services) => {
   const jVideo = $(tags.video);
   const jWin = $(window);
 

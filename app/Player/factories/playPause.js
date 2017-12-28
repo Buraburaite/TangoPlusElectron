@@ -1,4 +1,4 @@
-module.exports = (tags) => {
+module.exports = (tags, services) => {
   const videoEl = $(tags.video).get(0);
 
   playPause = () => {

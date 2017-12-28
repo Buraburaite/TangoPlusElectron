@@ -8,6 +8,8 @@ mute - m
 // Services, or singleton classes that centralize and protect certain pieces
 // of state in our application
 const DoubtitlesService = require('./services/doubtitles.service.js');
+// misc holds small bits of state until they find a better home
+const MiscService = require('./services/misc.service.js');
 
 const Player = require('./Player/Player.js');
 
@@ -37,7 +39,8 @@ const tags = {
 };
 
  const services = {
-  doubtitles: new DoubtitlesService()
+  doubtitles: new DoubtitlesService(),
+  misc: new MiscService()
 };
 
 const player = new Player(tags, services);

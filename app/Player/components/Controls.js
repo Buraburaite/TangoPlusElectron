@@ -3,6 +3,7 @@ const clipboard = require('electron').clipboard;
 const askForSourceFactory = require('../factories/askForSource.js');
 const askForSubsFactory = require('../factories/askForSubs.js');
 const playPauseFactory = require('../factories/playPause.js');
+const muteUnmuteFactory = require('../factories/muteUnmute.js');
 
 const secToTimestamp = require('../functions/secToTimestamp.js');
 
@@ -59,18 +60,7 @@ class Controls {
     $(tags.volumeSldr).on('input', (e) => jVideo.prop('volume', e.target.value));
 
     // #mute-btn:CLICK
-    let preMuteVol = 0.5; // 0.5 is a failsafe value
-    $(tags.muteBtn).click(
-      () => {
-        let currVol = jVideo.prop('volume');
-
-        if (currVol > 0) {
-          preMuteVol = currVol;
-          jVideo.prop('volume', 0);
-        }
-        else { jVideo.prop('volume', preMuteVol); }
-      }
-    );
+    $(tags.muteBtn).click(muteUnmuteFactory(tags, services));
 
     // #timeBtn:CLICK
     $(tags.timeBtn).click(playPauseFactory(tags));
