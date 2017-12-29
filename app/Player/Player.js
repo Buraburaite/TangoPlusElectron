@@ -47,8 +47,8 @@ class Player {
     );
 
     // #skip-back:DOUBLECLICK
-    $(tags.skipBack).dblclick(changeTimeFactory(tags, services, 'back'));
-    $(tags.skipForward).dblclick(changeTimeFactory(tags, services, 'forward'));
+    $(tags.skipBack).dblclick(changeTimeFactory(tags, services, 'skip back'));
+    $(tags.skipForward).dblclick(changeTimeFactory(tags, services, 'skip forward'));
   }
 }
 
