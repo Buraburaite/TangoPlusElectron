@@ -1,3 +1,5 @@
+const secToTime = require('../functions/secToTime.js');
+
 class Progress {
 
   constructor(tags, services) {
@@ -34,7 +36,7 @@ class Progress {
 
       // update the content of the tooltip
       let desiredTime = mouseX / progressEl.offsetWidth * videoEl.duration;
-      tooltip.tooltipster('content', this.doubs.getSlide(desiredTime).text);
+      tooltip.tooltipster('content', `${secToTime(desiredTime)} ${this.doubs.getSlide(desiredTime).text}`);
     });
 
     // setup progress tooltip
