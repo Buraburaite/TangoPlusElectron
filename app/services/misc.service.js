@@ -2,7 +2,7 @@ let instance;
 
 class MiscService {
 
-  constructor() {
+  constructor(tags) {
 
     // enforce singleton pattern
     if (!instance) { instance = this; }
