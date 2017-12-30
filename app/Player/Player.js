@@ -4,11 +4,6 @@ const Progress = require('./components/Progress.js');
 const Slide = require('./components/Slide.js');
 const Video = require('./components/Video.js');
 
-// Factories whose return functions can be passed to various event listeners
-const theaterizeFactory = require('./factories/theaterize.js');
-const playPauseFactory = require('./factories/playPause.js');
-const changeTimeFactory = require('./factories/changeTime.js');
-
 class Player {
 
   constructor(tags, services) {
@@ -20,30 +15,38 @@ class Player {
 
     const jFlasher = $(tags.flasher);
     const jSkip = $(tags.skipBack + ', ' + tags.skipForward);
+    const jVideo = $(tags.video);
+
+    // Functions for event listeners
+    const theaterize = require('./factories/theaterize.js')(tags, services);
+    const playPause  = require('./factories/playPause.js')(tags, services);
+
+    // Factories to make custom event listener callbacks
+    const changeIconFactory = require('./factories/changeIcon.js');
 
     // window:RESIZE
     // make video scale with window
-    const theaterize = theaterizeFactory(tags, services);
     $(window).resize(theaterize);
-    theaterize();
+    theaterize(); // initialize video dimensions
 
     // #Video:LOADSTART
-    $(tags.video).on('loadstart', () => $(tags.instructions).hide());
-
-    // #Video:PLAY || PAUSE
-    $(tags.video).on(
-      'play pause',
-      () => {
-        $(tags.centerFlasher).trigger('flasher:flash');
-        $(tags.centerFlasher + ' i').toggleClass('fa-play fa-pause');
-      }
-    );
-
-    // #video-container:CLICK
-    $(tags.videoContainer).click(playPauseFactory(tags, services));
+    jVideo.on('loadstart', () => $(tags.instructions).hide());
 
     // custom event to trigger flash animation on .flasher elements
     jFlasher.on('flasher:flash', this._flashAnimation);
+
+    // #Video:PLAY & PAUSE
+    // trigger flash on either play or pause
+    const playPauseFlasher = $(tags.centerFlasher);
+    jVideo.on('play pause', (e) => playPauseFlasher.trigger('flasher:flash'));
+    // change the icon to match the new state
+    const playPauseIcon = $(tags.centerFlasher + ' i');
+    jVideo.on('play',  changeIconFactory(playPauseIcon, 'play'));
+    jVideo.on('pause', changeIconFactory(playPauseIcon, 'pause'));
+
+    // #video-container:CLICK
+    $(tags.videoContainer).click(playPause);
+
   }
 
   _flashAnimation(e) {

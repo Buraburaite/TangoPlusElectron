@@ -1,12 +1,5 @@
 const clipboard = require('electron').clipboard;
 
-const askForSourceFactory = require('../factories/askForSource.js');
-const askForSubsFactory = require('../factories/askForSubs.js');
-const playPauseFactory = require('../factories/playPause.js');
-const muteUnmuteFactory = require('../factories/muteUnmute.js');
-
-const secToTimestamp = require('../functions/secToTimestamp.js');
-
 class Controls {
 
   constructor(tags, services) {
@@ -14,21 +7,31 @@ class Controls {
     this.tags = tags;
     const jVideo = $(tags.video);
 
+    // Functions for event listeners
+    const askForSource = require('../factories/askForSource.js')(tags, services);
+    const askForSubs   = require('../factories/askForSubs.js')(tags, services);
+    const playPause    = require('../factories/playPause.js')(tags, services);
+    const muteUnmute   = require('../factories/muteUnmute.js')(tags, services);
+    const secToTimestamp = require('../functions/secToTimestamp.js');
+
+    // Factories to make custom event listener callbacks
+    const changeIconFactory = require('../factories/changeIcon.js');
+
+
     // various buttons:CLICK (these functions need to be reusable, hence factories)
-    $(tags.playPauseBtn).click( playPauseFactory(tags));
-    $(tags.videoSourceBtn).click(askForSourceFactory(tags));
-    $(tags.subsBtn).click(askForSubsFactory(tags, services));
+    $(tags.playPauseBtn).click(playPause);
+    $(tags.videoSourceBtn).click(askForSource);
+    $(tags.subsBtn).click(askForSubs);
 
     // #auto-replay-btn:CLICK
     $(tags.autoReplayBtn).click(
       () => $(tags.autoReplayBtn).toggleClass('enabled')
     );
 
-    // #Video:PLAY || PAUSE
-    jVideo.on(
-      'play pause',
-      () => $(tags.playPauseBtn + ' i').toggleClass('fa-play fa-pause')
-    );
+    // #Video:PLAY & PAUSE
+    const playPauseIcon = $(tags.playPauseBtn + ' i');
+    jVideo.on('play',  changeIconFactory(playPauseIcon, 'play'));
+    jVideo.on('pause', changeIconFactory(playPauseIcon, 'pause'));
 
     // #Video:VOLUMECHANGE
     // NOTE: Always change volume directly, not through altering the
@@ -60,12 +63,12 @@ class Controls {
     $(tags.volumeSldr).on('input', (e) => jVideo.prop('volume', e.target.value));
 
     // #mute-btn:CLICK
-    $(tags.muteBtn).click(muteUnmuteFactory(tags, services));
+    $(tags.muteBtn).click(muteUnmute);
 
     // #timeBtn:CLICK
-    $(tags.timeBtn).click(playPauseFactory(tags));
+    $(tags.timeBtn).click(playPause);
 
-    // get timestamp copied to clipboard when clicking on timeBtn
+    // copy timestamp to clipboard on click
     $(tags.timeBtn).click(() => {
       clipboard.writeText(secToTimestamp(jVideo.get(0).currentTime));
     });
