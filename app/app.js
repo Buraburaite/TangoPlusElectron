@@ -9,9 +9,10 @@ const MiscService = require('./services/misc.service.js');
 const tags = {
   player: '#Player',
   instructions: '#instructions',
-  skipRegion: '.skip',
+  flasher: '.flasher',
   skipBack: '#skip-back',
   skipForward: '#skip-forward',
+  centerFlasher: '#center-flasher',
   slide: '#Slide',
   definition: '#definition',
   slideText: '#slide-text',

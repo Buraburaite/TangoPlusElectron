@@ -18,9 +18,11 @@ module.exports = (tags, services) => {
       break;
       case 37: // left arrow
       rewind();
+      $(tags.skipBack).trigger('flasher:flash');
       break;
       case 39: // right arrow
       fastForward();
+      $(tags.skipForward).trigger('flasher:flash');
       break;
       case 38: // up arrow
       jVideo.prop('volume', constrainVolume(jVideo.prop('volume') + 0.05));

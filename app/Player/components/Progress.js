@@ -16,6 +16,10 @@ class Progress {
 
     // #Progress:MOUSEDOWN
     $(tags.progress).mousedown((e) => {
+
+      // exit if video is not loaded yet
+      if (videoEl.readyState < 4) { return; }
+
       if (videoEl.paused) { wasPaused = true; }
       videoEl.pause();
 

@@ -59,7 +59,7 @@ a:not([href]){
     }
   }
 
-  .skip {
+  .flasher {
     height: 100%;
     width: 200px;
     position: absolute;
@@ -79,6 +79,25 @@ a:not([href]){
 
   #skip-forward {
     right: 0;
+  }
+
+  #center-flash {
+    height: 100%;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    left: (50% - 100);
+    // opacity: 0;
+
+    i {
+      pointer-events: none;
+      font-size: 100px;
+    }
   }
 
   #Controls {
@@ -155,7 +174,7 @@ a:not([href]){
           color: white;
           font-size: 32px;
           border: 1px solid black;
-          border-radius: 4px;
+          // border-radius: 4px;
           background-color: purple;
         }
 

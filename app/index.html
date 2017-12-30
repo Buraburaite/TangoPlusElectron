@@ -48,16 +48,25 @@
           <li><b>Highlight words in the subtitles for definitions in English!</b></li>
           <li>Load video: <i class="fa fa-file-video-o" aria-hidden="true"></i></li>
           <li>Load subtitles: <i class="fa fa-file-text-o" aria-hidden="true"></i></li>
+          <li>
+            Skip between lines of text:
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            /
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            (keyboard)
+          </li>
           <li>AutoReplay: <i class="fa fa-circle-o-notch" aria-hidden="true"></i></li>
           <li>Click the clock for timestamps</li>
-          <li>Double-click the sides for skipping</li>
         </ul>
       </div>
     </div>
-    <div id="skip-back" class="skip">
+    <div id="center-flasher" class="flasher">
       <i class="fa fa-step-backward" aria-hidden="true"></i>
     </div>
-    <div id="skip-forward" class="skip">
+    <div id="skip-back" class="flasher">
+      <i class="fa fa-step-backward" aria-hidden="true"></i>
+    </div>
+    <div id="skip-forward" class="flasher">
       <i class="fa fa-step-forward" aria-hidden="true"></i>
     </div>
     <div id="Controls">
@@ -68,7 +77,7 @@
         </div>
       </div>
       <div class="control-row">
-        <progress id="Progress" value="0" class="tooltip-progress" title="Timestamp copied!"></progress>
+        <progress id="Progress" value="0" class="tooltip-progress"></progress>
       </div>
       <div class="control-row">
         <div class="control-group">

@@ -18,11 +18,12 @@ class Player {
     this.progress = new Progress(tags, services);
     this.video = new Video(tags, services);
 
-    const jSkip = $(tags.skipRegion);
+    const jFlasher = $(tags.flasher);
+    const jSkip = $(tags.skipBack + ', ' + tags.skipForward);
 
     // window:RESIZE
     // make video scale with window
-    const theaterize = theaterizeFactory(tags);
+    const theaterize = theaterizeFactory(tags, services);
     $(window).resize(theaterize);
     theaterize();
 
@@ -30,26 +31,18 @@ class Player {
     $(tags.video).on('loadstart', () => $(tags.instructions).hide());
 
     // #video-container:CLICK
-    $(tags.videoContainer).click(playPauseFactory(tags));
+    $(tags.videoContainer).click(playPauseFactory(tags, services));
 
-    // .skip:CLICK
-    jSkip.click(playPauseFactory(tags));
-
-    // .skip:DOUBLECLICK
-    jSkip.dblclick(
-      (e) => {
-        $(e.target).animate(
-          { opacity: 0.5 },
-          200,
-          () => $(e.target).animate({ opacity: 0 }, 100)
-        );
-      }
-    );
-
-    // #skip-back:DOUBLECLICK
-    $(tags.skipBack).dblclick(changeTimeFactory(tags, services, 'skip back'));
-    $(tags.skipForward).dblclick(changeTimeFactory(tags, services, 'skip forward'));
+    jFlasher.on('flasher:flash', this._flashAnimation);
   }
+
+  _flashAnimation(e) {
+    $(e.target).animate(
+      { opacity: 0.5 },
+      200,
+      () => $(e.target).animate({ opacity: 0 }, 100)
+    );
+  };
 }
 
 module.exports = Player;
