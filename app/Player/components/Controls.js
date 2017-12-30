@@ -26,7 +26,7 @@ class Controls {
 
     // #Video:PLAY || PAUSE
     jVideo.on(
-      'play pause', // #Video:PLAY & #Video:PAUSE
+      'play pause',
       () => $(tags.playPauseBtn + ' i').toggleClass('fa-play fa-pause')
     );
 

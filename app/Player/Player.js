@@ -27,12 +27,22 @@ class Player {
     $(window).resize(theaterize);
     theaterize();
 
-    // #Video.LOADSTART
+    // #Video:LOADSTART
     $(tags.video).on('loadstart', () => $(tags.instructions).hide());
+
+    // #Video:PLAY || PAUSE
+    $(tags.video).on(
+      'play pause',
+      () => {
+        $(tags.centerFlasher).trigger('flasher:flash');
+        $(tags.centerFlasher + ' i').toggleClass('fa-play fa-pause');
+      }
+    );
 
     // #video-container:CLICK
     $(tags.videoContainer).click(playPauseFactory(tags, services));
 
+    // custom event to trigger flash animation on .flasher elements
     jFlasher.on('flasher:flash', this._flashAnimation);
   }
 

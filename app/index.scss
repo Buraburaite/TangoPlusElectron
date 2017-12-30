@@ -70,9 +70,9 @@ a:not([href]){
     justify-content: center;
     background-color: white;
     opacity: 0;
+    pointer-events: none;
 
     i {
-      pointer-events: none;
       font-size: 100px;
     }
   }
@@ -81,23 +81,12 @@ a:not([href]){
     right: 0;
   }
 
-  #center-flash {
-    height: 100%;
+  #center-flasher {
+    height: 200px;
     width: 200px;
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    left: (50% - 100);
-    // opacity: 0;
-
-    i {
-      pointer-events: none;
-      font-size: 100px;
-    }
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+    border-radius: 50%;
   }
 
   #Controls {
