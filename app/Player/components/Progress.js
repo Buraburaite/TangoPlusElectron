@@ -1,5 +1,3 @@
-const secToTime = require('../functions/secToTime.js');
-
 class Progress {
 
   constructor(tags, services) {
@@ -10,6 +8,9 @@ class Progress {
     const videoEl = $(tags.video).get(0);
     const progressEl = $(tags.progress).get(0);
     const tooltip = $('.tooltip-progress');
+
+    const secToTime = require('../functions/secToTime.js');
+
     let wasPaused = false;
     let mouseX = 0;
 

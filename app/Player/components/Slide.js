@@ -1,5 +1,3 @@
-const define = require('../functions/define.js');
-
 class Slide {
 
   constructor(tags, services) {
@@ -9,6 +7,8 @@ class Slide {
 
     const jSlideText = $(tags.slideText);
     const videoEl = $(tags.video).get(0);
+
+    const define = require('../functions/define.js');
 
     // #Video:TIMEUPDATE
     $(tags.video).bind(

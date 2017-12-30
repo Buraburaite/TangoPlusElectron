@@ -66,10 +66,8 @@ class Controls {
     $(tags.muteBtn).click(muteUnmute);
 
     // #timeBtn:CLICK
-    $(tags.timeBtn).click(playPause);
-
-    // copy timestamp to clipboard on click
     $(tags.timeBtn).click(() => {
+      playPause();
       clipboard.writeText(secToTimestamp(jVideo.get(0).currentTime));
     });
 

@@ -1,5 +1,3 @@
-const secToTime = require('../functions/secToTime.js'); // 1398 => 23:18
-
 class Video {
 
   constructor(tags, services) {
@@ -7,6 +5,8 @@ class Video {
     const progressEl = $(tags.progress).get(0);
     const jTime = $(tags.cTime);
     const jDuration = $(tags.duration);
+
+    const secToTime = require('../functions/secToTime.js'); // 1398 => 23:18
 
     // #Video:TIMEUPDATE
     $(tags.video).bind(
