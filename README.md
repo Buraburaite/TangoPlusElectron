@@ -17,7 +17,7 @@
 ## How does it work?
 This program features an in-app tutorial.
 ### 1) Download and start the app
-[MacOSX](https://s3-us-west-1.amazonaws.com/tpe/TangoPlusElectron-mac.zip), v1.0.1,
+[MacOSX](https://s3-us-west-1.amazonaws.com/tpe/TangoPlusElectron-mac.zip), v1.1.0,
 
 Windows _(coming soon)_  
 ### 2) Start the tutorial
