@@ -1,7 +1,7 @@
+const flashIconFactory = require('./flashIcon.js');
+
 module.exports = (tags, services, transform) => {
   const videoEl = $(tags.video).get(0);
-  const areThereDoubs = () => !!services.doubtitles.doubs;
-  const doubs = () => services.doubtitles.doubs; // doubs is stateful
 
   const changeTime = () => {
 
@@ -12,16 +12,15 @@ module.exports = (tags, services, transform) => {
       switch(transform) {
         case 'restart slide':
         newTime = doubs().getCurrentSlide().startTime;
+        flashBack();
         break;
         case 'skip back':
-        newTime = areThereDoubs() ?
-        smartRewind() :
-        videoEl.currentTime - 10;
+        newTime = areThereDoubs() ? smartRewind() : videoEl.currentTime - 10;
+        flashBack();
         break;
         case 'skip forward':
-        newTime = areThereDoubs() ?
-        doubs().getNextSlide().startTime :
-        videoEl.currentTime + 10;
+        newTime = areThereDoubs() ? doubs().getNextSlide().startTime : videoEl.currentTime + 10;
+        flashForward();
         break;
 
         default: return;
@@ -39,6 +38,9 @@ module.exports = (tags, services, transform) => {
       videoEl.currentTime = newTime;
     }
   };
+
+  const areThereDoubs = () => !!services.doubtitles.doubs;
+  const doubs = () => services.doubtitles.doubs; // doubs is stateful
 
   // I had difficulty naming this function, but essentially
   // the first time you call it, it will restart the current slide.
@@ -59,6 +61,9 @@ module.exports = (tags, services, transform) => {
 
     return time;
   };
+
+  const flashBack = flashIconFactory('step-backward');
+  const flashForward = flashIconFactory('step-forward');
 
   return changeTime;
 };

@@ -18,11 +18,9 @@ module.exports = (tags, services) => {
       break;
       case 37: // left arrow
       rewind();
-      $(tags.skipBack).trigger('flasher:flash');
       break;
       case 39: // right arrow
       fastForward();
-      $(tags.skipForward).trigger('flasher:flash');
       break;
       case 38: // up arrow
       jVideo.prop('volume', constrainVolume(jVideo.prop('volume') + 0.05));
@@ -39,9 +37,9 @@ module.exports = (tags, services) => {
   });
 
   const constrainVolume = (newVol) => {
-      // limit value to [0,1]
-      newVol = Math.max(0, newVol);
-      newVol = Math.min(newVol, 1);
-      return newVol;
+    // limit value to [0,1]
+    newVol = Math.max(0, newVol);
+    newVol = Math.min(newVol, 1);
+    return newVol;
   };
 }

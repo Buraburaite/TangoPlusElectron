@@ -13,16 +13,15 @@ class Player {
     this.progress = new Progress(tags, services);
     this.video = new Video(tags, services);
 
-    const jFlasher = $(tags.flasher);
     const jSkip = $(tags.skipBack + ', ' + tags.skipForward);
     const jVideo = $(tags.video);
+
+    // Factories to make custom event listener callbacks
+    const flashIconFactory = require('./factories/flashIcon.js');
 
     // Functions for event listeners
     const theaterize = require('./factories/theaterize.js')(tags, services);
     const playPause  = require('./factories/playPause.js')(tags, services);
-
-    // Factories to make custom event listener callbacks
-    const changeIconFactory = require('./factories/changeIcon.js');
 
     // window:RESIZE
     // make video scale with window
@@ -32,30 +31,33 @@ class Player {
     // #Video:LOADSTART
     jVideo.on('loadstart', () => $(tags.instructions).hide());
 
-    // custom event to trigger flash animation on .flasher elements
-    jFlasher.on('flasher:flash', this._flashAnimation);
+    // #Video:PLAY
+    jVideo.on('play',  flashIconFactory('play'));
 
-    // #Video:PLAY & PAUSE
-    // trigger flash on either play or pause
-    const playPauseFlasher = $(tags.centerFlasher);
-    jVideo.on('play pause', (e) => playPauseFlasher.trigger('flasher:flash'));
-    // change the icon to match the new state
-    const playPauseIcon = $(tags.centerFlasher + ' i');
-    jVideo.on('play',  changeIconFactory(playPauseIcon, 'play'));
-    jVideo.on('pause', changeIconFactory(playPauseIcon, 'pause'));
+    // #Video:PAUSE
+    jVideo.on('pause', flashIconFactory('pause'));
+
+    // #Video:VOLUMECHANGE
+    const flashUp   = flashIconFactory('volume-up');
+    const flashDown = flashIconFactory('volume-down');
+    const flashOff  = flashIconFactory('volume-off');
+
+    jVideo.on(
+      'volumechange',
+      (e) => {
+        // flash volume change
+        let newVol = e.target.volume;
+        if      (newVol > 0.5) { flashUp(); }
+        else if (newVol > 0)   { flashDown(); }
+        else                   { flashOff(); }
+      }
+    );
 
     // #video-container:CLICK
     $(tags.videoContainer).click(playPause);
 
   }
 
-  _flashAnimation(e) {
-    $(e.target).animate(
-      { opacity: 0.5 },
-      200,
-      () => $(e.target).animate({ opacity: 0 }, 100)
-    );
-  };
 }
 
 module.exports = Player;

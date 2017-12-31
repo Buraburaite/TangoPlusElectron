@@ -3,6 +3,7 @@ module.exports = (tags, services) => {
   const misc = services.misc;
 
   const muteUnmute = () => {
+
     let currVol = jVideo.prop('volume');
 
     if (currVol > 0) {
@@ -10,6 +11,7 @@ module.exports = (tags, services) => {
       jVideo.prop('volume', 0);
     }
     else { jVideo.prop('volume', misc.preMuteVol); }
+
   };
 
   return muteUnmute;

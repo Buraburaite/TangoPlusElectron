@@ -4,15 +4,6 @@ module.exports = (tags, services) => {
   const jVideo = $(tags.video);
   const videoEl = jVideo.get(0);
 
-  const changeSource = (filepaths) => {
-
-    // exit if no files were selected
-    if (!filepaths) { return; }
-
-    jVideo.attr('src', filepaths[0]);
-  };
-
-
   const askForSource = () => {
     videoEl.pause();
     dialog.showOpenDialog( // open a file dialog, async returns list of paths
@@ -25,6 +16,14 @@ module.exports = (tags, services) => {
       },
       changeSource // callback
     );
+  };
+
+  const changeSource = (filepaths) => {
+
+    // exit if no files were selected
+    if (!filepaths) { return; }
+
+    jVideo.attr('src', filepaths[0]);
   };
 
   return askForSource;

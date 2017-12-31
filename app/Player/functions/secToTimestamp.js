@@ -1,6 +1,5 @@
 const leftpad = require('left-pad');
 
-
 // 1398     => 00:23:18,000
 // 2.060692 => 00:00:02,061
 module.exports = (sec) => {

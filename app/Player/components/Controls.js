@@ -7,16 +7,15 @@ class Controls {
     this.tags = tags;
     const jVideo = $(tags.video);
 
+    // Factories to make custom event listener callbacks
+    const changeIconFactory = require('../factories/changeIcon.js');
+
     // Functions for event listeners
     const askForSource = require('../factories/askForSource.js')(tags, services);
     const askForSubs   = require('../factories/askForSubs.js')(tags, services);
     const playPause    = require('../factories/playPause.js')(tags, services);
     const muteUnmute   = require('../factories/muteUnmute.js')(tags, services);
     const secToTimestamp = require('../functions/secToTimestamp.js');
-
-    // Factories to make custom event listener callbacks
-    const changeIconFactory = require('../factories/changeIcon.js');
-
 
     // various buttons:CLICK (these functions need to be reusable, hence factories)
     $(tags.playPauseBtn).click(playPause);
@@ -35,7 +34,12 @@ class Controls {
 
     // #Video:VOLUMECHANGE
     // NOTE: Always change volume directly, not through altering the
-    // slider, simulating a click, or anything else.
+    // slider, simulating a click, or any other method.
+    const muteBtnIcon = $(tags.muteBtn + ' i');
+    const toVolumeUp   = changeIconFactory(muteBtnIcon, 'volume-up');
+    const toVolumeDown = changeIconFactory(muteBtnIcon, 'volume-down');
+    const toVolumeOff  = changeIconFactory(muteBtnIcon, 'volume-off');
+
     jVideo.on(
       'volumechange',
       (e) => {
@@ -46,13 +50,9 @@ class Controls {
         $(tags.volumeSldr).val(newVol);
 
         // 2) update mute button's icon
-        let iconClass = 'fa fa-volume-';
-
-        if      (newVol > 0.5) { iconClass += 'up'; }
-        else if (newVol > 0)   { iconClass += 'down'; }
-        else                   { iconClass += 'off'; }
-
-        $(tags.muteBtn + ' i').attr('class', iconClass);
+        if      (newVol > 0.5) { toVolumeUp(); }
+        else if (newVol > 0)   { toVolumeDown(); }
+        else                   { toVolumeOff(); }
       }
     );
 

@@ -68,34 +68,24 @@ a:not([href]){
     }
   }
 
-  .flasher {
-    height: 100%;
+  #flasher {
+    height: 200px;
     width: 200px;
     position: absolute;
-    top: 0;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
     z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: white;
+    border-radius: 50%;
     opacity: 0;
     pointer-events: none;
 
     i {
       font-size: 100px;
     }
-  }
-
-  #skip-forward {
-    right: 0;
-  }
-
-  #center-flasher {
-    height: 200px;
-    width: 200px;
-    top: calc(50% - 100px);
-    left: calc(50% - 100px);
-    border-radius: 50%;
   }
 
   #Controls {
