@@ -1,6 +1,6 @@
 {
   "name": "TangoPlusElectron",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Video Player for intermediate Japanese language learners",
   "main": "app/electron-start.js",
   "scripts": {
