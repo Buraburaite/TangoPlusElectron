@@ -11,6 +11,15 @@ a:not([href]){
   user-select: none;
 }
 
+// tooltipster progress theme (see tooltipster instructions)
+.tooltipster-sidetip.tooltip-progress-theme .tooltipster-box {
+}
+
+.tooltipster-sidetip.tooltip-progress-theme .tooltipster-content {
+	padding: 8px;
+  font-size: 24px;
+}
+
 @keyframes fadein {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -50,7 +59,7 @@ a:not([href]){
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 3vw;
       color: white;
 
       li {

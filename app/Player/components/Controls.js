@@ -30,8 +30,8 @@ class Controls {
 
     // #Video:PLAY & PAUSE
     const playPauseIcon = $(tags.playPauseBtn + ' i');
-    jVideo.on('play',  changeIconFactory(playPauseIcon, 'play'));
-    jVideo.on('pause', changeIconFactory(playPauseIcon, 'pause'));
+    jVideo.on('play',  changeIconFactory(playPauseIcon, 'pause'));
+    jVideo.on('pause', changeIconFactory(playPauseIcon, 'play'));
 
     // #Video:VOLUMECHANGE
     // NOTE: Always change volume directly, not through altering the

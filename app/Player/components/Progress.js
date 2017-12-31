@@ -41,7 +41,8 @@ class Progress {
 
       // update the content of the tooltip
       let desiredTime = mouseX / progressEl.offsetWidth * videoEl.duration;
-      tooltip.tooltipster('content', `${secToTime(desiredTime)} ${this.doubs.getSlide(desiredTime).text}`);
+      let previewText = `${secToTime(desiredTime)} ${this.doubs.getSlide(desiredTime).text}`;
+      tooltip.tooltipster('content', previewText);
     });
 
     // setup progress tooltip
@@ -76,6 +77,7 @@ class Progress {
         trigger: 'custom',
         triggerOpen:  { mouseenter: true },
         triggerClose: { mouseleave: true },
+        theme: 'tooltip-progress-theme',
         functionPosition: snapToMouse,
         updateAnimation: null
       });
