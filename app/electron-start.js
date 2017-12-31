@@ -5,7 +5,7 @@ This code is provided by the Electron team. It's almost entirely untouched.
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
-const client = require('electron-connect').client; // dev only
+// const client = require('electron-connect').client; // dev only
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -28,7 +28,7 @@ function createWindow () {
   }));
 
   // Open the DevTools.
-  win.webContents.openDevTools(); // dev only
+  // win.webContents.openDevTools(); // dev only
 
   // Quit the app (end all processes, I think) when all windows are closed
   app.on('window-all-closed', function () {
@@ -43,7 +43,7 @@ function createWindow () {
     win = null;
   });
 
-  client.create(win); // dev only
+  // client.create(win); // dev only
 }
 
 // This method will be called when Electron has finished

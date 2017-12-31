@@ -13,7 +13,6 @@ class Player {
     this.progress = new Progress(tags, services);
     this.video = new Video(tags, services);
 
-    const jSkip = $(tags.skipBack + ', ' + tags.skipForward);
     const jVideo = $(tags.video);
 
     // Factories to make custom event listener callbacks

@@ -24,14 +24,6 @@ class Video {
 
     // #Video:LOADEDDATA
     $(tags.video).bind('loadeddata', () => jDuration.text(secToTime(videoEl.duration)));
-
-    // document:MOUSEMOVE
-    // let timeout = setTimeout(() => document.body.style.cursor = "none", 2000);
-    // $(document).mousemove((e) => {
-    //   document.body.style.cursor = "default";
-    //   clearTimeout(timeout);
-    //   timeout = setTimeout(() => document.body.style.cursor = "none", 2000);
-    // });
   }
 }
 

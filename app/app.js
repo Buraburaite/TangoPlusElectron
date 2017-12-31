@@ -41,5 +41,5 @@ const player = new Player(tags, services);
 require('./keybindings.js')(tags, services);
 
 // dev only
-services.doubtitles.changeDoubs(__dirname + '/../IgnoreThis/hope.srt');
-$('#Video').attr('src', '../IgnoreThis/hope.mp4');
+// services.doubtitles.changeDoubs(__dirname + '/../IgnoreThis/hope.srt');
+// $('#Video').attr('src', '../IgnoreThis/hope.mp4');
