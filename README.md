@@ -1,7 +1,8 @@
 # TangoPlusElectron: Study language with video
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)](https://github.com/Buraburaite/TangoPlusElectron)
 
-![alt text](https://s3-us-west-1.amazonaws.com/tpe/One+Piece+sample.png "Sample image")
+![alt text](https://s3-us-west-1.amazonaws.com/tpe/One+Piece+sample.png? "Sample image")
+#### Part video player, part study tool, this desktop application aims to enable language-learners to off syllabus and choose their own study materials.
 
 ## Features
 - Highlighting words in the subtitles reveals possible definitions
@@ -16,7 +17,8 @@
 ## How does it work?
 This program features an in-app tutorial.
 ### 1) Download and start the app
-[MacOSX](https://s3-us-west-1.amazonaws.com/tpe/TangoPlusElectron-mac.zip), v1.0.1
+[MacOSX](https://s3-us-west-1.amazonaws.com/tpe/TangoPlusElectron-mac.zip), v1.0.1,
+
 Windows _(coming soon)_  
 ### 2) Start the tutorial
 Using the two white buttons in the bottom right, load the .mp4 and .srt files included with the download. The first will start the video, and the second will load the subtitles. You can see what those buttons look like in the image at the top of this document.
