@@ -3,10 +3,15 @@
 
 ![alt text](https://s3-us-west-1.amazonaws.com/tpe/One+Piece+sample.png "Sample image")
 
-## Features (v1.0.1)
+## Features
 - Highlighting words in the subtitles reveals possible definitions
 - Dedicated button for creating timestamps (make .srt files quickly!)
 - Supports Japanese -> English vocabulary
+### What's new in v1.1.0?
+- Preview tooltip on the progress bar
+- Keyboard shortcuts for commonly used actions
+- User interface improvements
+- Changing the subtitles file automatically updates it in TangoPlusElectron
 
 ## How does it work?
 This program features an in-app tutorial.
