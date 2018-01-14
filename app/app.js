@@ -29,7 +29,7 @@ const tags = {
   videoContainer: '#video-container'
 };
 
- const services = {
+const services = {
   doubtitles: new DoubtitlesService(tags),
   misc: new MiscService(tags)
 };
@@ -43,3 +43,4 @@ require('./keybindings.js')(tags, services);
 // dev only
 // services.doubtitles.changeDoubs(__dirname + '/../IgnoreThis/hope.srt');
 // $('#Video').attr('src', '../IgnoreThis/hope.mp4');
+// const openUrl = require('open');

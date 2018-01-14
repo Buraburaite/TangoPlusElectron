@@ -49,6 +49,15 @@ class Slide {
               (str, m) => str + `${m.kanji} (${m.kana}): ${m.def}<br>`,
               ''
             );
+
+            // matchs += //dev only
+            // `
+            // <button onclick="openUrl('http://tangorin.com/general/${word}')"
+            // style="height: auto; width: auto; padding: 2px 4px; font-size: 24px; color: black; background: orange; border: 4px solid black; border-radius: 4px;">
+            // Tangorin
+            // </button>
+            // `;
+
             // ...update the definition in the html...
             $(tags.definition).html(matchs);
           }

@@ -27,6 +27,7 @@
     "electron-builder": "^19.45.4",
     "electron-connect": "^0.6.1",
     "electron-packager": "^9.1.0",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "open": "0.0.5"
   }
 }
